@@ -1,0 +1,33 @@
+//This is the same as a regular event handler, but it automatically
+//filters out reopen game events, and the titlemap
+class SavingModEventHandler : EventHandler
+{
+    virtual void UniqueWorldLoaded(WorldEvent e)
+    {
+        //override this
+    }
+    
+    virtual void UniquePlayerEntered(Actor Player, bool returning)
+    {
+        //override this
+    }
+    
+    override void PlayerEntered(PlayerEvent e)
+    {      
+        if (gamestate == 7) //TITLEMAP
+            return;
+            
+        UniquePlayerEntered(players[e.PlayerNumber].mo, e.IsReturn);
+    }
+
+    override void WorldLoaded(WorldEvent e)
+    {
+        if (e.IsReopen)
+            return;
+        
+        if (gamestate == 7) //TITLEMAP
+            return;
+        
+        UniqueWorldLoaded(e);
+    }
+} 

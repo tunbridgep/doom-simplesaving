@@ -1,0 +1,18 @@
+#library "Savebutton"
+#include "zcommon.acs"
+
+script "SaveButton" (void)
+{
+    int SaveGems = CheckInventory("SaveGem");
+    
+    if (SaveGems > 0)
+    {
+        Autosave();
+        Log(s:"Using a save gem... ", i:SaveGems - 1, s:" Save Gems remain");
+        TakeInventory("SaveGem",1);
+    }
+    else
+    {
+        Log(s:"Cannot save without a save gem!");
+    }
+}

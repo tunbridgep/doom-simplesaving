@@ -1,0 +1,4 @@
+addkeysection "No Saving" NoSaveSection
+   addmenukey "Quicksave (Requires Save Gem)" nosaving_quicksave
+   alias nosaving_quicksave "pukename SaveButton"
+   defaultbind F6 nosaving_quicksave

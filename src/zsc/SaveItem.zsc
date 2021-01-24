@@ -1,0 +1,35 @@
+class SavingModPermanentItem : Inventory
+{
+    Default
+    {
+        +INVENTORY.UNDROPPABLE;
+        +INVENTORY.ALWAYSPICKUP;
+        //+INVENTORY.UNCLEARABLE;
+        +INVENTORY.HUBPOWER;
+        +INVENTORY.PERSISTENTPOWER;
+        +INVENTORY.UNTOSSABLE;
+        +INVENTORY.IGNORESKILL;
+        //+INVENTORY.INVBAR;
+        Inventory.InterHubAmount 1;
+        Inventory.MaxAmount 1;
+    }
+}
+
+class SaveGem : SavingModPermanentItem
+{
+    Default
+    {
+        +INVENTORY.INVBAR;
+        Inventory.InterHubAmount 999;
+        Inventory.MaxAmount 999;
+        Inventory.Icon "ARTIALI1";
+        +FLOATBOB;
+    }
+    
+    States
+    {
+        Spawn:
+            AKOL A -1;
+            Stop;
+    }
+}

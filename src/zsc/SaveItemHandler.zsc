@@ -1,0 +1,39 @@
+class SaveingModItemHandler : SavingModEventHandler
+{
+    bool has_spawned;
+    int enemies_spawned;
+    int spawn_threshold_needed;
+
+    override void OnRegister()
+    {
+        has_spawned = false;
+        enemies_spawned = 0;
+        spawn_threshold_needed = 10;
+    }
+    
+    override void WorldThingSpawned(WorldEvent e)
+    {
+        Actor a = e.Thing;
+              
+        if (a && a.GetLevelSpawnTime() <= 5 && a.bISMONSTER)
+        {
+            if (enemies_spawned < spawn_threshold_needed)
+                enemies_spawned++;
+            else if (!has_spawned)
+            {
+                a.GiveInventory("GemDropper",1);
+                has_spawned = true;
+            }
+        }
+    }
+}
+
+//This item will drop a Save Gem upon it's owner dying
+class GemDropper : SavingModPermanentItem
+{
+    override void OwnerDied()
+    {
+        owner.A_DropItem("SaveGem");
+        super.OwnerDied();
+    }
+}
