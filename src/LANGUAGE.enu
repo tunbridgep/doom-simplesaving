@@ -1,0 +1,23 @@
+[enu default]
+
+//Menu Options
+NOSAVE_MAIN_MENU_TITLE = "Saving Mod Options";
+NOSAVE_OPTIONS = "Saving Mod Options";
+NOSAVE_SAVES_PER_LEVEL = "Saves per level";
+NOSAVE_SAVES_PER_LEVEL_DESC = "How many save items will drop per level";
+NOSAVE_ENEMY_THRESHOLD = "Enemy Threshold";
+NOSAVE_ENEMY_THRESHOLD_DESC = "Minimum number of enemies required in a level for a save item to drop";
+NOSAVE_STRIP = "Level Strip";
+NOSAVE_STRIP_DESC = "When enabled, save items will be removed when entering a new level";
+NOSAVE_KEY_BIND = "Quicksave Key";
+NOSAVE_KEY_BIND_DESC = "Because GZDoom does not allow mods to disable saving,";
+NOSAVE_KEY_BIND_DESC2 = "players are required to use a different button to save.";
+NOSAVE_KEY_BIND_DESC3 = "This should be the same as your normal quicksave hotkey";
+
+//Item text
+NOSAVE_ITEM_NAME = "Ankh of Time Manipulation";
+NOSAVE_ITEM_PICKUP = "You got the Ankh of Time Manipulation! You can now save the game!";
+NOSAVE_PREVENTION = "You cannot save without an Ankh of Time Manipulation!";
+NOSAVE_SAVED = "Ankh used...";
+NOSAVE_REMAIN_1 = "You have";
+NOSAVE_REMAIN_2 = "saves remaining!";

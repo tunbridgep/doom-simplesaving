@@ -24,6 +24,8 @@ class SaveGem : SavingModPermanentItem
         Inventory.MaxAmount 999;
         Inventory.Icon "ARTIALI1";
         +FLOATBOB;
+        Inventory.PickupMessage "$NOSAVE_ITEM_PICKUP";
+        Tag "$NOSAVE_ITEM_NAME";
     }
     
     States

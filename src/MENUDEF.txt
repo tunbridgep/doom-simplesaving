@@ -1,0 +1,92 @@
+//-------------------------------------------------------------------------------------------
+//
+// The main menu. There's a lot of differences here between the games
+// Modified for all games to not have a SAVE GAME button
+//
+//-------------------------------------------------------------------------------------------
+
+LISTMENU "MainMenu"
+{
+	IfGame(Doom, Chex)
+	{
+		StaticPatch 94, 2, "M_DOOM"
+		Position 97, 72
+		IfOption(ReadThis)
+		{
+			Position 97, 64
+		}
+	}
+	IfGame(Strife)
+	{
+		StaticPatch 84, 2, "M_STRIFE"
+		Position 97, 45
+	}
+	IfGame(Heretic)
+	{
+		StaticPatch 88, 0, "M_HTIC"
+		StaticPatch 40, 10, "M_SKL01"
+		StaticPatch 232, 10, "M_SKL00"
+		Position 110, 56
+	}
+	IfGame(Hexen)
+	{
+		StaticPatch 88, 0, "M_HTIC"
+		StaticPatch 37, 80, "FBULB0"
+		StaticPatch 278, 80, "FBULA0"
+		Position 110, 56
+	}
+	
+	IfGame(Doom, Strife, Chex)
+	{
+		PatchItem "M_NGAME", "n", "PlayerclassMenu"
+		ifOption(SwapMenu)
+		{
+			PatchItem "M_LOADG", "l", "LoadGameMenu"
+			//PatchItem "M_SAVEG", "s", "SaveGameMenu"
+			PatchItem "M_OPTION","o", "OptionsMenu"
+		}
+		else
+		{
+			PatchItem "M_OPTION","o", "OptionsMenu"
+			PatchItem "M_LOADG", "l", "LoadGameMenu"
+			//PatchItem "M_SAVEG", "s", "SaveGameMenu"
+		}
+		ifOption(ReadThis)
+		{
+			PatchItem "M_RDTHIS","r", "ReadThisMenu"
+		}
+		PatchItem "M_QUITG", "q", "QuitMenu"
+	}
+	
+	IfGame(Heretic, Hexen)
+	{
+		TextItem "$MNU_NEWGAME", "n", "PlayerclassMenu"
+		TextItem "$MNU_OPTIONS", "o", "OptionsMenu"
+		//TextItem "$MNU_GAMEFILES", "g", "GameFilesMenu"
+        TextItem "$MNU_LOADGAME", "l", "LoadGameMenu"
+		TextItem "$MNU_INFO", "i", "ReadThisMenu"
+		TextItem "$MNU_QUITGAME", "q", "QuitMenu"
+	}
+}
+
+AddOptionMenu "OptionsMenu"
+{
+    StaticText ""
+    Submenu "$NOSAVE_MAIN_MENU_TITLE", "NoSaveOptions"
+}
+
+OptionMenu "NoSaveOptions"
+{
+    Title "$NOSAVE_OPTIONS"
+    Slider "$NOSAVE_SAVES_PER_LEVEL", "nosave_items_per_level", 0,100,1,0
+    StaticText "$NOSAVE_SAVES_PER_LEVEL_DESC"
+    Slider "$NOSAVE_ENEMY_THRESHOLD", "nosave_enemy_treshold", 1,200,1,0
+    StaticText "$NOSAVE_ENEMY_THRESHOLD_DESC"
+    Option "$NOSAVE_STRIP", "nosave_strip_between_levels", YesNo
+    StaticText "$NOSAVE_STRIP_DESC"
+    StaticText ""
+    Control "$NOSAVE_KEY_BIND", "nosaving_quicksave"
+    StaticText "$NOSAVE_KEY_BIND_DESC"
+    StaticText "$NOSAVE_KEY_BIND_DESC2"
+    StaticText "$NOSAVE_KEY_BIND_DESC3"
+}

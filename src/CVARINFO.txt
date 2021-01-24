@@ -1,0 +1,5 @@
+//save settings
+server cheat int nosave_items_per_level = 1;
+server cheat int nosave_enemy_treshold = 40;
+server cheat bool nosave_strip_between_levels = true;
+//server cheat bool nosave_show_inventory = true;

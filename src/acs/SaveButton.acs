@@ -8,11 +8,11 @@ script "SaveButton" (void)
     if (SaveGems > 0)
     {
         Autosave();
-        Log(s:"Using a save gem... ", i:SaveGems - 1, s:" Save Gems remain");
+        Log(l:"NOSAVE_SAVED", s:" ", l:"NOSAVE_REMAIN_1",s:" ", i:SaveGems - 1,s:" ", l:"NOSAVE_REMAIN_2");
         TakeInventory("SaveGem",1);
     }
     else
     {
-        Log(s:"Cannot save without a save gem!");
+        Log(l:"NOSAVE_PREVENTION");
     }
 }

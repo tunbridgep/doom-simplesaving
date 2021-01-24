@@ -1,14 +1,19 @@
 class SaveingModItemHandler : SavingModEventHandler
 {
-    bool has_spawned;
+    int has_spawned;
     int enemies_spawned;
-    int spawn_threshold_needed;
 
-    override void OnRegister()
+    override void UniqueWorldLoaded(WorldEvent e)
     {
-        has_spawned = false;
+        has_spawned = 0;
         enemies_spawned = 0;
-        spawn_threshold_needed = 10;
+    }
+    
+    override void UniquePlayerEntered(Actor Player, bool returning)
+    {
+        if (!returning && nosave_strip_between_levels)
+            Player.TakeInventory("SaveGem",99999999);
+            
     }
     
     override void WorldThingSpawned(WorldEvent e)
@@ -17,12 +22,12 @@ class SaveingModItemHandler : SavingModEventHandler
               
         if (a && a.GetLevelSpawnTime() <= 5 && a.bISMONSTER)
         {
-            if (enemies_spawned < spawn_threshold_needed)
+            if (enemies_spawned < nosave_enemy_treshold)
                 enemies_spawned++;
-            else if (!has_spawned)
+            else if (has_spawned < nosave_items_per_level)
             {
                 a.GiveInventory("GemDropper",1);
-                has_spawned = true;
+                has_spawned++;
             }
         }
     }
