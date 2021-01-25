@@ -9,10 +9,22 @@ class SaveingModItemHandler : SavingModEventHandler
         enemies_spawned = 0;
     }
     
+    bool IsSkipMult()
+    {
+        return nosave_map_skip != 0 && level.LevelNum % nosave_map_skip != 0;
+    }
+    
     override void UniquePlayerEntered(Actor Player, bool returning)
     {
         if (!returning && nosave_strip_between_levels)
             Player.TakeInventory("SaveGem",99999999);
+        if (!Player.CheckInventory("NoSaveStartup",1))
+        {
+            Player.GiveInventory("NoSaveStartup",1);
+        
+            if (nosave_items_starting > 0)
+                Player.GiveInventory("SaveGem",nosave_items_starting);
+        }
             
     }
     
@@ -20,7 +32,7 @@ class SaveingModItemHandler : SavingModEventHandler
     {
         Actor a = e.Thing;
               
-        if (a && a.GetLevelSpawnTime() <= 5 && a.bISMONSTER)
+        if (a && a.GetLevelSpawnTime() <= 5 && a.bISMONSTER && !IsSkipMult())
         {
             if (enemies_spawned < nosave_enemy_treshold)
                 enemies_spawned++;
@@ -32,6 +44,9 @@ class SaveingModItemHandler : SavingModEventHandler
         }
     }
 }
+
+//This item signifies that we have a start token, so we can verify that a player has veen setup correctly etc
+class NoSaveStartup : SavingModPermanentItem {}
 
 //This item will drop a Save Gem upon it's owner dying
 class GemDropper : SavingModPermanentItem

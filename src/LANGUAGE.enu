@@ -3,6 +3,8 @@
 //Menu Options
 NOSAVE_MAIN_MENU_TITLE = "Saving Mod Options";
 NOSAVE_OPTIONS = "Saving Mod Options";
+NOSAVE_SAVES_STARTING = "Starting number of save items";
+NOSAVE_SAVES_STARTING_DESC = "How many save items players will start with";
 NOSAVE_SAVES_PER_LEVEL = "Saves per level";
 NOSAVE_SAVES_PER_LEVEL_DESC = "How many save items will drop per level";
 NOSAVE_ENEMY_THRESHOLD = "Enemy Threshold";
@@ -12,7 +14,13 @@ NOSAVE_STRIP_DESC = "When enabled, save items will be removed when entering a ne
 NOSAVE_KEY_BIND = "Quicksave Key";
 NOSAVE_KEY_BIND_DESC = "Because GZDoom does not allow mods to disable saving,";
 NOSAVE_KEY_BIND_DESC2 = "players are required to use a different button to save.";
-NOSAVE_KEY_BIND_DESC3 = "This should be the same as your normal quicksave hotkey";
+NOSAVE_KEY_BIND_DESC3 = "This should replace your normal quicksave hotkey";
+NOSAVE_MAP_SKIP = "Map Skip Multiplier";
+NOSAVE_MAP_SKIP_DESC = "Will only create save items on maps that are a multiple of this number";
+NOSAVE_MAP_SKIP_DESC2 = "Used for skipping every X maps, etc.";
+NOSAVE_AUTOSAVE_DESC = "Automatically autosave at the start of each map.";
+NOSAVE_AUTOSAVE_DESC2 = "This must be set to 'Always' or 'Scripts Only' for this mod to function";
+NOSAVE_DISABLED = "Disabled";
 
 //Item text
 NOSAVE_ITEM_NAME = "Ankh of Time Manipulation";

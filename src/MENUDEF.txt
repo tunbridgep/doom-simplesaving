@@ -78,15 +78,28 @@ AddOptionMenu "OptionsMenu"
 OptionMenu "NoSaveOptions"
 {
     Title "$NOSAVE_OPTIONS"
-    Slider "$NOSAVE_SAVES_PER_LEVEL", "nosave_items_per_level", 0,100,1,0
+    ScaleSlider "$NOSAVE_SAVES_STARTING", "nosave_items_starting", 0,100,1,"$NOSAVE_DISABLED"
+    StaticText "$NOSAVE_SAVES_STARTING_DESC"
+    StaticText ""
+    ScaleSlider "$NOSAVE_SAVES_PER_LEVEL", "nosave_items_per_level", 0,100,1,"$NOSAVE_DISABLED"
     StaticText "$NOSAVE_SAVES_PER_LEVEL_DESC"
+    StaticText ""
+    ScaleSlider "$NOSAVE_MAP_SKIP", "nosave_map_skip", 0,32,1,"$NOSAVE_DISABLED"
+    StaticText "$NOSAVE_MAP_SKIP_DESC"
+    StaticText "$NOSAVE_MAP_SKIP_DESC2"
+    StaticText ""
     Slider "$NOSAVE_ENEMY_THRESHOLD", "nosave_enemy_treshold", 1,200,1,0
     StaticText "$NOSAVE_ENEMY_THRESHOLD_DESC"
+    StaticText ""
     Option "$NOSAVE_STRIP", "nosave_strip_between_levels", YesNo
     StaticText "$NOSAVE_STRIP_DESC"
+    StaticText ""
+    Option "$MISCMNU_ENABLEAUTOSAVES",			"disableautosave", "Autosave"
+    StaticText "$NOSAVE_AUTOSAVE_DESC"
+    StaticText "$NOSAVE_AUTOSAVE_DESC2", 1
     StaticText ""
     Control "$NOSAVE_KEY_BIND", "nosaving_quicksave"
     StaticText "$NOSAVE_KEY_BIND_DESC"
     StaticText "$NOSAVE_KEY_BIND_DESC2"
-    StaticText "$NOSAVE_KEY_BIND_DESC3"
+    StaticText "$NOSAVE_KEY_BIND_DESC3", 1
 }
