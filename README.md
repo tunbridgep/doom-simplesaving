@@ -14,4 +14,4 @@ A simple saving mod for doom, attempting to remove savescumming by restricting f
 
 # Credits
 
-* Ankh image created by Blue Shadow, taken from [Realm 667](realm667.com)
+* Ankh image created by Blue Shadow, taken from [Realm 667](http://realm667.com)
