@@ -14,7 +14,11 @@ A simple saving mod for doom, attempting to remove savescumming by restricting f
 
 # Installation
 
-Release versions are ready to go from the releases page. Please note that the repository only contains core data files with no transient data (no zscript include files or compiled ACS script)
+**Release versions are ready to go from the [releases](releases) page. Simply download a release version and drag it onto gzdoom.exe to start playing**
+
+## Building
+
+Please note that the repository only contains source code with no transient data (no zscript include files or compiled ACS script)
 
 If you wish to build the project yourself, please follow the following steps:
 
