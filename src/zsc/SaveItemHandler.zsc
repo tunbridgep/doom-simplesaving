@@ -11,18 +11,37 @@ class SaveingModItemHandler : SavingModEventHandler
     }
       
     override void UniquePlayerEntered(Actor Player, bool returning)
-    {   
+    {
+        //Make sure autosaving is enabled
+        if (disableautosave == 2)
+        {
+            String warning = Stringtable.Localize("$NOSAVE_WARNING");
+            Player.C_MidPrint("SMALLFONT", "$NOSAVE_WARNING", true);
+        }
+        
+        //Make sure our save button is bound
+        /*
+        int key = KeyBindings.GetKeysForCommand("nosave_quicksave");
+        {
+            if (key == -1)
+            {
+                String warning = Stringtable.Localize("$NOSAVE_NOKEY");
+                Player.C_MidPrint("SMALLFONT", "$NOSAVE_NOKEY", true);
+            }
+        }
+        */
+    
         if (!returning && nosave_strip_between_levels)
             Player.TakeInventory("SaveGem",99999999);
         if (!Player.CheckInventory("NoSaveStartup",1))
         {
             Player.GiveInventory("NoSaveStartup",1);
+            
             Player.ACS_ScriptCall("LoadAutosave");
         
             if (nosave_items_starting > 0)
                 Player.GiveInventory("SaveGem",nosave_items_starting);
         }
-            
     }
     
     bool HasMetThreshold()

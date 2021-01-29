@@ -98,7 +98,7 @@ OptionMenu "NoSaveOptions"
     StaticText "$NOSAVE_AUTOSAVE_DESC"
     StaticText "$NOSAVE_AUTOSAVE_DESC2", 1
     StaticText ""
-    Control "$NOSAVE_KEY_BIND", "nosaving_quicksave"
+    Control "$NOSAVE_KEY_BIND", "nosave_quicksave"
     StaticText "$NOSAVE_KEY_BIND_DESC"
     StaticText "$NOSAVE_KEY_BIND_DESC2"
     StaticText "$NOSAVE_KEY_BIND_DESC3", 1

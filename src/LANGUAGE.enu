@@ -18,8 +18,8 @@ NOSAVE_KEY_BIND_DESC3 = "This should replace your normal quicksave hotkey";
 NOSAVE_MAP_SKIP = "Map Skip Multiplier";
 NOSAVE_MAP_SKIP_DESC = "Will only create save items on maps that are a multiple of this number";
 NOSAVE_MAP_SKIP_DESC2 = "Used for skipping every X maps, etc.";
-NOSAVE_AUTOSAVE_DESC = "Automatically autosave at the start of each map.";
-NOSAVE_AUTOSAVE_DESC2 = "This must be set to 'Always' or 'Scripts Only' for this mod to function";
+NOSAVE_AUTOSAVE_DESC = "GZDoom's built-in Autosave option. Scripts Only is recommended";
+NOSAVE_AUTOSAVE_DESC2 = "This must be set to 'Always' or 'Scripts Only' for this mod to function!";
 NOSAVE_DISABLED = "Disabled";
 
 //Item text
@@ -29,3 +29,7 @@ NOSAVE_PREVENTION = "You cannot save without an Ankh of Time Manipulation!";
 NOSAVE_SAVED = "Ankh used...";
 NOSAVE_REMAIN_1 = "You have";
 NOSAVE_REMAIN_2 = "saves remaining!";
+
+//Misc
+NOSAVE_WARNING = "Warning: Autosaving is disabled! Simple Saving will not work correctly! Please change this in the options menu!";
+NOSAVE_NOKEY = "Warning: Simple Saving Quicksave button is not bound! The mod will not work correctly! Please change this in the options menu!";
