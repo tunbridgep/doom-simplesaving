@@ -1,6 +1,6 @@
 # Simple Saving
 
-A simple saving mod for doom, attempting to remove savescumming by restricting free saving and instead requiring the use of a resource in order to save.
+A simple saving mod for gzdoom, attempting to remove savescumming by restricting free saving and instead requiring the use of a resource in order to save.
 
 # Features
 
@@ -14,7 +14,9 @@ A simple saving mod for doom, attempting to remove savescumming by restricting f
 
 # Installation
 
-Release versions are ready to go from the [releases](https://github.com/tunbridgep/doom-simplesaving/releases) page. Simply download a release version and drag it onto gzdoom.exe to start playing
+Release versions are ready to go from the [releases](https://github.com/tunbridgep/doom-simplesaving/releases) page. Simply download a release version and drag it onto gzdoom.exe to start playing.
+
+**You will need to set your save hotkey in the Simple Saving options menu before this mod will work properly**
 
 # Building
 
