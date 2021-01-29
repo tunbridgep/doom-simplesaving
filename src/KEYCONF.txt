@@ -1,2 +1,2 @@
-alias nosaving_quicksave "pukename SaveButton"
-defaultbind F6 nosaving_quicksave
+alias nosave_quicksave "pukename SaveButton"
+defaultbind F6 nosave_quicksave

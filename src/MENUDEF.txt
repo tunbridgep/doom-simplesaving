@@ -84,17 +84,17 @@ OptionMenu "NoSaveOptions"
     ScaleSlider "$NOSAVE_SAVES_PER_LEVEL", "nosave_items_per_level", 0,100,1,"$NOSAVE_DISABLED"
     StaticText "$NOSAVE_SAVES_PER_LEVEL_DESC"
     StaticText ""
-    ScaleSlider "$NOSAVE_MAP_SKIP", "nosave_map_skip", 0,32,1,"$NOSAVE_DISABLED"
+    Slider "$NOSAVE_MAP_SKIP", "nosave_map_skip", 1,32,1,0
     StaticText "$NOSAVE_MAP_SKIP_DESC"
     StaticText "$NOSAVE_MAP_SKIP_DESC2"
     StaticText ""
-    Slider "$NOSAVE_ENEMY_THRESHOLD", "nosave_enemy_treshold", 1,200,1,0
+    Slider "$NOSAVE_ENEMY_THRESHOLD", "nosave_enemy_threshold", 1,200,1,0
     StaticText "$NOSAVE_ENEMY_THRESHOLD_DESC"
     StaticText ""
     Option "$NOSAVE_STRIP", "nosave_strip_between_levels", YesNo
     StaticText "$NOSAVE_STRIP_DESC"
     StaticText ""
-    Option "$MISCMNU_ENABLEAUTOSAVES",			"disableautosave", "Autosave"
+    Option "$MISCMNU_ENABLEAUTOSAVES", "disableautosave", "Autosave"
     StaticText "$NOSAVE_AUTOSAVE_DESC"
     StaticText "$NOSAVE_AUTOSAVE_DESC2", 1
     StaticText ""

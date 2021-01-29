@@ -1,19 +1,15 @@
 class SaveingModItemHandler : SavingModEventHandler
 {
     int has_spawned;
-    int enemies_spawned;
+    int total_enemies;
+    int unrolled_enemies;
 
     override void UniqueWorldLoaded(WorldEvent e)
     {
         has_spawned = 0;
-        enemies_spawned = 0;
+        Console.printf("Unique World Loaded");
     }
-    
-    bool IsSkipMult()
-    {
-        return nosave_map_skip != 0 && level.LevelNum % nosave_map_skip != 0;
-    }
-    
+      
     override void UniquePlayerEntered(Actor Player, bool returning)
     {   
         if (!returning && nosave_strip_between_levels)
@@ -29,32 +25,60 @@ class SaveingModItemHandler : SavingModEventHandler
             
     }
     
+    bool HasMetThreshold()
+    {
+        return total_enemies >= nosave_enemy_threshold - 1;
+    }
+    
+    bool IsValidActor(Actor a)
+    {
+        return a && a.bISMONSTER && a.bCOUNTKILL;
+    }
+    
     override void WorldThingSpawned(WorldEvent e)
     {
-        Actor a = e.Thing;
-              
-        if (a && a.GetLevelSpawnTime() <= 5 && a.bISMONSTER && !IsSkipMult())
+        if (IsValidActor(e.Thing))
         {
-            if (enemies_spawned < nosave_enemy_treshold)
-                enemies_spawned++;
-            else if (has_spawned < nosave_items_per_level)
+            total_enemies++;
+            unrolled_enemies++;
+        }
+    }
+    
+    bool IsValidMap()
+    {
+        return nosave_map_skip == 0 || level.LevelNum % nosave_map_skip == 0;
+    }
+    
+    int GetSpawnsRemaining()
+    {
+        return nosave_items_per_level - has_spawned;
+    }
+    
+    override void WorldThingDied(WorldEvent e)
+    {
+        Actor a = e.Thing;
+        
+        if (IsValidActor(a))
+        {
+            unrolled_enemies--;
+            if (HasMetThreshold() && IsValidMap() && GetSpawnsRemaining() > 0 )
             {
-                a.GiveInventory("GemDropper",1);
-                has_spawned++;
+                int droproll = random(0, unrolled_enemies);
+                
+                SSDebug.LogVerbose("Rolling between 0 and "..unrolled_enemies.." - rolled a "..droproll.."");
+                
+                if (droproll == 1)
+                {
+                    a.A_DropItem("SaveGem");
+                    has_spawned++;
+                }
             }
+            else
+                SSDebug.LogVerbose("Not rolling for enemy #"..unrolled_enemies.." - not valid map or threshold, or exceeded spawn number");
         }
     }
 }
 
-//This item signifies that we have a start token, so we can verify that a player has veen setup correctly etc
+//This item signifies that we have a start token, so we can verify that a player has been setup correctly etc
+//This also gives us the advantage of "restarting" when on a pistol-start enforced mission, like in scythe2
 class NoSaveStartup : SavingModPermanentItem {}
-
-//This item will drop a Save Gem upon it's owner dying
-class GemDropper : SavingModPermanentItem
-{
-    override void OwnerDied()
-    {
-        owner.A_DropItem("SaveGem");
-        super.OwnerDied();
-    }
-}

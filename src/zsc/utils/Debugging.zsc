@@ -1,0 +1,32 @@
+class SSDebug
+{
+
+    const mod_name = "[Simple Saving]";
+    const error_text = "ERROR: ";
+    
+    const NORMAL = 1;
+    const VERBOSE = 2;
+
+    private static void printDebug(String text)
+    {
+        Console.printf(mod_name.." "..text);
+    }
+    
+    static void Log(String text)
+    {
+        if (nosave_debug >= NORMAL)
+            printDebug(text);
+    }
+    
+    static void LogError(String Text)
+    {
+        printDebug(error_text..text);
+    }
+    
+    static void LogVerbose(String text)
+    {
+        if (nosave_debug >= VERBOSE)
+            printDebug(text);
+    }
+
+} 
