@@ -72,12 +72,12 @@ LISTMENU "MainMenu"
 AddOptionMenu "OptionsMenu"
 {
     StaticText ""
-    Submenu "$NOSAVE_MAIN_MENU_TITLE", "NoSaveOptions"
+    Submenu "$NOSAVE_OPTIONS_MENU_NAME", "NoSaveOptions"
 }
 
 OptionMenu "NoSaveOptions"
 {
-    Title "$NOSAVE_OPTIONS"
+    Title "$NOSAVE_MAIN_TITLE"
     ScaleSlider "$NOSAVE_SAVES_STARTING", "nosave_items_starting", 0,100,1,"$NOSAVE_DISABLED"
     StaticText "$NOSAVE_SAVES_STARTING_DESC"
     StaticText ""

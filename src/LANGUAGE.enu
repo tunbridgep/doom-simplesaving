@@ -1,8 +1,8 @@
 [enu default]
 
 //Menu Options
-NOSAVE_MAIN_MENU_TITLE = "Saving Mod Options";
-NOSAVE_OPTIONS = "Saving Mod Options";
+NOSAVE_MAIN_TITLE = "Simple Saving Options";
+NOSAVE_OPTIONS_MENU_NAME = "Simple Saving";
 NOSAVE_SAVES_STARTING = "Starting number of save items";
 NOSAVE_SAVES_STARTING_DESC = "How many save items players will start with";
 NOSAVE_SAVES_PER_LEVEL = "Saves per level";
@@ -13,7 +13,7 @@ NOSAVE_STRIP = "Level Strip";
 NOSAVE_STRIP_DESC = "When enabled, save items will be removed when entering a new level";
 NOSAVE_KEY_BIND = "Quicksave Key";
 NOSAVE_KEY_BIND_DESC = "Because GZDoom does not allow mods to disable saving,";
-NOSAVE_KEY_BIND_DESC2 = "players are required to use a different button to save.";
+NOSAVE_KEY_BIND_DESC2 = "players are required to use a different button to have special saving behavior.";
 NOSAVE_KEY_BIND_DESC3 = "This should replace your normal quicksave hotkey";
 NOSAVE_MAP_SKIP = "Map Skip Multiplier";
 NOSAVE_MAP_SKIP_DESC = "Will only create save items on maps that are a multiple of this number";
