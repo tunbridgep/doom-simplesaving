@@ -14,7 +14,9 @@ A simple saving mod for gzdoom, attempting to remove savescumming by restricting
 
 # Installation
 
-Release versions are ready to go from the [releases](https://github.com/tunbridgep/doom-simplesaving/releases) page. Simply download a release version and drag it onto gzdoom.exe to start playing
+Release versions are ready to go from the [releases](https://github.com/tunbridgep/doom-simplesaving/releases) page. Simply download a release version and drag it onto gzdoom.exe to start playing.
+
+**You will need to set your save hotkey in the Simple Saving options menu before this mod will work properly**
 
 # Building
 
