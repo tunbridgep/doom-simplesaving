@@ -14,9 +14,9 @@ A simple saving mod for doom, attempting to remove savescumming by restricting f
 
 # Installation
 
-**Release versions are ready to go from the [releases](releases) page. Simply download a release version and drag it onto gzdoom.exe to start playing**
+Release versions are ready to go from the [releases](https://github.com/tunbridgep/doom-simplesaving/releases) page. Simply download a release version and drag it onto gzdoom.exe to start playing
 
-## Building
+# Building
 
 Please note that the repository only contains source code with no transient data (no zscript include files or compiled ACS script)
 
@@ -32,3 +32,10 @@ Alternatively, a config.json file is provided for use with my [doom-quickbuild](
 # Credits
 
 * Ankh image created by Blue Shadow, taken from [Realm 667](http://realm667.com)
+
+# Other Stuff
+
+Checkout my other mods on github
+
+* [Simple Teleporter Effects](https://github.com/tunbridgep/doom-simpleteleportereffects) - add particle effects to any teleporter in any map in a compatible way
+* [Flashlight Mod](https://github.com/tunbridgep/doom-flashlight) - adds a usable flashlight, the ability to darken the map, a dynamic system for enemy and player stealth, and more.
