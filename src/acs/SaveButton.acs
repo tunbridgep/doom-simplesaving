@@ -16,3 +16,8 @@ script "SaveButton" (void)
         Log(l:"NOSAVE_PREVENTION");
     }
 }
+
+script "LoadAutosave" (void)
+{
+    Autosave();
+}

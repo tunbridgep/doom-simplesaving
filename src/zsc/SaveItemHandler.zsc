@@ -15,12 +15,13 @@ class SaveingModItemHandler : SavingModEventHandler
     }
     
     override void UniquePlayerEntered(Actor Player, bool returning)
-    {
+    {   
         if (!returning && nosave_strip_between_levels)
             Player.TakeInventory("SaveGem",99999999);
         if (!Player.CheckInventory("NoSaveStartup",1))
         {
             Player.GiveInventory("NoSaveStartup",1);
+            Player.ACS_ScriptCall("LoadAutosave");
         
             if (nosave_items_starting > 0)
                 Player.GiveInventory("SaveGem",nosave_items_starting);
