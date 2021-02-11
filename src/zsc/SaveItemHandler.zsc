@@ -3,35 +3,41 @@ class SaveingModItemHandler : SavingModEventHandler
     int has_spawned;
     int total_enemies;
     int unrolled_enemies;
+    
+    const SAVE_BUTTON_TICS = 70;
+    int lastpress[32];
 
     override void UniqueWorldLoaded(WorldEvent e)
     {
         has_spawned = 0;
-        Console.printf("Unique World Loaded");
     }
       
     override void UniquePlayerEntered(Actor Player, bool returning)
     {
+        //don't give out new items on hub maps
+        if (returning)
+            return;
+    
         //Make sure autosaving is enabled
         if (disableautosave == 2)
         {
             String warning = Stringtable.Localize("$NOSAVE_WARNING");
-            Player.C_MidPrint("SMALLFONT", "$NOSAVE_WARNING", true);
+            Console.MidPrint(SMALLFONT, "$NOSAVE_WARNING", true);
         }
         
-        //Make sure our save button is bound
         /*
+        //Make sure our save button is bound
         int key = KeyBindings.GetKeysForCommand("nosave_quicksave");
         {
             if (key == -1)
             {
                 String warning = Stringtable.Localize("$NOSAVE_NOKEY");
-                Player.C_MidPrint("SMALLFONT", "$NOSAVE_NOKEY", true);
+                Console.MidPrint(SMALLFONT, "$NOSAVE_NOKEY", true);
             }
         }
         */
     
-        if (!returning && nosave_strip_between_levels)
+        if (nosave_strip_between_levels)
             Player.TakeInventory("SaveGem",99999999);
         if (!Player.CheckInventory("NoSaveStartup",1))
         {
@@ -52,6 +58,42 @@ class SaveingModItemHandler : SavingModEventHandler
     bool IsValidActor(Actor a)
     {
         return a && a.bISMONSTER && a.bCOUNTKILL;
+    }
+    
+    void DisplaySaveGemsMessage(Actor player)
+    {
+        int SaveGems = player.CountInv("SaveGem");
+    
+        String prefix = Stringtable.Localize("$NOSAVE_REMAIN_1");
+        String postfix = Stringtable.Localize("$NOSAVE_REMAIN_2");
+        Console.Printf(prefix.." "..SaveGems.." "..postfix);
+    }
+    
+    void Save(Actor player)
+    {   
+        if (player.CountInv("SaveGem") > 0)
+        {
+            LevelLocals.MakeAutoSave();
+            Console.Printf(Stringtable.Localize("$NOSAVE_SAVED"));
+            player.TakeInventory("SaveGem",1);
+        }
+        else
+            //Console.Printf(Stringtable.Localize("$NOSAVE_PREVENTION"));
+            DisplaySaveGemsMessage(player);
+    }
+    
+    
+    override void NetworkProcess (ConsoleEvent e) 
+    {
+        if (e.Name == "SaveButton")
+        {
+            if (gametic - lastpress[e.Player] <= SAVE_BUTTON_TICS && lastpress[e.Player] > SAVE_BUTTON_TICS)
+                Save(players[e.Player].mo);
+            else
+                DisplaySaveGemsMessage(players[e.Player].mo);
+                
+            lastpress[e.Player] = gametic;
+        }
     }
     
     override void WorldThingSpawned(WorldEvent e)

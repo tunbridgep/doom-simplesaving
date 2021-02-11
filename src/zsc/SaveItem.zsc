@@ -19,13 +19,27 @@ class SaveGem : SavingModPermanentItem
 {
     Default
     {
-        +INVENTORY.INVBAR;
-        Inventory.InterHubAmount 999;
-        Inventory.MaxAmount 999;
+        -INVENTORY.UNDROPPABLE;;
+        -INVENTORY.UNTOSSABLE;
+        Inventory.InterHubAmount 25;
+        Inventory.MaxAmount 25;
         Inventory.Icon "ARTIALI1";
         +FLOATBOB;
         Inventory.PickupMessage "$NOSAVE_ITEM_PICKUP";
         Tag "$NOSAVE_ITEM_NAME";
+    }
+    
+    //This has to be done here, rather than being dynamic
+    //because otherwise the inventory UI completely breaks.
+    //But there's nothing stopping the player dropping the item and picking it up again
+    /* override void DoEffect() */
+    override void AttachToOwner(Actor other)
+    {
+        if (nosave_show_inventory)
+            bINVBAR = true;
+        else
+            bINVBAR = false;
+        super.AttachToOwner(other);
     }
     
     States

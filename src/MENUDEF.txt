@@ -94,6 +94,9 @@ OptionMenu "NoSaveOptions"
     Option "$NOSAVE_STRIP", "nosave_strip_between_levels", YesNo
     StaticText "$NOSAVE_STRIP_DESC"
     StaticText ""
+    Option "$NOSAVE_SHOW_INVENTORY", "nosave_show_inventory", YesNo
+    StaticText "$NOSAVE_SHOW_INVENTORY_DESC"
+    StaticText ""
     Option "$MISCMNU_ENABLEAUTOSAVES", "disableautosave", "Autosave"
     StaticText "$NOSAVE_AUTOSAVE_DESC"
     StaticText "$NOSAVE_AUTOSAVE_DESC2", 1

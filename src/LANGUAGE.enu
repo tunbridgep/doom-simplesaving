@@ -21,6 +21,8 @@ NOSAVE_MAP_SKIP_DESC2 = "Used for skipping every X maps, etc.";
 NOSAVE_AUTOSAVE_DESC = "GZDoom's built-in Autosave option. Scripts Only is recommended";
 NOSAVE_AUTOSAVE_DESC2 = "This must be set to 'Always' or 'Scripts Only' for this mod to function!";
 NOSAVE_DISABLED = "Disabled";
+NOSAVE_SHOW_INVENTORY = "Show item in Inventory";
+NOSAVE_SHOW_INVENTORY_DESC = "Will show save items in the inventory panel";
 
 //Item text
 NOSAVE_ITEM_NAME = "Ankh of Time Manipulation";
