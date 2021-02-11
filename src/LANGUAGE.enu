@@ -27,10 +27,10 @@ NOSAVE_SHOW_INVENTORY_DESC = "Will show save items in the inventory panel";
 //Item text
 NOSAVE_ITEM_NAME = "Ankh of Time Manipulation";
 NOSAVE_ITEM_PICKUP = "You got the Ankh of Time Manipulation! You can now save the game!";
-NOSAVE_PREVENTION = "You cannot save without an Ankh of Time Manipulation!";
 NOSAVE_SAVED = "Ankh used...";
 NOSAVE_REMAIN_1 = "You have";
 NOSAVE_REMAIN_2 = "saves remaining!";
+NOSAVE_REMAIN_3 = "(Press again to save.)";
 
 //Misc
 NOSAVE_WARNING = "Warning: Autosaving is disabled! Simple Saving will not work correctly! Please change this in the options menu!";
