@@ -4,7 +4,7 @@ class SaveingModItemHandler : SavingModEventHandler
     int total_enemies;
     int unrolled_enemies;
     
-    const SAVE_BUTTON_TICS = 70;
+    const SAVE_BUTTON_TICS = 35;
     int lastpress[32];
 
     override void UniqueWorldLoaded(WorldEvent e)
