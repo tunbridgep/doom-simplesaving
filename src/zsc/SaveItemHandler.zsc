@@ -95,11 +95,12 @@ class SaveingModItemHandler : SavingModEventHandler
     {
         if (e.Name == "SaveButton")
         {
-            if (gametic - lastpress[e.Player] <= SAVE_BUTTON_TICS && lastpress[e.Player] > SAVE_BUTTON_TICS)
+            if (lastpress[e.Player] <= gametic && gametic - lastpress[e.Player] <= SAVE_BUTTON_TICS && lastpress[e.Player] > SAVE_BUTTON_TICS)
                 Save(players[e.Player].mo);
             else
                 DisplaySaveGemsMessage(players[e.Player].mo);
-                
+            
+            SSDebug.LogVerbose("lastpress is "..lastpress[e.Player]..", gametic is "..gametic.."");
             lastpress[e.Player] = gametic;
         }
     }
