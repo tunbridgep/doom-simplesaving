@@ -42,12 +42,16 @@ class SaveingModItemHandler : SavingModEventHandler
         if (!Player.CheckInventory("NoSaveStartup",1))
         {
             Player.GiveInventory("NoSaveStartup",1);
-            
-            Player.ACS_ScriptCall("LoadAutosave");
-        
             if (nosave_items_starting > 0)
                 Player.GiveInventory("SaveGem",nosave_items_starting);
         }
+    }
+    
+    static void MakeAutosave(bool showmsg = true)
+    {
+        if (showmsg)
+            Console.Printf(Stringtable.Localize("$NOSAVE_SAVED"));
+        LevelLocals.MakeAutoSave();
     }
     
     bool HasMetThreshold()
@@ -78,8 +82,7 @@ class SaveingModItemHandler : SavingModEventHandler
     {   
         if (player.CountInv("SaveGem") > 0)
         {
-            LevelLocals.MakeAutoSave();
-            Console.Printf(Stringtable.Localize("$NOSAVE_SAVED"));
+            MakeAutosave(false);
             player.TakeInventory("SaveGem",1);
         }
         else
@@ -147,4 +150,18 @@ class SaveingModItemHandler : SavingModEventHandler
 
 //This item signifies that we have a start token, so we can verify that a player has been setup correctly etc
 //This also gives us the advantage of "restarting" when on a pistol-start enforced mission, like in scythe2
-class NoSaveStartup : SavingModPermanentItem {}
+class NoSaveStartup : SavingModPermanentItem
+{
+    bool startSave;
+
+    override void DoEffect()
+    {
+        //This needs to be delayed by a bit or it doesn't make a save
+        if (gametic > 5 && !startSave)
+        {
+            SaveingModItemHandler.MakeAutosave(false); //Do an autosave right at the start of the game, and once only, so that we always have at least one autosave. Otherwise we get bad pistol starts.
+            startSave = true;
+        }
+        super.DoEffect();
+    }
+}

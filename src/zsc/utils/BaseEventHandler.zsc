@@ -12,7 +12,7 @@ class SavingModEventHandler : EventHandler
         //override this
     }
     
-    override void PlayerEntered(PlayerEvent e)
+    override void PlayerSpawned(PlayerEvent e)
     {      
         if (gamestate == 7) //TITLEMAP
             return;
