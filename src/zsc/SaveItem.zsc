@@ -42,6 +42,12 @@ class SaveGem : SavingModPermanentItem
         super.AttachToOwner(other);
     }
     
+    override bool Use(bool pickup)
+    {
+        SaveingModItemHandler.Save(owner);
+        return super.Use(pickup);
+    }
+    
     States
     {
         Spawn:

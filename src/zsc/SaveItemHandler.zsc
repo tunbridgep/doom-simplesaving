@@ -36,9 +36,7 @@ class SaveingModItemHandler : SavingModEventHandler
             }
         }
         */
-    
-        if (nosave_strip_between_levels)
-            Player.TakeInventory("SaveGem",99999999);
+               
         if (!Player.CheckInventory("NoSaveStartup",1))
         {
             Player.GiveInventory("NoSaveStartup",1);
@@ -64,7 +62,7 @@ class SaveingModItemHandler : SavingModEventHandler
         return a && a.bISMONSTER && a.bCOUNTKILL;
     }
     
-    void DisplaySaveGemsMessage(Actor player)
+    static void DisplaySaveGemsMessage(Actor player)
     {
         int SaveGems = player.CountInv("SaveGem");
     
@@ -78,7 +76,7 @@ class SaveingModItemHandler : SavingModEventHandler
             Console.Printf(prefix.." "..SaveGems.." "..postfix);
     }
     
-    void Save(Actor player)
+    static void Save(Actor player)
     {   
         if (player.CountInv("SaveGem") > 0)
         {
@@ -154,6 +152,12 @@ class SaveingModItemHandler : SavingModEventHandler
 class NoSaveStartup : SavingModPermanentItem
 {
     bool startSave;
+    
+    override void Travelled()
+    {
+        if (nosave_strip_between_levels)
+            owner.TakeInventory("SaveGem",999);
+    }
 
     override void DoEffect()
     {
