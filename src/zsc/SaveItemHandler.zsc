@@ -95,7 +95,7 @@ class SaveingModItemHandler : SavingModEventHandler
     {
         if (e.Name == "SaveButton")
         {
-            if (lastpress[e.Player] <= gametic && gametic - lastpress[e.Player] <= SAVE_BUTTON_TICS && lastpress[e.Player] > SAVE_BUTTON_TICS)
+            if (!nosave_double_tap || (lastpress[e.Player] <= gametic && gametic - lastpress[e.Player] <= SAVE_BUTTON_TICS && lastpress[e.Player] > SAVE_BUTTON_TICS))
                 Save(players[e.Player].mo);
             else
                 DisplaySaveGemsMessage(players[e.Player].mo);

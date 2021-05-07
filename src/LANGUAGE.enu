@@ -23,6 +23,8 @@ NOSAVE_AUTOSAVE_DESC2 = "This must be set to 'Always' or 'Scripts Only' for this
 NOSAVE_DISABLED = "Disabled";
 NOSAVE_SHOW_INVENTORY = "Show item in Inventory";
 NOSAVE_SHOW_INVENTORY_DESC = "Will show save items in the inventory panel";
+NOSAVE_DOUBLE_TAP = "Double Tap Saving";
+NOSAVE_DOUBLE_TAP_DESC = "Pressing the save button once will tell you how many save items you have. Press again to save";
 
 //Item text
 NOSAVE_ITEM_NAME = "Ankh of Time Manipulation";

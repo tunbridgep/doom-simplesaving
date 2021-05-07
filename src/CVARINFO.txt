@@ -6,3 +6,4 @@ server cheat int nosave_enemy_threshold = 40;
 server cheat bool nosave_strip_between_levels = true;
 server cheat int nosave_map_skip = 1;
 server bool nosave_show_inventory = false;
+nosave bool nosave_double_tap = false;

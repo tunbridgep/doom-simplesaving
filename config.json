@@ -4,7 +4,7 @@
 		{ "dir":"./src" }
 	],
 	"steps":[
-		{"type":"acs", "settings":{ "acc":"acc", "dir":"acs", "recursive":"false", "pattern":"*.*", "keep_error_file":"false", "include_src":"true"} },
+		{"type":"acs", "settings":{ "acc":"~/.local/bin/acc", "dir":"acs", "recursive":"false", "pattern":"*.*", "keep_error_file":"false", "include_src":"true"} },
 		{"_type":"decorate", "settings":{ "dir":"decorate", "output":"decorate.txt"} },
 		{"type":"zscript", "settings":{ "dir":"zsc", "output":"zscript.txt"} }
 	],
