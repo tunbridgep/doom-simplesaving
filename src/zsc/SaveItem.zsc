@@ -21,8 +21,9 @@ class SaveGem : SavingModPermanentItem
     {
         -INVENTORY.UNDROPPABLE;;
         -INVENTORY.UNTOSSABLE;
-        Inventory.InterHubAmount 25;
-        Inventory.MaxAmount 25;
+		-INVENTORY.ALWAYSPICKUP;
+        Inventory.InterHubAmount 9999;
+        Inventory.MaxAmount 9999;
         Inventory.Icon "ARTIALI1";
         +FLOATBOB;
         Inventory.PickupMessage "$NOSAVE_ITEM_PICKUP";
@@ -42,6 +43,15 @@ class SaveGem : SavingModPermanentItem
         super.AttachToOwner(other);
     }
     
+	override bool CanPickup(Actor toucher)
+    {
+		let max = nosave_items_max;
+		if (nosave_items_starting > max)
+			max = nosave_items_starting;
+        bool allow = toucher.CountInv("SaveGem") < max;
+        return allow && super.CanPickup(toucher);
+    }
+	
     override bool Use(bool pickup)
     {
         SaveingModItemHandler.Save(owner);

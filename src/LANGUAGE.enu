@@ -9,7 +9,7 @@ NOSAVE_SAVES_PER_LEVEL = "Saves per level";
 NOSAVE_SAVES_PER_LEVEL_DESC = "How many save items will drop per level";
 NOSAVE_ENEMY_THRESHOLD = "Enemy Threshold";
 NOSAVE_ENEMY_THRESHOLD_DESC = "Minimum number of enemies required in a level for a save item to drop";
-NOSAVE_STRIP = "Strip on Level Change";
+NOSAVE_STRIP = "Remove on Level Change";
 NOSAVE_STRIP_DESC = "When enabled, save items will be removed when entering a new level";
 NOSAVE_KEY_BIND = "Quicksave Key";
 NOSAVE_KEY_BIND_DESC = "Because GZDoom does not allow mods to disable saving,";
@@ -27,6 +27,8 @@ NOSAVE_DOUBLE_TAP = "Double Tap Saving";
 NOSAVE_DOUBLE_TAP_DESC = "Pressing the save button once will tell you how many save items you have. Press again to save";
 NOSAVE_MAP_START = "First Map Offset";
 NOSAVE_MAP_START_DESC = "The earliest map where save items will start to appear.";
+NOSAVE_MAX_ITEMS = "Max Items";
+NOSAVE_MAX_ITEMS_DESC = "The maximum number of save items players can hold";
 
 //Item text
 NOSAVE_ITEM_NAME = "Ankh of Time Manipulation";
