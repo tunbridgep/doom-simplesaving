@@ -1,0 +1,1 @@
+../doom_quickbuild/src/build.cmd

@@ -114,7 +114,8 @@ class SaveingModItemHandler : SavingModEventHandler
     
     bool IsValidMap()
     {
-        return nosave_map_skip == 0 || level.LevelNum % nosave_map_skip == 0;
+        return (nosave_map_skip == 0 || level.LevelNum % nosave_map_skip == 0)
+			&& (level.LevelNum >= nosave_map_first);
     }
     
     int GetSpawnsRemaining()
