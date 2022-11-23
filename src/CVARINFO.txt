@@ -2,9 +2,9 @@
 noarchive server int nosave_debug = 0;
 server cheat int nosave_items_starting = 0;
 server cheat int nosave_items_per_level = 1;
-server cheat int nosave_enemy_threshold = 1;
+server cheat int nosave_enemy_threshold = 40;
 server cheat bool nosave_strip_between_levels = true;
 server cheat int nosave_map_skip = 1;
 server cheat int nosave_map_first = 2;
 server bool nosave_show_inventory = false;
-nosave bool nosave_double_tap = false;
+nosave bool nosave_double_tap = true;
