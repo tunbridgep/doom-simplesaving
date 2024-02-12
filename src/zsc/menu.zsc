@@ -1,0 +1,43 @@
+class ContinueMenu : MessageBoxMenu
+{
+    String mCommand;
+
+    void Init(Menu parent, String message, String command)
+    {
+        mCommand = command;
+        Super.Init(parent,message,0);
+    }
+
+    override void HandleResult(bool res)
+    {
+        if (res)
+        {
+            Console.Printf ("YES - " .. mCommand);
+            Close();
+            CloseSound();
+        }
+        else
+            Super.HandleResult(res);
+    }
+}
+
+class ListMenuItemClickableItem : ListMenuItemTextItem
+{
+    String mCommand;
+    String mText;
+
+	void Init(ListMenuDescriptor desc, String text, String hotkey, Name command, int param = 0)
+	{
+		Super.Init(desc, text, hotkey, command, param);
+        mCommand = command;
+        mText = text;
+	}
+
+	override bool Activate()
+	{
+        let msg = new("ContinueMenu");
+        msg.Init(Menu.GetCurrentMenu(),mText,mCommand);
+        msg.ActivateMenu();
+		return true;
+	}
+}

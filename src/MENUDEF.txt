@@ -38,6 +38,8 @@ LISTMENU "MainMenu"
 	
 	IfGame(Doom, Strife, Chex)
 	{
+		//TextItem "$SV_CONTINUE", "c", "NoSaveContinue"
+        ClickableItem "$NOSAVE_CONTINUE_MENU", "c", "continue"
 		PatchItem "M_NGAME", "n", "PlayerclassMenu"
 		ifOption(SwapMenu)
 		{
@@ -129,4 +131,14 @@ OptionMenu "NoSaveOptions"
     StaticText "$NOSAVE_KEY_BIND_DESC"
     StaticText "$NOSAVE_KEY_BIND_DESC2"
     StaticText "$NOSAVE_KEY_BIND_DESC3", 1
+}
+
+//The "Continue" menu
+//This is just a confirmation dialog which loads the last autosave
+
+OptionMenu "NoSaveContinue"
+{
+    StaticText ""
+    StaticText "$NOSAVE_CONTINUE_DESC"
+    Command "label", "command"
 }
