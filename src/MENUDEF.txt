@@ -75,9 +75,20 @@ AddOptionMenu "OptionsMenu"
     Submenu "$NOSAVE_OPTIONS_MENU_NAME", "NoSaveOptions"
 }
 
+OptionValue NoSaveStyles
+{
+    0, "$NOSAVE_STYLE_DOOM"
+    1, "$NOSAVE_STYLE_RAVEN"
+    //2, "$NOSAVE_STYLE_STRIFE"
+}
+
 OptionMenu "NoSaveOptions"
 {
     Title "$NOSAVE_MAIN_TITLE"
+    StaticText ""
+    Option "$NOSAVE_STYLE", "nosave_style", "NoSaveStyles"
+    StaticText "$NOSAVE_STYLE_DESC"
+    StaticText ""
     ScaleSlider "$NOSAVE_SAVES_STARTING", "nosave_items_starting", 0,100,1,"$NOSAVE_DISABLED"
     StaticText "$NOSAVE_SAVES_STARTING_DESC"
     StaticText ""
