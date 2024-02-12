@@ -1,5 +1,5 @@
-Submitted: Blue Shadow
-Decorate: Blue Shadow
-Sprites: Raven Software
-Sprite Edit: Blue Shadow
-Idea Base: Castlevania Symphony of the Night's Ankh of Life
+This mod contains several sprites (and a sound file or two) from realm667
+https://realm667.com/
+
+Sprite Edits by: Raven Software, Blue Shadow, Underqualified_Gunman, Captain Toenail, DOOM, That_One_Doom_Mod (Fist Redux), Save Disk Graphic (STDISK) from Id Software, Metro Ticket by WaKa
+Sounds from: EarthBound (healing sound), cardboard cutting sound from n Beats (https://www.youtube.com/watch?v=T6qFOh00y7c)

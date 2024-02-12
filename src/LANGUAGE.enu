@@ -38,7 +38,7 @@ NOSAVE_STYLE_RAVEN = "Mythical (Heretic/Hexen)";
 NOSAVE_STYLE_STRIFE = "Disciple (Strife)";
 NOSAVE_STYLE_FLOPPY = "Floppy Disk";
 NOSAVE_STYLE_MISATO = "Misato's Cross (Evangellion)";
-NOSAVE_STYLE_SUBWAY = "Subway Ticket (Ashes)";
+NOSAVE_STYLE_SUBWAY = "Metro Ticket (Ashes)";
 
 //Item text
 NOSAVE_ITEM_NAME = "Save Item";
