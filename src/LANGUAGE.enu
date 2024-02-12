@@ -32,13 +32,16 @@ NOSAVE_MAX_ITEMS_DESC = "The maximum number of save items players can hold";
 NOSAVE_STYLE = "Save Item Style";
 NOSAVE_STYLE_DESC = "Save Items will look a certain way depending on the style set.";
 NOSAVE_STYLE_DOOM = "Doom";
+NOSAVE_STYLE_DOOM2 = "Doom (Alternate)";
 NOSAVE_STYLE_RAVEN = "Heretic/Hexen";
 NOSAVE_STYLE_STRIFE = "Strife";
+NOSAVE_STYLE_FLOPPY = "Floppy Disk";
 
 //Item text
 NOSAVE_ITEM_NAME = "Save Item";
 NOSAVE_ITEM_PICKUP_RAVEN = "You got the Ankh of Time Manipulation! You can now save the game!";
 NOSAVE_ITEM_PICKUP_DOOM = "You feel the Demon Essense flow through you! You can now save the game!";
+NOSAVE_ITEM_PICKUP_FLOPPY = "You got a Data Disk! You can now save the game!";
 NOSAVE_SAVED = "Saving...";
 NOSAVE_REMAIN_1 = "You have";
 NOSAVE_REMAIN_2 = "saves remaining!";

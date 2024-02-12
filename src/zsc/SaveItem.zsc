@@ -15,6 +15,19 @@ class SavingModPermanentItem : Inventory
     }
 }
 
+struct StyleStruct
+{
+    enum Name
+    {
+        Doom,
+        DoomAlt,
+        Raven,
+        Strife,
+        Chex,
+        Floppy,
+    }
+}
+
 class SaveGem : SavingModPermanentItem
 {
     Default
@@ -25,8 +38,6 @@ class SaveGem : SavingModPermanentItem
         Inventory.InterHubAmount 9999;
         Inventory.MaxAmount 9999;
         Inventory.Icon "ARTIALI1";
-        +FLOATBOB;
-        Inventory.PickupMessage "$NOSAVE_ITEM_PICKUP";
         Tag "$NOSAVE_ITEM_NAME";
     }
     
@@ -58,10 +69,101 @@ class SaveGem : SavingModPermanentItem
         return super.Use(pickup);
     }
     
+    int GetSkin()
+    {
+        return nosave_style;
+    }
+
+    override void Tick()
+    {
+        Super.Tick();
+        SetIcon();
+    }
+ 
+    override String PickupMessage()
+    {
+        StyleStruct Style;
+        int skin = GetSkin();
+        String txt = "$NOSAVE_ITEM_PICKUP_RAVEN";
+
+        if (skin == Style.Doom || skin == Style.DoomAlt)
+            txt = "$NOSAVE_ITEM_PICKUP_DOOM";
+        else if (skin == Style.Floppy)
+            txt = "$NOSAVE_ITEM_PICKUP_FLOPPY";
+
+        return StringTable.Localize(txt);
+    }
+
+    void SetIcon()
+    {
+        StyleStruct Style;
+        int skin = GetSkin();
+        string _icon;
+        
+        if (skin == Style.Raven)
+            _icon = "ARTIALI1";
+        else if (skin == Style.Doom)
+            _icon = "ARTIALI2";
+        else if (skin == Style.DoomAlt)
+            _icon = "ARTIALI6";
+        //else if (skin == Style.Strife)
+        //else if (skin == Style.Chex)
+        else if (skin == Style.Floppy)
+            _icon = "ARTIALI5";
+        
+        Icon = TexMan.CheckForTexture(_icon);
+    }
+
+    void SetFrameInformation(int _frame)
+    {
+        SetIcon();
+        StyleStruct Style;
+        String _sprite;
+        int _speed = 1;
+        int skin = GetSkin();
+        
+        bFLOATBOB = false;
+
+        if (skin == Style.Raven)
+        {
+            _frame = 0; //Always force to frame zero
+            _sprite = "AKOL";
+            bFLOATBOB = true;
+        }
+        else if (skin == Style.Doom)
+        {
+            _speed = 4;
+            _sprite = "DMES";
+        }
+        else if (skin == Style.DoomAlt)
+        {
+            _speed = 4;
+            _sprite = "DME2";
+        }
+        else if (skin == Style.Floppy)
+        {
+            _sprite = "FLOP";
+            _frame = 0; //Always force to frame zero
+        }
+        
+        frame = _frame;
+        sprite = GetSpriteIndex(_sprite);
+        A_SetTics(_speed);
+    }
+
     States
     {
         Spawn:
-            AKOL A -1;
-            Stop;
+            //Create temp sprites. See note here:
+            //https://zdoom.org/wiki/GetSpriteIndex
+            DMES ABCD 0;
+            DME2 ABCD 0;
+            AKOL A 0;
+            FLOP A 0;
+            TNT1 A 1 SetFrameInformation(0);
+            TNT1 A 1 SetFrameInformation(1);
+            TNT1 A 1 SetFrameInformation(2);
+            TNT1 A 1 SetFrameInformation(3);
+            Loop;
     }
 }

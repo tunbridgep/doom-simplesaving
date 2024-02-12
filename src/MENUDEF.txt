@@ -78,8 +78,12 @@ AddOptionMenu "OptionsMenu"
 OptionValue NoSaveStyles
 {
     0, "$NOSAVE_STYLE_DOOM"
-    1, "$NOSAVE_STYLE_RAVEN"
-    //2, "$NOSAVE_STYLE_STRIFE"
+    1, "$NOSAVE_STYLE_DOOM2"
+    2, "$NOSAVE_STYLE_RAVEN"
+    //3, "$NOSAVE_STYLE_STRIFE"
+    //4, "$NOSAVE_STYLE_CHEX"
+    5, "$NOSAVE_STYLE_FLOPPY"
+    //6, "$NOSAVE_STYLE_HACX"
 }
 
 OptionMenu "NoSaveOptions"
