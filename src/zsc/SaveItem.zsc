@@ -9,7 +9,7 @@ class SavingModPermanentItem : Inventory
         +INVENTORY.PERSISTENTPOWER;
         +INVENTORY.UNTOSSABLE;
         +INVENTORY.IGNORESKILL;
-        +INVENTORY.KEEPDEPLETED;
+        //+INVENTORY.KEEPDEPLETED;
         //+INVENTORY.INVBAR;
         Inventory.InterHubAmount 1;
         Inventory.MaxAmount 1;
@@ -66,6 +66,17 @@ class SaveGem : SavingModPermanentItem
         bool allow = toucher.CountInv("SaveGem") < max;
         return allow && super.CanPickup(toucher);
     }
+	
+    void MakeAutosave(bool showmsg = true)
+    {
+        if (showmsg)
+        {
+            Console.Printf(Stringtable.Localize("$NOSAVE_SAVED"));
+            owner.A_StartSound(UseSound,CHAN_ITEM,CHANF_UI|CHANF_LISTENERZ|CHANF_LOCAL|CHANF_OVERLAP|CHANF_NOPAUSE,1.0,ATTN_NONE);
+        }
+        UseSound = ""; //Horrible dirty hack to prevent the "Use" sound playing when loading the created autosave.
+        LevelLocals.MakeAutoSave();
+    }
     
     void DisplayCornerMessage(bool pressAgain = false)
     {
@@ -74,34 +85,17 @@ class SaveGem : SavingModPermanentItem
         String postfix2 = Stringtable.Localize("$NOSAVE_REMAIN_3");
         
         int amt = pressAgain ? amount : amount - 1;
-
-        if (amt == 0)
-            Console.Printf(Stringtable.Localize("$NOSAVE_REMAIN_NONE"));
-        else if (pressAgain)
+        
+        if (pressAgain)
             Console.Printf(prefix.." "..amt.." "..postfix.." "..postfix2);
         else
             Console.Printf(prefix.." "..amt.." "..postfix);
     }
-	
-    bool usedOnce;
-
-    void MakeAutosave(bool showmsg = true)
-    {
-        if (showmsg)
-            Console.Printf(Stringtable.Localize("$NOSAVE_SAVED"));
-        if (usedOnce)
-            owner.A_StartSound(UseSound,CHAN_ITEM,CHANF_UI|CHANF_LISTENERZ|CHANF_LOCAL|CHANF_OVERLAP|CHANF_NOPAUSE,1.0,ATTN_NONE);
-        UseSound = ""; //Horrible dirty hack to prevent the "Use" sound playing when loading the created autosave.
-        LevelLocals.MakeAutoSave();
-    }
 
     override bool Use(bool pickup)
     {
-        if (usedOnce)
-            DisplayCornerMessage();
-        if (amount > 0)
-            MakeAutosave(true);
-        usedOnce = true;
+        DisplayCornerMessage();
+        MakeAutosave(true);
         return true;
     }
     

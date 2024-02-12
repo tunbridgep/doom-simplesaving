@@ -1,3 +1,45 @@
+//This item signifies that we have a start token, so we can verify that a player has been setup correctly etc
+//This also gives us the advantage of "restarting" when on a pistol-start enforced mission, like in scythe2
+class NoSaveStartup : SavingModPermanentItem
+{
+    bool startup;
+    
+    override void Travelled()
+    {
+        if (nosave_strip_between_levels)
+            owner.TakeInventory("SaveGem",999);
+    }
+    
+    void ButtonPress(bool doublePress)
+    {
+        SaveGem savegem = SaveGem(owner.FindInventory("SaveGem",true));
+        if (savegem && doublePress)
+            owner.UseInventory(savegem);
+        else if (savegem)
+            savegem.DisplayCornerMessage(true);
+        else
+            Console.Printf(Stringtable.Localize("$NOSAVE_REMAIN_NONE"));
+    }
+
+    override void DoEffect()
+    {
+        //This needs to be delayed by a bit or it doesn't make a save
+        if (gametic > 5 && !startup)
+        {
+            //Give our starter gems rest
+            if (nosave_items_starting > 0)
+                owner.GiveInventory("SaveGem",nosave_items_starting);
+
+            //Autosave at the start of the game, so we don't have pistol starts
+            LevelLocals.MakeAutoSave();
+            
+            startup = true;
+        }
+        super.DoEffect();
+    }
+}
+
+//Handler for keypresses and player joining/leaving etc.
 class SaveingModItemHandler : SavingModEventHandler
 {
     int has_spawned;
@@ -58,19 +100,19 @@ class SaveingModItemHandler : SavingModEventHandler
         if (e.Name == "SaveButton")
         {
             let player = players[e.Player].mo;
-            SaveGem savegem = SaveGem(player.FindInventory("SaveGem",true));
+            NoSaveStartup token = NoSaveStartup(player.FindInventory("NoSaveStartup",true));
 
-            if (!SaveGem)
+            if (!token)
                 return;
 
             //we have double tapped (or single tapped, if not enabled)
             if (!nosave_double_tap || (lastpress[e.Player] <= gametic && gametic - lastpress[e.Player] <= SAVE_BUTTON_TICS && lastpress[e.Player] > SAVE_BUTTON_TICS))
             {
-                player.UseInventory(savegem);
+                token.ButtonPress(true);
             }
             else
             {
-                savegem.DisplayCornerMessage(true);
+                token.ButtonPress(false);
             }
             
             SSDebug.LogVerbose("lastpress is "..lastpress[e.Player]..", gametic is "..gametic.."");
@@ -123,35 +165,3 @@ class SaveingModItemHandler : SavingModEventHandler
     }
 }
 
-//This item signifies that we have a start token, so we can verify that a player has been setup correctly etc
-//This also gives us the advantage of "restarting" when on a pistol-start enforced mission, like in scythe2
-class NoSaveStartup : SavingModPermanentItem
-{
-    bool startup;
-    
-    override void Travelled()
-    {
-        if (nosave_strip_between_levels)
-            owner.TakeInventory("SaveGem",999);
-    }
-
-    override void DoEffect()
-    {
-        //This needs to be delayed by a bit or it doesn't make a save
-        if (gametic > 5 && !startup)
-        {
-            //Do an autosave right at the start of the game, and once only, so that we always have at least one autosave. Otherwise we get bad pistol starts.
-            //This also ensures we always have a copy of the Save Gem, even if it has 0 uses
-            owner.GiveInventory("SaveGem",1);
-            SaveGem savegem = SaveGem(owner.FindInventory("SaveGem",true)); //gross
-            owner.UseInventory(savegem);
-            
-            //Give the rest
-            if (nosave_items_starting > 0)
-                owner.GiveInventory("SaveGem",nosave_items_starting);
-            
-            startup = true;
-        }
-        super.DoEffect();
-    }
-}
