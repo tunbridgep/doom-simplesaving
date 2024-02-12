@@ -26,6 +26,8 @@ struct StyleStruct
         Strife,
         Chex,
         Floppy,
+        Misato,
+        Ashes,
     }
 }
 
@@ -123,6 +125,10 @@ class SaveGem : SavingModPermanentItem
             txt = "$NOSAVE_ITEM_PICKUP_DOOM";
         else if (skin == Style.Floppy)
             txt = "$NOSAVE_ITEM_PICKUP_FLOPPY";
+        else if (skin == Style.Misato)
+            txt = "$NOSAVE_ITEM_PICKUP_MISATO";
+        else if (skin == Style.Ashes)
+            txt = "$NOSAVE_ITEM_PICKUP_SUBWAY";
 
         return StringTable.Localize(txt);
     }
@@ -153,6 +159,16 @@ class SaveGem : SavingModPermanentItem
         {
             _icon = "ARTIALI5";
             _useSound = "save/floppy";
+        }
+        else if (skin == Style.Misato)
+        {
+            _icon = "ARTIALI7";
+        }
+        else if (skin == Style.Ashes)
+        {
+            _icon = "ARTIALI8";
+            //_useSound = "save/subwayu";
+            _pickupSound = "save/subwayp";
         }
         
         Icon = TexMan.CheckForTexture(_icon);
@@ -185,10 +201,22 @@ class SaveGem : SavingModPermanentItem
         {
             _speed = 4;
             _sprite = "DME2";
+            bFLOATBOB = true;
         }
         else if (skin == Style.Floppy)
         {
             _sprite = "FLOP";
+            _frame = 0; //Always force to frame zero
+        }
+        else if (skin == Style.Misato)
+        {
+            _sprite = "MISA";
+            _frame = 0; //Always force to frame zero
+            bFLOATBOB = true;
+        }
+        else if (skin == Style.Ashes)
+        {
+            _sprite = "SUBW";
             _frame = 0; //Always force to frame zero
         }
         
@@ -206,6 +234,8 @@ class SaveGem : SavingModPermanentItem
             DME2 ABCD 0;
             AKOL A 0;
             FLOP A 0;
+            MISA A 0;
+            SUBW A 0;
             TNT1 A 1 SetFrameInformation(0);
             TNT1 A 1 SetFrameInformation(1);
             TNT1 A 1 SetFrameInformation(2);

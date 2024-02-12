@@ -83,7 +83,8 @@ OptionValue NoSaveStyles
     //3, "$NOSAVE_STYLE_STRIFE"
     //4, "$NOSAVE_STYLE_CHEX"
     5, "$NOSAVE_STYLE_FLOPPY"
-    //6, "$NOSAVE_STYLE_HACX"
+    6, "$NOSAVE_STYLE_MISATO"
+    7, "$NOSAVE_STYLE_SUBWAY"
 }
 
 OptionMenu "NoSaveOptions"
@@ -92,6 +93,7 @@ OptionMenu "NoSaveOptions"
     StaticText ""
     Option "$NOSAVE_STYLE", "nosave_style", "NoSaveStyles"
     StaticText "$NOSAVE_STYLE_DESC"
+    StaticText ""
     StaticText ""
     ScaleSlider "$NOSAVE_SAVES_STARTING", "nosave_items_starting", 0,100,1,"$NOSAVE_DISABLED"
     StaticText "$NOSAVE_SAVES_STARTING_DESC"
@@ -129,4 +131,5 @@ OptionMenu "NoSaveOptions"
     StaticText "$NOSAVE_KEY_BIND_DESC"
     StaticText "$NOSAVE_KEY_BIND_DESC2"
     StaticText "$NOSAVE_KEY_BIND_DESC3", 1
+    StaticText "$NOSAVE_KEY_BIND_DESC4", 1
 }

@@ -1,1 +1,3 @@
 save/floppy SAV_FLOP
+save/subwayu SAV_SBWY
+save/subwayp SAV_SBWY

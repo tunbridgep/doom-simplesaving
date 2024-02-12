@@ -1,0 +1,7 @@
+1.0:
+  - Release Version
+
+1.1:
+  - Added "Style" selection, now you can pick what fits your game better.
+  - Fixed numerous bugs.
+  - Added some polish.

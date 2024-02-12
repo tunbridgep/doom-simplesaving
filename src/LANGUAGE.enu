@@ -14,7 +14,8 @@ NOSAVE_STRIP_DESC = "When enabled, save items will be removed when entering a ne
 NOSAVE_KEY_BIND = "Quicksave Key";
 NOSAVE_KEY_BIND_DESC = "Because GZDoom does not allow mods to disable saving,";
 NOSAVE_KEY_BIND_DESC2 = "players are required to use a different button to have special saving behavior.";
-NOSAVE_KEY_BIND_DESC3 = "This should replace your normal quicksave hotkey";
+NOSAVE_KEY_BIND_DESC3 = "This should replace your normal quicksave hotkey (F5),";
+NOSAVE_KEY_BIND_DESC4 = "as well as F2 and F8 (The save/load menu hotkeys).";
 NOSAVE_MAP_SKIP = "Map Skip Multiplier";
 NOSAVE_MAP_SKIP_DESC = "Will only create save items on maps that are a multiple of this number";
 NOSAVE_MAP_SKIP_DESC2 = "Used for skipping every X maps, etc.";
@@ -31,17 +32,21 @@ NOSAVE_MAX_ITEMS = "Max Items";
 NOSAVE_MAX_ITEMS_DESC = "The maximum number of save items players can hold";
 NOSAVE_STYLE = "Save Item Style";
 NOSAVE_STYLE_DESC = "Save Items will look a certain way depending on the style set.";
-NOSAVE_STYLE_DOOM = "Doom";
-NOSAVE_STYLE_DOOM2 = "Doom (Alternate)";
-NOSAVE_STYLE_RAVEN = "Heretic/Hexen";
-NOSAVE_STYLE_STRIFE = "Strife";
+NOSAVE_STYLE_DOOM = "Essense (Doom)";
+NOSAVE_STYLE_DOOM2 = "Skully (Doom Alternate)";
+NOSAVE_STYLE_RAVEN = "Mythical (Heretic/Hexen)";
+NOSAVE_STYLE_STRIFE = "Disciple (Strife)";
 NOSAVE_STYLE_FLOPPY = "Floppy Disk";
+NOSAVE_STYLE_MISATO = "Misato's Cross (Evangellion)";
+NOSAVE_STYLE_SUBWAY = "Subway Ticket (Ashes)";
 
 //Item text
 NOSAVE_ITEM_NAME = "Save Item";
 NOSAVE_ITEM_PICKUP_RAVEN = "You got the Ankh of Time Manipulation!";
 NOSAVE_ITEM_PICKUP_DOOM = "You feel the Demon Essense flow through you!";
 NOSAVE_ITEM_PICKUP_FLOPPY = "You got a Data Disk!";
+NOSAVE_ITEM_PICKUP_MISATO = "You got Misato's Cross!";
+NOSAVE_ITEM_PICKUP_SUBWAY = "You got a Ticket to Ride!";
 
 //Misc
 NOSAVE_SAVED = "Saving...";
