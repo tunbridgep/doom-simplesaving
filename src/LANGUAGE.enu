@@ -39,14 +39,16 @@ NOSAVE_STYLE_FLOPPY = "Floppy Disk";
 
 //Item text
 NOSAVE_ITEM_NAME = "Save Item";
-NOSAVE_ITEM_PICKUP_RAVEN = "You got the Ankh of Time Manipulation! You can now save the game!";
-NOSAVE_ITEM_PICKUP_DOOM = "You feel the Demon Essense flow through you! You can now save the game!";
-NOSAVE_ITEM_PICKUP_FLOPPY = "You got a Data Disk! You can now save the game!";
+NOSAVE_ITEM_PICKUP_RAVEN = "You got the Ankh of Time Manipulation!";
+NOSAVE_ITEM_PICKUP_DOOM = "You feel the Demon Essense flow through you!";
+NOSAVE_ITEM_PICKUP_FLOPPY = "You got a Data Disk!";
+
+//Misc
 NOSAVE_SAVED = "Saving...";
 NOSAVE_REMAIN_1 = "You have";
 NOSAVE_REMAIN_2 = "saves remaining!";
 NOSAVE_REMAIN_3 = "(Press again to save.)";
-
-//Misc
+NOSAVE_REMAIN_NONE = "No saves left!";
+NOSAVE_CAN_NOW_SAVE = "You can now save the game!";
 NOSAVE_WARNING = "Warning: Autosaving is disabled! Simple Saving will not work correctly! Please change this in the options menu!";
 NOSAVE_NOKEY = "Warning: Simple Saving Quicksave button is not bound! The mod will not work correctly! Please change this in the options menu!";

@@ -27,7 +27,7 @@ class SaveingModItemHandler : SavingModEventHandler
         
         /*
         //Make sure our save button is bound
-        int key = KeyBindings.GetKeysForCommand("nosave_quicksave");
+        int key = Bindings.GetKeysForCommand("nosave_quicksave");
         {
             if (key == -1)
             {
@@ -36,20 +36,11 @@ class SaveingModItemHandler : SavingModEventHandler
             }
         }
         */
-               
+
         if (!Player.CheckInventory("NoSaveStartup",1))
         {
             Player.GiveInventory("NoSaveStartup",1);
-            if (nosave_items_starting > 0)
-                Player.GiveInventory("SaveGem",nosave_items_starting);
         }
-    }
-    
-    static void MakeAutosave(bool showmsg = true)
-    {
-        if (showmsg)
-            Console.Printf(Stringtable.Localize("$NOSAVE_SAVED"));
-        LevelLocals.MakeAutoSave();
     }
     
     bool HasMetThreshold()
@@ -62,41 +53,25 @@ class SaveingModItemHandler : SavingModEventHandler
         return a && a.bISMONSTER && a.bCOUNTKILL;
     }
     
-    static void DisplaySaveGemsMessage(Actor player)
-    {
-        int SaveGems = player.CountInv("SaveGem");
-    
-        String prefix = Stringtable.Localize("$NOSAVE_REMAIN_1");
-        String postfix = Stringtable.Localize("$NOSAVE_REMAIN_2");
-        String postfix2 = Stringtable.Localize("$NOSAVE_REMAIN_3");
-        
-        if (SaveGems > 0)
-            Console.Printf(prefix.." "..SaveGems.." "..postfix.." "..postfix2);
-        else
-            Console.Printf(prefix.." "..SaveGems.." "..postfix);
-    }
-    
-    static void Save(Actor player)
-    {   
-        if (player.CountInv("SaveGem") > 0)
-        {
-            MakeAutosave(false);
-            player.TakeInventory("SaveGem",1);
-        }
-        else
-            //Console.Printf(Stringtable.Localize("$NOSAVE_PREVENTION"));
-            DisplaySaveGemsMessage(player);
-    }
-    
-    
     override void NetworkProcess (ConsoleEvent e) 
     {
         if (e.Name == "SaveButton")
         {
+            let player = players[e.Player].mo;
+            SaveGem savegem = SaveGem(player.FindInventory("SaveGem",true));
+
+            if (!SaveGem)
+                return;
+
+            //we have double tapped (or single tapped, if not enabled)
             if (!nosave_double_tap || (lastpress[e.Player] <= gametic && gametic - lastpress[e.Player] <= SAVE_BUTTON_TICS && lastpress[e.Player] > SAVE_BUTTON_TICS))
-                Save(players[e.Player].mo);
+            {
+                player.UseInventory(savegem);
+            }
             else
-                DisplaySaveGemsMessage(players[e.Player].mo);
+            {
+                savegem.DisplayCornerMessage(true);
+            }
             
             SSDebug.LogVerbose("lastpress is "..lastpress[e.Player]..", gametic is "..gametic.."");
             lastpress[e.Player] = gametic;
@@ -152,7 +127,7 @@ class SaveingModItemHandler : SavingModEventHandler
 //This also gives us the advantage of "restarting" when on a pistol-start enforced mission, like in scythe2
 class NoSaveStartup : SavingModPermanentItem
 {
-    bool startSave;
+    bool startup;
     
     override void Travelled()
     {
@@ -163,10 +138,19 @@ class NoSaveStartup : SavingModPermanentItem
     override void DoEffect()
     {
         //This needs to be delayed by a bit or it doesn't make a save
-        if (gametic > 5 && !startSave)
+        if (gametic > 5 && !startup)
         {
-            SaveingModItemHandler.MakeAutosave(false); //Do an autosave right at the start of the game, and once only, so that we always have at least one autosave. Otherwise we get bad pistol starts.
-            startSave = true;
+            //Do an autosave right at the start of the game, and once only, so that we always have at least one autosave. Otherwise we get bad pistol starts.
+            //This also ensures we always have a copy of the Save Gem, even if it has 0 uses
+            owner.GiveInventory("SaveGem",1);
+            SaveGem savegem = SaveGem(owner.FindInventory("SaveGem",true)); //gross
+            owner.UseInventory(savegem);
+            
+            //Give the rest
+            if (nosave_items_starting > 0)
+                owner.GiveInventory("SaveGem",nosave_items_starting);
+            
+            startup = true;
         }
         super.DoEffect();
     }

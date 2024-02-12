@@ -9,6 +9,7 @@ class SavingModPermanentItem : Inventory
         +INVENTORY.PERSISTENTPOWER;
         +INVENTORY.UNTOSSABLE;
         +INVENTORY.IGNORESKILL;
+        +INVENTORY.KEEPDEPLETED;
         //+INVENTORY.INVBAR;
         Inventory.InterHubAmount 1;
         Inventory.MaxAmount 1;
@@ -32,9 +33,10 @@ class SaveGem : SavingModPermanentItem
 {
     Default
     {
-        -INVENTORY.UNDROPPABLE;;
+        -INVENTORY.UNDROPPABLE;
         -INVENTORY.UNTOSSABLE;
 		-INVENTORY.ALWAYSPICKUP;
+        +INVENTORY.FANCYPICKUPSOUND;
         Inventory.InterHubAmount 9999;
         Inventory.MaxAmount 9999;
         Inventory.Icon "ARTIALI1";
@@ -62,11 +64,42 @@ class SaveGem : SavingModPermanentItem
         bool allow = toucher.CountInv("SaveGem") < max;
         return allow && super.CanPickup(toucher);
     }
+    
+    void DisplayCornerMessage(bool pressAgain = false)
+    {
+        String prefix = Stringtable.Localize("$NOSAVE_REMAIN_1");
+        String postfix = Stringtable.Localize("$NOSAVE_REMAIN_2");
+        String postfix2 = Stringtable.Localize("$NOSAVE_REMAIN_3");
+        
+        int amt = pressAgain ? amount : amount - 1;
+
+        if (amt == 0)
+            Console.Printf(Stringtable.Localize("$NOSAVE_REMAIN_NONE"));
+        else if (pressAgain)
+            Console.Printf(prefix.." "..amt.." "..postfix.." "..postfix2);
+        else
+            Console.Printf(prefix.." "..amt.." "..postfix);
+    }
 	
+    bool usedOnce;
+
+    void MakeAutosave(bool showmsg = true)
+    {
+        if (showmsg)
+            Console.Printf(Stringtable.Localize("$NOSAVE_SAVED"));
+        if (usedOnce)
+            owner.A_StartSound(UseSound,CHAN_ITEM,CHANF_UI|CHANF_LISTENERZ|CHANF_LOCAL|CHANF_OVERLAP|CHANF_NOPAUSE,1.0,ATTN_NONE);
+        LevelLocals.MakeAutoSave();
+    }
+
     override bool Use(bool pickup)
     {
-        SaveingModItemHandler.Save(owner);
-        return super.Use(pickup);
+        if (usedOnce)
+            DisplayCornerMessage();
+        if (amount > 0)
+            MakeAutosave(true);
+        usedOnce = true;
+        return true;
     }
     
     int GetSkin()
@@ -77,7 +110,7 @@ class SaveGem : SavingModPermanentItem
     override void Tick()
     {
         Super.Tick();
-        SetIcon();
+        SetProperties();
     }
  
     override String PickupMessage()
@@ -94,29 +127,42 @@ class SaveGem : SavingModPermanentItem
         return StringTable.Localize(txt);
     }
 
-    void SetIcon()
+    void SetProperties()
     {
         StyleStruct Style;
         int skin = GetSkin();
         string _icon;
+        string _pickupSound = "misc/i_pkup";
+        string _useSound = "misc/p_pkup";
         
         if (skin == Style.Raven)
+        {
             _icon = "ARTIALI1";
+        }
         else if (skin == Style.Doom)
+        {
             _icon = "ARTIALI2";
+        }
         else if (skin == Style.DoomAlt)
+        {
             _icon = "ARTIALI6";
+        }
         //else if (skin == Style.Strife)
         //else if (skin == Style.Chex)
         else if (skin == Style.Floppy)
+        {
             _icon = "ARTIALI5";
+            _useSound = "save/floppy";
+        }
         
         Icon = TexMan.CheckForTexture(_icon);
+        PickupSound = _pickupSound;
+        UseSound = _useSound;
     }
 
     void SetFrameInformation(int _frame)
     {
-        SetIcon();
+        SetProperties();
         StyleStruct Style;
         String _sprite;
         int _speed = 1;
