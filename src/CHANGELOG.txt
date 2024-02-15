@@ -2,11 +2,16 @@
   - Release Version
 
 1.1:
+  - Bugfixes
+
+1.2:
+  - Bugfixes
+  - Added double-tap option.
+
+1.3:
   - Added "Style" selection, now you can pick what fits your game better.
   - Fixed numerous bugs.
   - Added some polish.
-
-1.2:
   - Added "Consistent Drops" option. If enabled, save items will drop based on
     the proportion of killed enemies, meaning if 3 are set per map, one will drop
     at 30% kills, one at 60% and one at 90%. There is still some variation.
