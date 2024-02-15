@@ -223,6 +223,18 @@ class SaveGem : SavingModPermanentItem
     States
     {
         Spawn:
+            //If we are set to auto collect, simply save
+            TNT1 A 0
+            {
+                if (nosave_auto_collect)
+                {
+                    let player = players[consoleplayer].mo;
+                    player.GiveInventory("SaveGem",1);
+                    player.A_StartSound(PickupSound,CHAN_ITEM,CHANF_UI|CHANF_LISTENERZ|CHANF_LOCAL|CHANF_OVERLAP|CHANF_NOPAUSE,1.0,ATTN_NONE);
+                    Console.Printf(PickupMessage());
+                    self.Destroy();
+                }
+            }
             //Create temp sprites. See note here:
             //https://zdoom.org/wiki/GetSpriteIndex
             DMES ABCD 0;

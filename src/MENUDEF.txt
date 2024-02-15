@@ -114,6 +114,9 @@ OptionMenu "NoSaveOptions"
     Slider "$NOSAVE_ENEMY_THRESHOLD", "nosave_enemy_threshold", 1,200,1,0
     StaticText "$NOSAVE_ENEMY_THRESHOLD_DESC"
     StaticText ""
+    Option "$NOSAVE_AUTO_PICKUP", "nosave_auto_collect", "YesNo"
+    StaticText "$NOSAVE_AUTO_PICKUP_DESC"
+    StaticText ""
     Option "$NOSAVE_STRIP", "nosave_strip_between_levels", YesNo
     StaticText "$NOSAVE_STRIP_DESC"
     StaticText ""
