@@ -5,3 +5,11 @@
   - Added "Style" selection, now you can pick what fits your game better.
   - Fixed numerous bugs.
   - Added some polish.
+
+1.2:
+  - Added "Consistent Drops" option. If enabled, save items will drop based on
+    the proportion of killed enemies, meaning if 3 are set per map, one will drop
+    at 30% kills, one at 60% and one at 90%. There is still some variation.
+  - Added "Auto Pickup" option. If enabled, all save items will be immediately
+    added to the players inventory when they are dropped, rather than falling
+	on the ground.
