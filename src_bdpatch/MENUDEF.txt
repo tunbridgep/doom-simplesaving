@@ -1,0 +1,66 @@
+ListMenu "MainMenu"
+{
+	IfGame(Doom, Chex)
+	{
+		StaticPatch 94, 2, "M_DOOM"
+		Position 97, 72
+		IfOption(ReadThis)
+		{
+			Position 97, 64
+		}
+	}
+	IfGame(Strife)
+	{
+		StaticPatch 84, 2, "M_STRIFE"
+		Position 97, 45
+	}
+	IfGame(Heretic)
+	{
+		StaticPatch 88, 0, "M_HTIC"
+		StaticPatch 40, 10, "M_SKL01"
+		StaticPatch 232, 10, "M_SKL00"
+		Position 110, 56
+	}
+	IfGame(Hexen)
+	{
+		StaticPatch 88, 0, "M_HTIC"
+		StaticPatch 37, 80, "FBULB0"
+		StaticPatch 278, 80, "FBULA0"
+		Position 110, 56
+	}
+	
+	IfGame(Doom, Strife, Chex)
+	{
+		TextItem "New Game", "n", "PlayerclassMenu"
+		ifOption(SwapMenu)
+		{
+			TextItem "Load Game", "l", "LoadGameMenu"
+			TextItem "Options", "o", "OptionsMenu"/////////////
+			TextItem "Brutal Doom Options", "b", "BrutalMenu"
+			TextItem "Credits", "c", "BrutalCreditsMenu"
+		}
+		else
+		{
+			TextItem "Options", "o", "OptionsMenu"/////////////////////
+			TextItem "Brutal Doom Options", "b", "BrutalMenu"
+			TextItem "Load Game", "l", "LoadGameMenu"
+			TextItem "Credits", "c", "BrutalCreditsMenu"
+		}
+		ifOption(ReadThis)
+		{
+			TextItem "Read This!","r", "ReadThisMenu"
+		}
+		TextItem "Quit Game", "q", "QuitMenu"
+	}
+	
+	IfGame(Heretic, Hexen)
+	{
+		TextItem "$MNU_NEWGAME", "n", "PlayerclassMenu"
+		TextItem "$MNU_OPTIONS", "o", "OptionsMenu"/////////////////////
+		TextItem "Brutal Doom Options", "b", "BrutalMenu"
+		TextItem "Credits", "c", "BrutalCreditsMenu"
+		TextItem "$MNU_GAMEFILES", "g", "GameFilesMenu"
+		TextItem "$MNU_INFO", "i", "ReadThisMenu"
+		TextItem "$MNU_QUITGAME", "q", "QuitMenu"
+	}
+}

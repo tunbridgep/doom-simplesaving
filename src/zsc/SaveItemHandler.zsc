@@ -44,7 +44,7 @@ class SaveingModItemHandler : SavingModEventHandler
 {
     int has_spawned;
     int total_enemies;
-    int unrolled_enemies;
+    int remaining_enemies;
     
     const SAVE_BUTTON_TICS = 35;
     int lastpress[32];
@@ -125,7 +125,7 @@ class SaveingModItemHandler : SavingModEventHandler
         if (IsValidActor(e.Thing))
         {
             total_enemies++;
-            unrolled_enemies++;
+            remaining_enemies++;
         }
     }
     
@@ -146,7 +146,7 @@ class SaveingModItemHandler : SavingModEventHandler
         
         if (IsValidActor(a))
         {
-            unrolled_enemies--;
+            remaining_enemies--;
             if (HasMetThreshold() && IsValidMap() && GetSpawnsRemaining() > 0 )
             {
                 int droproll;
@@ -159,13 +159,13 @@ class SaveingModItemHandler : SavingModEventHandler
                         noise = random(-total_enemies / 10, total_enemies / 10);
 
                     let segment_size = (0.0 + total_enemies) / (nosave_items_per_level);
-                    droproll = (total_enemies - unrolled_enemies) >= segment_size * (has_spawned + 1) - noise ? 1 : 0;
-                    SSDebug.LogVerbose("enemy: "..(total_enemies - unrolled_enemies)..", segment_size: "..segment_size..", has_spawned: "..has_spawned);
+                    droproll = (total_enemies - remaining_enemies) >= segment_size * (has_spawned + 1) - noise ? 1 : 0;
+                    SSDebug.LogVerbose("enemy: "..(total_enemies - remaining_enemies)..", segment_size: "..segment_size..", has_spawned: "..has_spawned);
                 }
                 else
                 {
-                    droproll = random(0, unrolled_enemies);
-                    SSDebug.LogVerbose("Rolling between 0 and "..unrolled_enemies.." - rolled a "..droproll.."");
+                    droproll = random(0, remaining_enemies);
+                    SSDebug.LogVerbose("Rolling between 0 and "..remaining_enemies.." - rolled a "..droproll.."");
                 }
 
                 if (droproll == 1)
@@ -175,7 +175,7 @@ class SaveingModItemHandler : SavingModEventHandler
                 }
             }
             else
-                SSDebug.LogVerbose("Not rolling for enemy #"..unrolled_enemies.." - not valid map or threshold, or exceeded spawn number");
+                SSDebug.LogVerbose("Not rolling for enemy #"..remaining_enemies.." - not valid map or threshold, or exceeded spawn number");
         }
     }
 }

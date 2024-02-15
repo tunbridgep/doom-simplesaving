@@ -18,3 +18,4 @@
   - Added "Auto Pickup" option. If enabled, all save items will be immediately
     added to the players inventory when they are dropped, rather than falling
 	on the ground.
+  - Added Brutal Doom Patch
