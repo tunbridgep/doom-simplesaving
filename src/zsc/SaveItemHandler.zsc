@@ -149,10 +149,25 @@ class SaveingModItemHandler : SavingModEventHandler
             unrolled_enemies--;
             if (HasMetThreshold() && IsValidMap() && GetSpawnsRemaining() > 0 )
             {
-                int droproll = random(0, unrolled_enemies);
-                
-                SSDebug.LogVerbose("Rolling between 0 and "..unrolled_enemies.." - rolled a "..droproll.."");
-                
+                int droproll;
+                if (nosave_consistent_drops && nosave_items_per_level > 0 && total_enemies > 0)
+                {
+                    int noise;
+                    if (has_spawned == nosave_items_per_level - 1)
+                        noise = random(0, total_enemies / 10);
+                    else
+                        noise = random(-total_enemies / 10, total_enemies / 10);
+
+                    let segment_size = (0.0 + total_enemies) / (nosave_items_per_level);
+                    droproll = (total_enemies - unrolled_enemies) >= segment_size * (has_spawned + 1) - noise ? 1 : 0;
+                    SSDebug.LogVerbose("enemy: "..(total_enemies - unrolled_enemies)..", segment_size: "..segment_size..", has_spawned: "..has_spawned);
+                }
+                else
+                {
+                    droproll = random(0, unrolled_enemies);
+                    SSDebug.LogVerbose("Rolling between 0 and "..unrolled_enemies.." - rolled a "..droproll.."");
+                }
+
                 if (droproll == 1)
                 {
                     a.A_DropItem("SaveGem");

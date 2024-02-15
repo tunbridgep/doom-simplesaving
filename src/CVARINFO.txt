@@ -8,6 +8,7 @@ server cheat bool nosave_strip_between_levels = false;
 server cheat int nosave_map_skip = 1;
 server cheat int nosave_map_first = 2;
 server cheat bool nosave_auto_collect = false;
+server cheat bool nosave_consistent_drops = false;
 server bool nosave_show_inventory = false;
 nosave bool nosave_double_tap = true;
 nosave int nosave_style = 0;
