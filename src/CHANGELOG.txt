@@ -19,3 +19,13 @@
     added to the players inventory when they are dropped, rather than falling
 	on the ground.
   - Added Brutal Doom Patch
+
+1.31:
+  - Updated Corner Messages to be more readable
+  - Rolling for save items in non-consistent mode no longer biases enemies
+  killed later, making the distribution of items far more fair and balanced.
+  - Added a setting to grant additional save items based on the number of the
+  enemies in the map.
+  - Updated default settings to be more dynamic and feel more natural.
+  - Fixed off-by-one errors that were sometimes preventing the final save item
+  from dropping if it was rolled by the last enemy in a map.
