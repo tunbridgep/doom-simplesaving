@@ -1,14 +1,25 @@
 [enu default]
 
+//Corner Messages
+NOSAVE_SAVED = "Saving...";
+NOSAVE_REMAIN = "You have %d saves remaining!";
+NOSAVE_REMAIN_ONE = "One save remaining!";
+NOSAVE_REMAIN_POSTFIX = "(Press again to save.)";
+NOSAVE_REMAIN_NONE = "No saves remaining!";
+NOSAVE_CAN_NOW_SAVE = "You can now save the game!";
+
 //Menu Options
 NOSAVE_MAIN_TITLE = "Simple Saving Options";
 NOSAVE_OPTIONS_MENU_NAME = "Simple Saving";
 NOSAVE_SAVES_STARTING = "Starting number of save items";
 NOSAVE_SAVES_STARTING_DESC = "How many save items players will start with";
-NOSAVE_SAVES_PER_LEVEL = "Saves per level";
+NOSAVE_SAVES_PER_LEVEL = "Saves per level (Base)";
 NOSAVE_SAVES_PER_LEVEL_DESC = "How many save items will drop per level";
-NOSAVE_ENEMY_THRESHOLD = "Enemy Threshold";
-NOSAVE_ENEMY_THRESHOLD_DESC = "Minimum number of enemies required in a level for a save item to drop";
+NOSAVE_SAVES_PER_LEVEL_BONUS = "Saves per Level (Bonus)";
+NOSAVE_SAVES_PER_LEVEL_BONUS_DESC = "Drop additional save items based on the number of enemies";
+NOSAVE_SAVES_PER_LEVEL_BONUS_DESC2 = "in the map, determined by multiples of this number.";
+NOSAVE_ENEMY_THRESHOLD = "Minimum Enemy Threshold";
+NOSAVE_ENEMY_THRESHOLD_DESC = "Minimum number of enemies required in a level for save items to drop";
 NOSAVE_AUTO_PICKUP = "Auto Pickup";
 NOSAVE_AUTO_PICKUP_DESC = "Automatically and instantly pickup any save items when dropped";
 NOSAVE_STRIP = "Remove on Level Change";
@@ -55,11 +66,5 @@ NOSAVE_ITEM_PICKUP_MISATO = "You got Misato's Cross!";
 NOSAVE_ITEM_PICKUP_SUBWAY = "You got a Ticket to Ride!";
 
 //Misc
-NOSAVE_SAVED = "Saving...";
-NOSAVE_REMAIN_1 = "You have";
-NOSAVE_REMAIN_2 = "saves remaining!";
-NOSAVE_REMAIN_3 = "(Press again to save.)";
-NOSAVE_REMAIN_NONE = "No saves left!";
-NOSAVE_CAN_NOW_SAVE = "You can now save the game!";
 NOSAVE_WARNING = "Warning: Autosaving is disabled! Simple Saving will not work correctly! Please change this in the options menu!";
 NOSAVE_NOKEY = "Warning: Simple Saving Quicksave button is not bound! The mod will not work correctly! Please change this in the options menu!";

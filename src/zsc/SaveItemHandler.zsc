@@ -137,9 +137,16 @@ class SaveingModItemHandler : SavingModEventHandler
     
     int GetSpawnsRemaining()
     {
-        return nosave_items_per_level - has_spawned;
+        return GetTotalSaveItems() - has_spawned;
     }
     
+    int GetTotalSaveItems()
+    {
+        if (nosave_items_per_level_bonus > 0)
+            return nosave_items_per_level + (total_enemies / nosave_items_per_level_bonus);
+        return nosave_items_per_level;
+    }
+
     override void WorldThingDied(WorldEvent e)
     {
         Actor a = e.Thing;
@@ -150,25 +157,25 @@ class SaveingModItemHandler : SavingModEventHandler
             if (HasMetThreshold() && IsValidMap() && GetSpawnsRemaining() > 0 )
             {
                 int droproll;
-                if (nosave_consistent_drops && nosave_items_per_level > 0 && total_enemies > 0)
+                let segment_size = (0.0 + total_enemies) / (GetTotalSaveItems());
+                if (nosave_consistent_drops && GetTotalSaveItems() > 0 && total_enemies > 0)
                 {
                     int noise;
-                    if (has_spawned == nosave_items_per_level - 1)
+                    if (has_spawned == GetTotalSaveItems() - 1)
                         noise = random(0, total_enemies / 10);
                     else
                         noise = random(-total_enemies / 10, total_enemies / 10);
 
-                    let segment_size = (0.0 + total_enemies) / (nosave_items_per_level);
-                    droproll = (total_enemies - remaining_enemies) >= segment_size * (has_spawned + 1) - noise ? 1 : 0;
+                    droproll = total_enemies - remaining_enemies >= segment_size * (has_spawned + 1) - noise ? 0 : 1;
                     SSDebug.LogVerbose("enemy: "..(total_enemies - remaining_enemies)..", segment_size: "..segment_size..", has_spawned: "..has_spawned);
                 }
                 else
                 {
-                    droproll = random(0, remaining_enemies);
-                    SSDebug.LogVerbose("Rolling between 0 and "..remaining_enemies.." - rolled a "..droproll.."");
+                    droproll = random(1, segment_size);
+                    SSDebug.LogVerbose("Rolling between 1 and "..segment_size.." - rolled "..droproll.."");
                 }
 
-                if (droproll == 1)
+                if (droproll == 1 || GetTotalSaveItems() >= remaining_enemies)
                 {
                     a.A_DropItem("SaveGem");
                     has_spawned++;

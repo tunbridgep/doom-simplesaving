@@ -80,21 +80,30 @@ class SaveGem : SavingModPermanentItem
     
     void DisplayCornerMessage(bool pressAgain = false)
     {
-        String prefix = Stringtable.Localize("$NOSAVE_REMAIN_1");
-        String postfix = Stringtable.Localize("$NOSAVE_REMAIN_2");
-        String postfix2 = Stringtable.Localize("$NOSAVE_REMAIN_3");
+        String text_some = Stringtable.Localize("$NOSAVE_REMAIN");
+        String text_one = Stringtable.Localize("$NOSAVE_REMAIN_ONE");
+        String text_none = Stringtable.Localize("$NOSAVE_REMAIN_NONE");
+        String postfix = Stringtable.Localize("$NOSAVE_REMAIN_POSTFIX");
         
         int amt = pressAgain ? amount : amount - 1;
-        
-        if (pressAgain)
-            Console.Printf(prefix.." "..amt.." "..postfix.." "..postfix2);
+
+        String text;
+        if (amt > 1)
+            text = text_some;
+        else if (amt == 1)
+            text = text_one;
         else
-            Console.Printf(prefix.." "..amt.." "..postfix);
+            text = text_none;
+
+        text = pressAgain ? text.." "..postfix : text;
+        
+        Console.Printf(text,amt);
     }
 
     override bool Use(bool pickup)
     {
-        DisplayCornerMessage();
+        if (!nosave_double_tap)
+            DisplayCornerMessage();
         MakeAutosave(true);
         return true;
     }
