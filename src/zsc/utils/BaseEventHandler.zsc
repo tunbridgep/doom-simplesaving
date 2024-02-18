@@ -1,6 +1,6 @@
 //This is the same as a regular event handler, but it automatically
 //filters out reopen game events, and the titlemap
-class SavingModEventHandler : EventHandler
+class SavingModEventHandler : StaticEventHandler
 {
     virtual void UniqueWorldLoaded(WorldEvent e)
     {

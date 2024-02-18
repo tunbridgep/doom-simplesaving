@@ -87,7 +87,7 @@ class SaveingModItemHandler : SavingModEventHandler
     
     bool HasMetThreshold()
     {
-        return total_enemies >= nosave_enemy_threshold - 1;
+        return total_enemies >= nosave_enemy_threshold;
     }
     
     bool IsValidActor(Actor a)
@@ -154,11 +154,12 @@ class SaveingModItemHandler : SavingModEventHandler
         if (IsValidActor(a))
         {
             remaining_enemies--;
-            if (HasMetThreshold() && IsValidMap() && GetSpawnsRemaining() > 0 )
+            if (HasMetThreshold() && IsValidMap() && GetSpawnsRemaining() > 0 && total_enemies > 0 && GetTotalSaveItems() > 0)
             {
                 int droproll;
                 let segment_size = (0.0 + total_enemies) / (GetTotalSaveItems());
-                if (nosave_consistent_drops && GetTotalSaveItems() > 0 && total_enemies > 0)
+
+                if (nosave_consistent_drops)
                 {
                     int noise;
                     if (has_spawned == GetTotalSaveItems() - 1)

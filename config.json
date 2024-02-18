@@ -9,6 +9,6 @@
 		{"type":"zscript", "settings":{ "dir":"zsc", "output":"zscript.txt"} }
 	],
 	"outputs": [
-		{"type":"zip", "settings":{ "cmd":"7z -mx1 a","path":"./rel","name":"NoSaving 1.31.pk7", "split":"false"} }
+		{"type":"zip", "settings":{ "cmd":"7z -mx1 a","path":"./rel","name":"NoSaving 1.31H.pk7", "split":"false"} }
 	]
 }

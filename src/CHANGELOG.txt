@@ -29,3 +29,9 @@
   - Updated default settings to be more dynamic and feel more natural.
   - Fixed off-by-one errors that were sometimes preventing the final save item
   from dropping if it was rolled by the last enemy in a map.
+
+1.31 Hotfix:
+  - Fixes a critical issue introduced in 1.31 where consistent mode would
+  always drop items immediately, rather than segmenting properly.
+  - Made the EventHandler a StaticEventHandler, to allow properly
+  adding/removing mid-game.
