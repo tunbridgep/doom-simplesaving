@@ -166,7 +166,7 @@ class SaveingModItemHandler : SavingModEventHandler
                     else
                         noise = random(-total_enemies / 10, total_enemies / 10);
 
-                    droproll = total_enemies - remaining_enemies >= segment_size * (has_spawned + 1) - noise ? 0 : 1;
+                    droproll = total_enemies - remaining_enemies >= segment_size * (has_spawned + 1) - noise ? 1 : 0;
                     SSDebug.LogVerbose("enemy: "..(total_enemies - remaining_enemies)..", segment_size: "..segment_size..", has_spawned: "..has_spawned);
                 }
                 else
