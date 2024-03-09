@@ -71,7 +71,6 @@ LISTMENU "MainMenu"
 
 AddOptionMenu "OptionsMenu"
 {
-    StaticText ""
     Submenu "$NOSAVE_OPTIONS_MENU_NAME", "NoSaveOptions"
 }
 
