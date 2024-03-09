@@ -42,7 +42,7 @@ class SaveGem : SavingModPermanentItem
         Inventory.InterHubAmount 9999;
         Inventory.MaxAmount 9999;
         Inventory.Icon "ARTIALI1";
-        Tag "$NOSAVE_ITEM_NAME";
+        Tag "";
     }
     
     //This has to be done here, rather than being dynamic
@@ -144,18 +144,22 @@ class SaveGem : SavingModPermanentItem
         string _icon;
         string _pickupSound = "misc/i_pkup";
         string _useSound = "misc/p_pkup";
+        string _tag = "$NOSAVE_ITEM_TAG_RAVEN";
         
         if (skin == Style.Raven)
         {
             _icon = "ARTIALI1";
+            _tag = "$NOSAVE_ITEM_TAG_RAVEN";
         }
         else if (skin == Style.Doom)
         {
             _icon = "ARTIALI2";
+            _tag = "$NOSAVE_ITEM_TAG_DOOM";
         }
         else if (skin == Style.DoomAlt)
         {
             _icon = "ARTIALI6";
+            _tag = "$NOSAVE_ITEM_TAG_DOOM";
         }
         //else if (skin == Style.Strife)
         //else if (skin == Style.Chex)
@@ -163,21 +167,25 @@ class SaveGem : SavingModPermanentItem
         {
             _icon = "ARTIALI5";
             _useSound = "save/floppy";
+            _tag = "$NOSAVE_ITEM_TAG_FLOPPY";
         }
         else if (skin == Style.Misato)
         {
             _icon = "ARTIALI7";
+            _tag = "$NOSAVE_ITEM_TAG_MISATO";
         }
         else if (skin == Style.Ashes)
         {
             _icon = "ARTIALI8";
             //_useSound = "save/subwayu";
             _pickupSound = "save/subwayp";
+            _tag = "$NOSAVE_ITEM_TAG_SUBWAY";
         }
         
         Icon = TexMan.CheckForTexture(_icon);
         PickupSound = _pickupSound;
         UseSound = _useSound;
+        SetTag(StringTable.Localize(_tag));
     }
 
     void SetFrameInformation(int _frame)

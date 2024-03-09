@@ -41,6 +41,7 @@ NOSAVE_AUTOSAVE_DESC2 = "This must be set to 'Always' or 'Scripts Only' for this
 NOSAVE_DISABLED = "Disabled";
 NOSAVE_SHOW_INVENTORY = "Show item in Inventory";
 NOSAVE_SHOW_INVENTORY_DESC = "Will show save items in the inventory panel";
+NOSAVE_SHOW_INVENTORY_DESC2 = "Due to GZDoom bugs, save items may not appear until after a level transition";
 NOSAVE_DOUBLE_TAP = "Double Tap Saving";
 NOSAVE_DOUBLE_TAP_DESC = "Pressing the save button once will tell you how many save items you have. Press again to save";
 NOSAVE_MAP_START = "First Map Offset";
@@ -58,12 +59,16 @@ NOSAVE_STYLE_MISATO = "Misato's Cross (Evangellion)";
 NOSAVE_STYLE_SUBWAY = "Metro Ticket (Ashes)";
 
 //Item text
-NOSAVE_ITEM_NAME = "Save Item";
 NOSAVE_ITEM_PICKUP_RAVEN = "You got the Ankh of Time Manipulation!";
+NOSAVE_ITEM_TAG_RAVEN = "Ankh of Time Manipulation";
 NOSAVE_ITEM_PICKUP_DOOM = "You feel the Demon Essense flow through you!";
+NOSAVE_ITEM_TAG_DOOM = "Demon Essense";
 NOSAVE_ITEM_PICKUP_FLOPPY = "You got a Data Disk!";
+NOSAVE_ITEM_TAG_FLOPPY = "Data Disk";
 NOSAVE_ITEM_PICKUP_MISATO = "You got Misato's Cross!";
+NOSAVE_ITEM_TAG_MISATO = "Misato's Cross";
 NOSAVE_ITEM_PICKUP_SUBWAY = "You got a Ticket to Ride!";
+NOSAVE_ITEM_TAG_SUBWAY = "Subway Ticket";
 
 //Misc
 NOSAVE_WARNING = "Warning: Autosaving is disabled! Simple Saving will not work correctly! Please change this in the options menu!";

@@ -131,6 +131,7 @@ OptionMenu "NoSaveOptions"
     StaticText ""
     Option "$NOSAVE_SHOW_INVENTORY", "nosave_show_inventory", YesNo
     StaticText "$NOSAVE_SHOW_INVENTORY_DESC"
+    StaticText "$NOSAVE_SHOW_INVENTORY_DESC2", 1
     StaticText ""
     Option "$NOSAVE_DOUBLE_TAP", "nosave_double_tap", YesNo
     StaticText "$NOSAVE_DOUBLE_TAP_DESC"
