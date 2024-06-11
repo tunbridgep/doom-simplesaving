@@ -76,6 +76,7 @@ AddOptionMenu "OptionsMenu"
 
 OptionValue NoSaveStyles
 {
+    -1, "$NOSAVE_STYLE_AUTO"
     0, "$NOSAVE_STYLE_DOOM"
     1, "$NOSAVE_STYLE_DOOM2"
     2, "$NOSAVE_STYLE_RAVEN"
@@ -86,12 +87,53 @@ OptionValue NoSaveStyles
     7, "$NOSAVE_STYLE_SUBWAY"
 }
 
+OptionValue NoSaveProfiles
+{
+    0, "$NOSAVE_PROFILE_0"
+    1, "$NOSAVE_PROFILE_1"
+    2, "$NOSAVE_PROFILE_2"
+    3, "$NOSAVE_PROFILE_3"
+    4, "$NOSAVE_PROFILE_4"
+    5, "$NOSAVE_PROFILE_5"
+    //-1, "$NOSAVE_PROFILE_C"
+}
+
 OptionMenu "NoSaveOptions"
 {
     Title "$NOSAVE_MAIN_TITLE"
     StaticText ""
-    Option "$NOSAVE_STYLE", "nosave_style", "NoSaveStyles"
-    StaticText "$NOSAVE_STYLE_DESC"
+    NoSaveOptionReadOnly "$NOSAVE_PROFILE_CURRENT", "nosave_profile", "NoSaveProfiles"
+    NoSaveDynamicText 1, "nosave_profile", "NOSAVE_PROFILE"
+    NoSaveDynamicText 1, "nosave_profile", "NOSAVE_PROFILE", 1
+    StaticText ""
+    Option "$NOSAVE_PROFILE_SELECT", "nosave_profile_temp", "NoSaveProfiles"
+    NoSaveDynamicText 1, "nosave_profile_temp", "NOSAVE_PROFILE"
+    NoSaveDynamicText 1, "nosave_profile_temp", "NOSAVE_PROFILE", 1
+    StaticText ""
+    Command "$NOSAVE_PROFILE_APPLY", "nosave_profile_apply"
+    StaticText ""
+    Option "$MISCMNU_ENABLEAUTOSAVES", "disableautosave", "Autosave"
+    StaticText "$NOSAVE_AUTOSAVE_DESC"
+    StaticText "$NOSAVE_AUTOSAVE_DESC2", 1
+    StaticText ""
+    Control "$NOSAVE_KEY_BIND", "nosave_quicksave"
+    StaticText "$NOSAVE_KEY_BIND_DESC"
+    StaticText "$NOSAVE_KEY_BIND_DESC2"
+    StaticText "$NOSAVE_KEY_BIND_DESC3", 1
+    StaticText "$NOSAVE_KEY_BIND_DESC4", 1
+    StaticText ""
+    SubMenu "$NOSAVE_GAMEPLAY_MENU_NAME", "NoSaveGameplayOptions"
+    SubMenu "$NOSAVE_ADVANCED_MENU_NAME", "NoSaveAdvancedOptions"
+    //StaticText "$NOSAVE_PROFILE_CURRENT"
+    //StaticText ""
+    //StaticText ""
+}
+
+OptionMenu "NoSaveGameplayOptions"
+{
+    Title "$NOSAVE_CUSTOM_MENU_NAME"
+    StaticText ""
+    StaticText "$NOSAVE_GAMEPLAY_MENU_HEADER1", 1
     StaticText ""
     StaticText ""
     ScaleSlider "$NOSAVE_SAVES_STARTING", "nosave_items_starting", 0,100,1,"$NOSAVE_DISABLED"
@@ -117,16 +159,24 @@ OptionMenu "NoSaveOptions"
     Slider "$NOSAVE_ENEMY_THRESHOLD", "nosave_enemy_threshold", 1,200,1,0
     StaticText "$NOSAVE_ENEMY_THRESHOLD_DESC"
     StaticText ""
-    Option "$NOSAVE_AUTO_PICKUP", "nosave_auto_collect", "YesNo"
-    StaticText "$NOSAVE_AUTO_PICKUP_DESC"
+    Option "$NOSAVE_STRIP", "nosave_strip_between_levels", YesNo
+    StaticText "$NOSAVE_STRIP_DESC"
     StaticText ""
     Option "$NOSAVE_CONSISTENT_DROPS", "nosave_consistent_drops", "YesNo"
     StaticText "$NOSAVE_CONSISTENT_DROPS_DESC"
     StaticText "$NOSAVE_CONSISTENT_DROPS_DESC2"
     StaticText "$NOSAVE_CONSISTENT_DROPS_DESC3"
     StaticText ""
-    Option "$NOSAVE_STRIP", "nosave_strip_between_levels", YesNo
-    StaticText "$NOSAVE_STRIP_DESC"
+}
+OptionMenu "NoSaveAdvancedOptions"
+{
+    Title "$NOSAVE_ADVANCED_MENU_NAME"
+    StaticText ""
+    Option "$NOSAVE_STYLE", "nosave_style", "NoSaveStyles"
+    StaticText "$NOSAVE_STYLE_DESC"
+    StaticText ""
+    Option "$NOSAVE_AUTO_PICKUP", "nosave_auto_collect", "YesNo"
+    StaticText "$NOSAVE_AUTO_PICKUP_DESC"
     StaticText ""
     Option "$NOSAVE_SHOW_INVENTORY", "nosave_show_inventory", YesNo
     StaticText "$NOSAVE_SHOW_INVENTORY_DESC"
@@ -134,14 +184,4 @@ OptionMenu "NoSaveOptions"
     StaticText ""
     Option "$NOSAVE_DOUBLE_TAP", "nosave_double_tap", YesNo
     StaticText "$NOSAVE_DOUBLE_TAP_DESC"
-    StaticText ""
-    Option "$MISCMNU_ENABLEAUTOSAVES", "disableautosave", "Autosave"
-    StaticText "$NOSAVE_AUTOSAVE_DESC"
-    StaticText "$NOSAVE_AUTOSAVE_DESC2", 1
-    StaticText ""
-    Control "$NOSAVE_KEY_BIND", "nosave_quicksave"
-    StaticText "$NOSAVE_KEY_BIND_DESC"
-    StaticText "$NOSAVE_KEY_BIND_DESC2"
-    StaticText "$NOSAVE_KEY_BIND_DESC3", 1
-    StaticText "$NOSAVE_KEY_BIND_DESC4", 1
 }

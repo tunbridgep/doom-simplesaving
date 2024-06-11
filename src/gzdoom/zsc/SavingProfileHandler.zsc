@@ -1,0 +1,98 @@
+//Handler for setting up profiles for the save mod
+class SaveingProfileHandler : SavingModEventHandler
+{
+    void CInt(string name, int value)
+    {
+        let cv = CVar.FindCVar(name);
+        if (cv)
+            cv.SetInt(value);
+        else
+            Console.Printf("Couldn't modify console variable: %s", name);
+    }
+
+    void CBool(string name, bool value)
+    {
+        let cv = CVar.FindCVar(name);
+        if (cv)
+            cv.SetBool(value);
+        else
+            Console.Printf("Couldn't modify console variable: %s", name);
+    }
+
+    override void NetworkProcess (ConsoleEvent e) 
+    {
+        if (e.Name == "SaveSelectProfile")
+        {
+            let temp = nosave_profile_temp;
+
+            //First, set our profile to match the temp one
+            CInt("nosave_profile",temp);
+
+            switch (temp)
+            {
+                case 0: //Vanilla Doom
+                    CInt("nosave_items_starting",1);
+                    CInt("nosave_items_max",5);
+                    CInt("nosave_items_per_level",3);
+                    CInt("nosave_items_per_level_bonus",0);
+                    CInt("nosave_map_skip",2);
+                    CInt("nosave_map_first",2);
+                    CInt("nosave_enemy_threshold",20);
+                    CBool("nosave_strip_between_levels",false);
+                    CBool("nosave_consistent_drops",false);
+                    break;
+                case 1: //"Recent" Wads and Slaughtermaps etc
+                    CInt("nosave_items_starting",5);
+                    CInt("nosave_items_max",100);
+                    CInt("nosave_items_per_level",2);
+                    CInt("nosave_items_per_level_bonus",35);
+                    CInt("nosave_map_skip",1);
+                    CInt("nosave_map_first",1);
+                    CInt("nosave_enemy_threshold",20);
+                    CBool("nosave_strip_between_levels",false);
+                    CBool("nosave_consistent_drops",true);
+                    break;
+                case 2: //Ashes
+                    CInt("nosave_items_starting",3);
+                    CInt("nosave_items_max",100);
+                    CInt("nosave_items_per_level",2);
+                    CInt("nosave_items_per_level_bonus",30);
+                    CInt("nosave_map_skip",1);
+                    CInt("nosave_map_first",1);
+                    CInt("nosave_enemy_threshold",1);
+                    CBool("nosave_strip_between_levels",false);
+                    CBool("nosave_consistent_drops",true);
+                    break;
+                case 3: //Fresh Start
+                    CInt("nosave_items_starting",0);
+                    CInt("nosave_items_max",100);
+                    CInt("nosave_items_per_level",3);
+                    CInt("nosave_items_per_level_bonus",0);
+                    CInt("nosave_map_skip",1);
+                    CInt("nosave_map_first",1);
+                    CInt("nosave_enemy_threshold",1);
+                    CBool("nosave_strip_between_levels",true);
+                    CBool("nosave_consistent_drops",true);
+                    break;
+                case 4: //Long Haul
+                    CInt("nosave_items_starting",40);
+                    CInt("nosave_items_max",40);
+                    CInt("nosave_items_per_level",0);
+                    CInt("nosave_items_per_level_bonus",0);
+                    CBool("nosave_strip_between_levels",false);
+                    break;
+                case 5: //Hardcore Mode
+                    CInt("nosave_items_starting",0);
+                    CInt("nosave_items_max",1);
+                    CInt("nosave_items_per_level",1);
+                    CInt("nosave_items_per_level_bonus",0);
+                    CInt("nosave_map_skip",1);
+                    CInt("nosave_map_first",1);
+                    CInt("nosave_enemy_threshold",1);
+                    CBool("nosave_strip_between_levels",true);
+                    CBool("nosave_consistent_drops",false);
+                    break;
+            }
+        }
+    }
+}

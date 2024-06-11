@@ -1,0 +1,2 @@
+//Save profiles
+alias "nosave_profile_apply" "netevent SaveSelectProfile"

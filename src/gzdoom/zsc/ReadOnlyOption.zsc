@@ -1,0 +1,65 @@
+//I genuinely can't believe gzdoom has no built-in way to do this
+class OptionMenuItemNoSaveOptionReadOnly : OptionMenuItemOption
+{
+    override bool Selectable()
+	{
+    	return false;
+	}
+}
+
+/*
+class OptionMenuItemNoSaveCustomProfileOptions : OptionMenuItemSubmenu
+{
+    override bool Selectable()
+	{
+    	return nosave_profile == -1;
+	}
+}
+*/
+
+class OptionMenuItemNoSaveDynamicText : OptionMenuItemStaticText
+{
+    cvar condition;
+    string languagePrefix;
+    int offset;
+    
+    private string CalculateText()
+    {
+        let text = "ERROR: REPORT BUG";
+        
+        if (condition)
+        {
+            let val = condition.GetInt();
+            let tempstring = "$";
+
+            //Get description name
+            if (val >= 0)
+                tempstring = tempstring .. languagePrefix.."_"..val.."_DESC";
+            else
+                tempstring = tempstring .. languagePrefix.."_C_DESC";
+
+            //Apply offset
+            tempstring = tempstring .. "_"..offset;
+
+            text = StringTable.Localize(tempstring);
+        }
+        
+        return text;
+    }
+
+    OptionMenuItemNoSaveDynamicText Init(int color, CVar _condition, String _languagePrefix, int _offset = 0)
+    {
+        condition = _condition;
+        languagePrefix = _languagePrefix;
+        offset = _offset;
+        let text = CalculateText();
+        return OptionMenuItemNoSaveDynamicText(Super.Init(text,color));
+    }
+    
+    override int Draw(OptionMenuDescriptor desc, int y, int indent, bool selected)
+	{
+	    mLabel = CalculateText();
+		return Super.Draw(desc,y,indent,selected);
+	}
+
+}

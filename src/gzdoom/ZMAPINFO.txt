@@ -1,0 +1,6 @@
+ 
+GameInfo
+{
+    AddEventHandlers = "SaveingModItemHandler"
+    AddEventHandlers = "SaveingProfileHandler"
+}

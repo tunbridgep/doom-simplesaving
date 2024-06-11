@@ -107,9 +107,32 @@ class SaveGem : SavingModPermanentItem
         MakeAutosave(true);
         return true;
     }
-    
+
     int GetSkin()
     {
+        StyleStruct Style;
+        string Scavenger = "Scavenger";
+        class scav = Scavenger;
+        let player = players[consoleplayer].mo;
+
+        if (nosave_style == -1)
+        {
+            if (player.GetClass() is 'ChexPlayer') //Have to do this before DoomPlayer because ChexPlayer inherits from DoomPlayer
+                return Style.Doom; //TODO: Chex Style
+            else if (player.GetClass() is GetReplacement("DoomPlayer"))
+                return Style.Doom;
+            else if (player.GetClass() is GetReplacement("HereticPlayer")
+                || player.GetClass() is GetReplacement("FighterPlayer")
+                || player.GetClass() is GetReplacement("ClericPlayer")
+                || player.GetClass() is GetReplacement("MagePlayer"))
+                return Style.Raven;
+            else if (player.GetClass() is GetReplacement("StrifePlayer"))
+                return Style.Strife;
+            else if (player.GetClass() is GetReplacement(Scavenger))
+                return Style.Ashes;
+            else
+                return 0;   //Doom style is the fallback
+        }
         return nosave_style;
     }
 
@@ -123,7 +146,10 @@ class SaveGem : SavingModPermanentItem
     {
         StyleStruct Style;
         int skin = GetSkin();
+
         String txt = "$NOSAVE_ITEM_PICKUP_RAVEN";
+
+        Console.printf("skin: %d",skin);
 
         if (skin == Style.Doom || skin == Style.DoomAlt)
             txt = "$NOSAVE_ITEM_PICKUP_DOOM";

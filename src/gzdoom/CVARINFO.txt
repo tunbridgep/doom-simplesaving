@@ -1,0 +1,5 @@
+//gzdoom specific settings
+nosave server int nosave_style = -1;
+nosave server int nosave_profile = 0; //our actually selected profile
+noarchive nosave server int nosave_profile_temp = 0; //our temporary profile selection in the menu
+nosave server bool nosave_show_inventory = false;
