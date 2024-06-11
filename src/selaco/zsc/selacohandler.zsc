@@ -1,0 +1,77 @@
+class SaveingModSelacoHandler : StaticEventHandler
+{
+    override void NetworkProcess(ConsoleEvent e)
+    {
+        if(e.name == "SimpleSavesSelacoHack")
+        {
+            let d = Dawn(players[0].mo);
+            if(d && d.quicksaveTimerCurrent == 0 && d.countinv("isPlaying") == 1)
+            {
+                d.quicksaveTimerCurrent = d.QUICKSAVE_DELAY_TIMER;
+                checkSaveValidation(isQuicksave: true);
+            }
+            return;
+        }
+    }
+
+    // Validation system for Quick Saves
+	// Defaults to autosave type, otherwise is quicksave
+    // REWRITTEN by Sarge to account for the new hardcore variable
+	void checkSaveValidation(bool isQuicksave = false, int enemyRange = 2000) {
+		PlayerPawn pawn=players[consolePlayer].mo;
+		let d = Dawn(pawn);
+		d.beginSaveValidation = false;
+		d.quicksaveTimerCurrent++;
+        
+        SaveGem savegem = SaveGem(d.FindInventory("SaveGem",true));
+
+		if(isQuicksave)
+		{
+			if(d.quicksaveTimerCurrent >= d.QUICKSAVE_DELAY_TIMER) {
+				// Check 1 - Check if the player is playing Hardcore Mode
+				if(d.countinv("HardcoreMode") || !savegem) {
+					d.denySave("$DENIEDSAVE_LIMITED", isQuicksave);
+					return;
+				}
+
+				// Check 2 - Player is not in a critical state
+				if(d.countinv("DangerStateActive")) {
+					d.denySave("$DENIEDSAVE_DANGERSTATE", isQuicksave);
+					return;
+				}
+
+				// Check 3 - Check if enemies have seen Dawn recently and if any of they are close.
+				if(d.seenByEnemySaveValidation)
+				{
+					ThinkerIterator it = ThinkerIterator.Create("SelacoEnemy");
+					SelacoEnemy enemyActor = SelacoEnemy(it.Next());
+
+					for (; enemyActor; enemyActor = SelacoEnemy(it.Next())) 
+					{
+						if(!(enemyActor.target is "Dawn") || enemyActor.dawnNearbyCooldown > 0 || enemyActor.distance3DSquared(d) > 2000*2000)
+						{
+							continue;
+						}
+						d.denySave("$DENIEDSAVE_ALERTEDENEMY", isQuicksave);
+						return;
+					}
+				}
+
+				// Check 4 - No nearby hazard -- This must be improved.
+				BlockThingsIterator it2 = BlockThingsIterator.Create(d, 600);
+				Actor hazardousActor; 
+				while (it2.Next()) {
+					hazardousActor = it2.thing;
+					let hazardousActorProps = SelacoActor(hazardousActor);
+					if((hazardousActorProps) && hazardousActorProps.bDangerousActor && d.Distance2DSquared(hazardousActor) < 400*400) {
+						d.denySave("$DENIEDSAVE_DANGEROUOBJECT", isQuicksave);
+						return;
+					}
+				}
+			}
+            d.UseInventory(savegem);
+			d.A_playsound("UI/QUICKSAVE", CHAN_AUTO, 0.7);
+		}
+		d.saveAccepted(isQuicksave);
+	}
+}

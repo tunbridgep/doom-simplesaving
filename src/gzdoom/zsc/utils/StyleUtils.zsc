@@ -1,0 +1,150 @@
+class SSStyleUtils play
+{
+    //For GZDoom, we need to find the style based on a console var or which game we're running
+    static int GetSkin()
+    {
+        StyleStruct Style;
+        string Scavenger = "Scavenger";
+        class scav = Scavenger;
+        let player = players[consoleplayer].mo;
+
+        if (nosave_style == -1)
+        {
+            if (player.GetClass() is player.GetReplacement(Scavenger))
+                return Style.Ashes;
+            else if (player.GetClass() is 'ChexPlayer') //Have to do this before DoomPlayer because ChexPlayer inherits from DoomPlayer
+                return Style.Doom; //TODO: Chex Style
+            else if (player.GetClass() is player.GetReplacement("DoomPlayer"))
+                return Style.Doom;
+            else if (player.GetClass() is player.GetReplacement("HereticPlayer")
+                || player.GetClass() is player.GetReplacement("FighterPlayer")
+                || player.GetClass() is player.GetReplacement("ClericPlayer")
+                || player.GetClass() is player.GetReplacement("MagePlayer"))
+                return Style.Raven;
+            else if (player.GetClass() is player.GetReplacement("StrifePlayer"))
+                return Style.Strife;
+            else
+                return 0;   //Doom style is the fallback
+        }
+        return nosave_style;
+    }
+    
+    static String GetPickupMessage()
+    {
+        StyleStruct Style;
+        int skin = GetSkin();
+
+        String txt = "$NOSAVE_ITEM_PICKUP_RAVEN";
+
+        if (skin == Style.Doom || skin == Style.DoomAlt)
+            txt = "$NOSAVE_ITEM_PICKUP_DOOM";
+        else if (skin == Style.Floppy)
+            txt = "$NOSAVE_ITEM_PICKUP_FLOPPY";
+        else if (skin == Style.Misato)
+            txt = "$NOSAVE_ITEM_PICKUP_MISATO";
+        else if (skin == Style.Ashes)
+            txt = "$NOSAVE_ITEM_PICKUP_SUBWAY";
+
+        return StringTable.Localize(txt);
+    }
+
+    static void SetObjectProperties(SaveGem item)
+    {
+        StyleStruct Style;
+        int skin = GetSkin();
+        string _icon;
+        string _pickupSound = "misc/i_pkup";
+        string _useSound = "misc/p_pkup";
+        string _tag = "$NOSAVE_ITEM_TAG_RAVEN";
+        
+        if (skin == Style.Raven)
+        {
+            _icon = "ARTIALI1";
+            _tag = "$NOSAVE_ITEM_TAG_RAVEN";
+        }
+        else if (skin == Style.Doom)
+        {
+            _icon = "ARTIALI2";
+            _tag = "$NOSAVE_ITEM_TAG_DOOM";
+        }
+        else if (skin == Style.DoomAlt)
+        {
+            _icon = "ARTIALI6";
+            _tag = "$NOSAVE_ITEM_TAG_DOOM";
+        }
+        //else if (skin == Style.Strife)
+        //else if (skin == Style.Chex)
+        else if (skin == Style.Floppy)
+        {
+            _icon = "ARTIALI5";
+            _useSound = "save/floppy";
+            _tag = "$NOSAVE_ITEM_TAG_FLOPPY";
+        }
+        else if (skin == Style.Misato)
+        {
+            _icon = "ARTIALI7";
+            _tag = "$NOSAVE_ITEM_TAG_MISATO";
+        }
+        else if (skin == Style.Ashes)
+        {
+            _icon = "ARTIALI8";
+            //_useSound = "save/subwayu";
+            _pickupSound = "save/subwayp";
+            _tag = "$NOSAVE_ITEM_TAG_SUBWAY";
+        }
+        
+        item.Icon = TexMan.CheckForTexture(_icon);
+        item.PickupSound = _pickupSound;
+        item.UseSound = _useSound;
+        item.SetTag(StringTable.Localize(_tag));
+    }
+    
+    static void SetObjectFrameInformation(SaveGem item, int _frame)
+    {
+        StyleStruct Style;
+        String _sprite;
+        int _speed = 1;
+        int skin = GetSkin();
+        
+        item.bFLOATBOB = false;
+
+        if (skin == Style.Raven)
+        {
+            _frame = 0; //Always force to frame zero
+            _sprite = "AKOL";
+            item.bFLOATBOB = true;
+        }
+        else if (skin == Style.Doom)
+        {
+            _speed = 4;
+            _sprite = "DMES";
+        }
+        else if (skin == Style.DoomAlt)
+        {
+            _speed = 4;
+            _sprite = "DME2";
+            item.bFLOATBOB = true;
+        }
+        else if (skin == Style.Floppy)
+        {
+            _sprite = "FLOP";
+            _frame = 0; //Always force to frame zero
+        }
+        else if (skin == Style.Misato)
+        {
+            _sprite = "MISA";
+            _frame = 0; //Always force to frame zero
+            item.bFLOATBOB = true;
+        }
+        else if (skin == Style.Ashes)
+        {
+            _sprite = "SUBW";
+            _frame = 0; //Always force to frame zero
+        }
+        
+        item.frame = _frame;
+        item.sprite = item.GetSpriteIndex(_sprite);
+        item.A_SetTics(_speed);
+    }
+
+}

@@ -71,7 +71,7 @@ class SaveGem : SavingModPermanentItem
     {
         if (showmsg)
         {
-            Console.Printf(Stringtable.Localize("$NOSAVE_SAVED"));
+            SSPrintUtils.Print(Stringtable.Localize("$NOSAVE_SAVED"));
             owner.A_StartSound(UseSound,CHAN_ITEM,CHANF_UI|CHANF_LISTENERZ|CHANF_LOCAL|CHANF_OVERLAP|CHANF_NOPAUSE,1.0,ATTN_NONE);
         }
         UseSound = ""; //Horrible dirty hack to prevent the "Use" sound playing when loading the created autosave.
@@ -97,7 +97,7 @@ class SaveGem : SavingModPermanentItem
 
         text = pressAgain ? text.." "..postfix : text;
         
-        Console.Printf(text,amt);
+        SSPrintUtils.Print(String.Format(text,amt));
     }
 
     override bool Use(bool pickup)
@@ -108,33 +108,6 @@ class SaveGem : SavingModPermanentItem
         return true;
     }
 
-    int GetSkin()
-    {
-        StyleStruct Style;
-        string Scavenger = "Scavenger";
-        class scav = Scavenger;
-        let player = players[consoleplayer].mo;
-
-        if (nosave_style == -1)
-        {
-            if (player.GetClass() is 'ChexPlayer') //Have to do this before DoomPlayer because ChexPlayer inherits from DoomPlayer
-                return Style.Doom; //TODO: Chex Style
-            else if (player.GetClass() is GetReplacement("DoomPlayer"))
-                return Style.Doom;
-            else if (player.GetClass() is GetReplacement("HereticPlayer")
-                || player.GetClass() is GetReplacement("FighterPlayer")
-                || player.GetClass() is GetReplacement("ClericPlayer")
-                || player.GetClass() is GetReplacement("MagePlayer"))
-                return Style.Raven;
-            else if (player.GetClass() is GetReplacement("StrifePlayer"))
-                return Style.Strife;
-            else if (player.GetClass() is GetReplacement(Scavenger))
-                return Style.Ashes;
-            else
-                return 0;   //Doom style is the fallback
-        }
-        return nosave_style;
-    }
 
     override void Tick()
     {
@@ -144,123 +117,18 @@ class SaveGem : SavingModPermanentItem
  
     override String PickupMessage()
     {
-        StyleStruct Style;
-        int skin = GetSkin();
-
-        String txt = "$NOSAVE_ITEM_PICKUP_RAVEN";
-
-        Console.printf("skin: %d",skin);
-
-        if (skin == Style.Doom || skin == Style.DoomAlt)
-            txt = "$NOSAVE_ITEM_PICKUP_DOOM";
-        else if (skin == Style.Floppy)
-            txt = "$NOSAVE_ITEM_PICKUP_FLOPPY";
-        else if (skin == Style.Misato)
-            txt = "$NOSAVE_ITEM_PICKUP_MISATO";
-        else if (skin == Style.Ashes)
-            txt = "$NOSAVE_ITEM_PICKUP_SUBWAY";
-
-        return StringTable.Localize(txt);
+        return SSStyleUtils.GetPickupMessage();
     }
 
     void SetProperties()
     {
-        StyleStruct Style;
-        int skin = GetSkin();
-        string _icon;
-        string _pickupSound = "misc/i_pkup";
-        string _useSound = "misc/p_pkup";
-        string _tag = "$NOSAVE_ITEM_TAG_RAVEN";
-        
-        if (skin == Style.Raven)
-        {
-            _icon = "ARTIALI1";
-            _tag = "$NOSAVE_ITEM_TAG_RAVEN";
-        }
-        else if (skin == Style.Doom)
-        {
-            _icon = "ARTIALI2";
-            _tag = "$NOSAVE_ITEM_TAG_DOOM";
-        }
-        else if (skin == Style.DoomAlt)
-        {
-            _icon = "ARTIALI6";
-            _tag = "$NOSAVE_ITEM_TAG_DOOM";
-        }
-        //else if (skin == Style.Strife)
-        //else if (skin == Style.Chex)
-        else if (skin == Style.Floppy)
-        {
-            _icon = "ARTIALI5";
-            _useSound = "save/floppy";
-            _tag = "$NOSAVE_ITEM_TAG_FLOPPY";
-        }
-        else if (skin == Style.Misato)
-        {
-            _icon = "ARTIALI7";
-            _tag = "$NOSAVE_ITEM_TAG_MISATO";
-        }
-        else if (skin == Style.Ashes)
-        {
-            _icon = "ARTIALI8";
-            //_useSound = "save/subwayu";
-            _pickupSound = "save/subwayp";
-            _tag = "$NOSAVE_ITEM_TAG_SUBWAY";
-        }
-        
-        Icon = TexMan.CheckForTexture(_icon);
-        PickupSound = _pickupSound;
-        UseSound = _useSound;
-        SetTag(StringTable.Localize(_tag));
+        SSStyleUtils.SetObjectProperties(self);
     }
 
     void SetFrameInformation(int _frame)
     {
         SetProperties();
-        StyleStruct Style;
-        String _sprite;
-        int _speed = 1;
-        int skin = GetSkin();
-        
-        bFLOATBOB = false;
-
-        if (skin == Style.Raven)
-        {
-            _frame = 0; //Always force to frame zero
-            _sprite = "AKOL";
-            bFLOATBOB = true;
-        }
-        else if (skin == Style.Doom)
-        {
-            _speed = 4;
-            _sprite = "DMES";
-        }
-        else if (skin == Style.DoomAlt)
-        {
-            _speed = 4;
-            _sprite = "DME2";
-            bFLOATBOB = true;
-        }
-        else if (skin == Style.Floppy)
-        {
-            _sprite = "FLOP";
-            _frame = 0; //Always force to frame zero
-        }
-        else if (skin == Style.Misato)
-        {
-            _sprite = "MISA";
-            _frame = 0; //Always force to frame zero
-            bFLOATBOB = true;
-        }
-        else if (skin == Style.Ashes)
-        {
-            _sprite = "SUBW";
-            _frame = 0; //Always force to frame zero
-        }
-        
-        frame = _frame;
-        sprite = GetSpriteIndex(_sprite);
-        A_SetTics(_speed);
+        SSStyleUtils.SetObjectFrameInformation(self,_frame);
     }
 
     States
@@ -284,7 +152,7 @@ class SaveGem : SavingModPermanentItem
                     let player = players[consoleplayer].mo;
                     player.GiveInventory("SaveGem",1);
                     player.A_StartSound(PickupSound,CHAN_ITEM,CHANF_UI|CHANF_LISTENERZ|CHANF_LOCAL|CHANF_OVERLAP|CHANF_NOPAUSE,1.0,ATTN_NONE);
-                    Console.Printf(PickupMessage());
+                    SSPrintUtils.Print(PickupMessage());
                     self.Destroy();
                 }
             }

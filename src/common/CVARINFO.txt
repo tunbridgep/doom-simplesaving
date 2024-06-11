@@ -1,13 +1,13 @@
 //save settings
 nosave server int nosave_debug = 0;
-latch nosave server cheat int nosave_items_starting = 0;
-latch nosave server cheat int nosave_items_max = 10;
-latch nosave server cheat int nosave_items_per_level = 0;
-latch nosave server cheat int nosave_items_per_level_bonus = 40;
-latch nosave server cheat int nosave_enemy_threshold = 0;
-latch nosave server cheat bool nosave_strip_between_levels = false;
-latch nosave server cheat int nosave_map_skip = 1;
-latch nosave server cheat int nosave_map_first = 1;
+nosave server cheat int nosave_items_starting = 0;
+nosave server cheat int nosave_items_max = 10;
+nosave server cheat int nosave_items_per_level = 0;
+nosave server cheat int nosave_items_per_level_bonus = 40;
+nosave server cheat int nosave_enemy_threshold = 0;
+nosave server cheat bool nosave_strip_between_levels = false;
+nosave server cheat int nosave_map_skip = 1;
+nosave server cheat int nosave_map_first = 1;
 nosave server cheat bool nosave_auto_collect = false;
-latch nosave server cheat bool nosave_consistent_drops = false;
+nosave server cheat bool nosave_consistent_drops = false;
 nosave bool nosave_double_tap = true;

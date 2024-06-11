@@ -18,7 +18,7 @@ class NoSaveStartup : SavingModPermanentItem
         else if (savegem)
             savegem.DisplayCornerMessage(true);
         else
-            Console.Printf(Stringtable.Localize("$NOSAVE_REMAIN_NONE"));
+            SSPrintUtils.Print(Stringtable.Localize("$NOSAVE_REMAIN_NONE"));
     }
 
     override void DoEffect()

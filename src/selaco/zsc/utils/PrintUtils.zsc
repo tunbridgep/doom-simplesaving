@@ -1,0 +1,9 @@
+class SSPrintUtils play
+{
+    //For GZDoom, do a standard Console.Printf,
+    //For Selaco, print using MidPrint
+    static void Print(string message)
+    {
+        Console.MidPrint("SMALLFONT","\c[white]"..message,true);
+    }
+}

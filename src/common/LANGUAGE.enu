@@ -102,3 +102,6 @@ NOSAVE_ITEM_TAG_SUBWAY = "Subway Ticket";
 //Misc
 NOSAVE_WARNING = "Warning: Autosaving is disabled! Simple Saving will not work correctly! Please change this in the options menu!";
 NOSAVE_NOKEY = "Warning: Simple Saving Quicksave button is not bound! The mod will not work correctly! Please change this in the options menu!";
+
+//Selaco Stuff
+DENIEDSAVE_LIMITED = "You need a Combat Simulation Chip to Quicksave";
