@@ -27,7 +27,7 @@ class NoSaveStartup : SavingModPermanentItem
     override void DoEffect()
     {
         //This needs to be delayed by a bit or it doesn't make a save
-        if (gametic > 5 && !startup)
+        if (gametic > 5 && !startup && owner)
         {
             //Give our starter gems rest
             if (nosave_items_starting > 0)

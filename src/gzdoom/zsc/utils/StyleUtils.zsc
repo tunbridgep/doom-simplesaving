@@ -4,13 +4,11 @@ class SSStyleUtils play
     static int GetSkin()
     {
         StyleStruct Style;
-        string Scavenger = "Scavenger";
-        class scav = Scavenger;
-        let player = players[consoleplayer].mo;
+        let player = players[0].mo;
 
-        if (nosave_style == -1)
+        if (nosave_style == -1 && player)
         {
-            if (player.GetClass() is player.GetReplacement(Scavenger))
+            if (player.GetClassName() == "Scavenger" || player.GetClassName() == "Walker") //dirty Ashes hack
                 return Style.Ashes;
             else if (player.GetClass() is 'ChexPlayer') //Have to do this before DoomPlayer because ChexPlayer inherits from DoomPlayer
                 return Style.Doom; //TODO: Chex Style
