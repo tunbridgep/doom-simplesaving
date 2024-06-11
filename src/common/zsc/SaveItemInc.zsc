@@ -2,12 +2,9 @@ class SavingModPermanentItem : Inventory
 {
     Default
     {
-        +INVENTORY.UNDROPPABLE;
-        +INVENTORY.ALWAYSPICKUP;
         +INVENTORY.UNCLEARABLE;
         +INVENTORY.HUBPOWER;
         +INVENTORY.PERSISTENTPOWER;
-        +INVENTORY.UNTOSSABLE;
         +INVENTORY.IGNORESKILL;
         //+INVENTORY.KEEPDEPLETED;
         //+INVENTORY.INVBAR;
@@ -31,20 +28,8 @@ struct StyleStruct
     }
 }
 
-class SaveGem : SavingModPermanentItem
+mixin class SaveGemInc
 {
-    Default
-    {
-        -INVENTORY.UNDROPPABLE;
-        -INVENTORY.UNTOSSABLE;
-		-INVENTORY.ALWAYSPICKUP;
-        +INVENTORY.FANCYPICKUPSOUND;
-        Inventory.InterHubAmount 9999;
-        Inventory.MaxAmount 9999;
-        Inventory.Icon "ARTIALI1";
-        Tag "";
-    }
-    
     //This has to be done here, rather than being dynamic
     //because otherwise the inventory UI completely breaks.
     //But there's nothing stopping the player dropping the item and picking it up again

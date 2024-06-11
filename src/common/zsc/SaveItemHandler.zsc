@@ -14,7 +14,10 @@ class NoSaveStartup : SavingModPermanentItem
     {
         SaveGem savegem = SaveGem(owner.FindInventory("SaveGem",true));
         if (savegem && doublePress)
-            owner.UseInventory(savegem);
+            if (SSMiscUtils.IsSelaco())
+                EventHandler.SendNetworkEvent("SimpleSavesSelacoHack");
+            else
+                owner.UseInventory(savegem);
         else if (savegem)
             savegem.DisplayCornerMessage(true);
         else

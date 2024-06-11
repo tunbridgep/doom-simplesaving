@@ -1,0 +1,7 @@
+class SSMiscUtils play
+{
+    static bool IsSelaco()
+    {
+        return false;
+    }
+}

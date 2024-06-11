@@ -1,1 +1,2 @@
-alias quicksaveselaco "netevent SimpleSavesSelacoHack"
+alias quicksaveselaco "netevent SaveButton"
+alias save_menu "quicksaveselaco" //Dirty hack
