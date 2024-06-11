@@ -239,6 +239,16 @@ class SaveGem : SavingModPermanentItem
 
     States
     {
+		Precache:
+			//Create temp sprites. See note here:
+            //https://zdoom.org/wiki/GetSpriteIndex
+            DMES ABCD 1;
+            DME2 ABCD 1;
+            AKOL A 1;
+            FLOP A 1;
+            MISA A 1;
+            SUBW A 1;
+			Stop;
         Spawn:
             //If we are set to auto collect, simply save
             TNT1 A 0
@@ -252,14 +262,6 @@ class SaveGem : SavingModPermanentItem
                     self.Destroy();
                 }
             }
-            //Create temp sprites. See note here:
-            //https://zdoom.org/wiki/GetSpriteIndex
-            DMES ABCD 0;
-            DME2 ABCD 0;
-            AKOL A 0;
-            FLOP A 0;
-            MISA A 0;
-            SUBW A 0;
             TNT1 A 1 SetFrameInformation(0);
             TNT1 A 1 SetFrameInformation(1);
             TNT1 A 1 SetFrameInformation(2);

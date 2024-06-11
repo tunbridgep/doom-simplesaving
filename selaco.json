@@ -2,7 +2,7 @@
 	"debug":"true",
 	"inputs": [
 		{ "dir":"./src/common" },
-		{ "dir":"./src/gzdoom" }
+		{ "dir":"./src/selaco" }
 	],
 	"steps":[
 		{"type":"acs", "settings":{ "dir":"acs", "recursive":"false", "pattern":"*.*", "keep_error_file":"false", "include_src":"true"} },
@@ -10,6 +10,6 @@
 		{"type":"zscript", "settings":{ "dir":"zsc", "output":"zscript.txt"} }
 	],
 	"outputs": [
-		{"type":"zip", "settings":{ "cmd":"7z -mx1 a","path":"./rel","name":"NoSaving 1.32.pk7", "split":"false"} }
+		{"type":"zip", "settings":{ "cmd":"7z -tzip -mx1 a","path":"./rel","name":"NoSaving 1.32 - Selaco.pk3", "split":"false"} }
 	]
 }

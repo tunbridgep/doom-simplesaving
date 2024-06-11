@@ -84,7 +84,24 @@ class SaveingModItemHandler : SavingModEventHandler
             Player.GiveInventory("NoSaveStartup",1);
         }
     }
-    
+ 
+	//Check for save button press
+	//This is necessary as we can't restrict saving
+	//because Graf is a self-entitled cunt
+    override bool InputProcess (InputEvent e)
+    {
+        if (Bindings.GetBinding(e.KeyScan) == "quicksave")
+        {
+            EventHandler.SendNetworkEvent("SaveCheater");
+
+            //Swallow the event
+            //e = null;
+            //return true;
+        }
+
+        return false;
+    }
+ 
     bool HasMetThreshold()
     {
         return total_enemies >= nosave_enemy_threshold;
@@ -97,9 +114,15 @@ class SaveingModItemHandler : SavingModEventHandler
     
     override void NetworkProcess (ConsoleEvent e) 
     {
+		let player = players[e.Player].mo;
+		if (e.Name == "SaveCheater")
+		{
+			//player.DamageMobj(player,player,10000,'Normal',DMG_FORCED,0);
+            //Console.MidPrint("BIGFONT","Tell Graf his port sucks",true);
+            Console.MidPrint("BIGFONT","BIND QUICKSAVE BUTTON IN OPTIONS",true);
+		}
         if (e.Name == "SaveButton")
         {
-            let player = players[e.Player].mo;
             NoSaveStartup token = NoSaveStartup(player.FindInventory("NoSaveStartup",true));
 
             if (!token)
