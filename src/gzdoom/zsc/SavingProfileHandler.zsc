@@ -28,6 +28,8 @@ class SaveingProfileHandler : SavingModEventHandler
             //First, set our profile to match the temp one
             CInt("nosave_profile",temp);
 
+            SSDebug.Log(String.Format("Updated Settings for profile %d",temp));
+
             switch (temp)
             {
                 case 0: //Vanilla Doom
@@ -55,8 +57,8 @@ class SaveingProfileHandler : SavingModEventHandler
                 case 2: //Ashes
                     CInt("nosave_items_starting",3);
                     CInt("nosave_items_max",100);
-                    CInt("nosave_items_per_level",0);
-                    CInt("nosave_items_per_level_bonus",35);
+                    CInt("nosave_items_per_level",1);
+                    CInt("nosave_items_per_level_bonus",30);
                     CInt("nosave_map_skip",1);
                     CInt("nosave_map_first",1);
                     CInt("nosave_enemy_threshold",1);
