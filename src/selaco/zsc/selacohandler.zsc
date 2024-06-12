@@ -23,16 +23,19 @@ class SaveingModSelacoHandler : StaticEventHandler
 		d.beginSaveValidation = false;
 		d.quicksaveTimerCurrent++;
         
-        SaveGem savegem = SaveGem(d.FindInventory("SaveGem",true));
+        //SaveGem savegem = SaveGem(d.FindInventory("SaveGem",true));
 
 		if(isQuicksave)
 		{
 			if(d.quicksaveTimerCurrent >= d.QUICKSAVE_DELAY_TIMER) {
+                /*
+                //SARGE: Disabled so that Hardcore can benefit from savegems
 				// Check 1 - Check if the player is playing Hardcore Mode
-				if(d.countinv("HardcoreMode") || !savegem) {
+				if(d.countinv("HardcoreMode")) {
 					d.denySave("$DENIEDSAVE_LIMITED", isQuicksave);
 					return;
 				}
+                */
 
 				// Check 2 - Player is not in a critical state
 				if(d.countinv("DangerStateActive")) {
