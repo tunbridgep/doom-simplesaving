@@ -131,7 +131,7 @@ OptionMenu "NoSaveOptions"
 
 OptionMenu "NoSaveGameplayOptions"
 {
-    Title "$NOSAVE_CUSTOM_MENU_NAME"
+    Title "$NOSAVE_GAMEPLAY_MENU_NAME"
     StaticText ""
     StaticText "$NOSAVE_GAMEPLAY_MENU_HEADER1", 1
     StaticText ""
