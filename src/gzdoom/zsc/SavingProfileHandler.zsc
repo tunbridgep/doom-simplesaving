@@ -45,7 +45,7 @@ class SaveingProfileHandler : SavingModEventHandler
                     CInt("nosave_items_starting",5);
                     CInt("nosave_items_max",100);
                     CInt("nosave_items_per_level",2);
-                    CInt("nosave_items_per_level_bonus",35);
+                    CInt("nosave_items_per_level_bonus",50);
                     CInt("nosave_map_skip",1);
                     CInt("nosave_map_first",1);
                     CInt("nosave_enemy_threshold",20);
@@ -55,8 +55,8 @@ class SaveingProfileHandler : SavingModEventHandler
                 case 2: //Ashes
                     CInt("nosave_items_starting",3);
                     CInt("nosave_items_max",100);
-                    CInt("nosave_items_per_level",2);
-                    CInt("nosave_items_per_level_bonus",30);
+                    CInt("nosave_items_per_level",0);
+                    CInt("nosave_items_per_level_bonus",35);
                     CInt("nosave_map_skip",1);
                     CInt("nosave_map_first",1);
                     CInt("nosave_enemy_threshold",1);

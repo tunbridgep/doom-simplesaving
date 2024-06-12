@@ -4,4 +4,11 @@ class SSMiscUtils play
     {
         return false;
     }
+
+    //For GZDoom this is set by convar
+    //For Selaco this is always false because Selaco doesn't have a working inventory bar
+    static bool ShowInInventory()
+    {
+        return nosave_show_inventory;
+    }
 }

@@ -23,7 +23,7 @@ class SaveingModSelacoHandler : StaticEventHandler
 		d.beginSaveValidation = false;
 		d.quicksaveTimerCurrent++;
         
-        //SaveGem savegem = SaveGem(d.FindInventory("SaveGem",true));
+        SaveGem savegem = SaveGem(d.FindInventory("SaveGem",true));
 
 		if(isQuicksave)
 		{

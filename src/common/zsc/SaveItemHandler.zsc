@@ -35,9 +35,22 @@ class NoSaveStartup : SavingModPermanentItem
 
             //Autosave at the start of the game, so we don't have pistol starts
             LevelLocals.MakeAutoSave();
-            
+
             startup = true;
         }
+            
+        //Set INVBAR on existing savegems
+        //We may need to refresh our count
+        let savegem = owner.FindInventory("SaveGem");
+        bool inv = SSMiscUtils.ShowInInventory();
+        if (savegem && ((savegem.bINVBAR && !inv) || (!savegem.bINVBAR && inv)))
+        {
+            let amount = savegem.amount;
+            owner.TakeInventory("SaveGem",9999);
+            owner.GiveInventory("SaveGem",amount);
+            SSDebug.LogVerbose("Refreshed Save Gems");
+        }
+            
         super.DoEffect();
     }
 }

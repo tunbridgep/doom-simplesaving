@@ -36,7 +36,7 @@ mixin class SaveGemInc
     /* override void DoEffect() */
     override void AttachToOwner(Actor other)
     {
-        if (nosave_show_inventory)
+        if (SSMiscUtils.ShowInInventory())
             bINVBAR = true;
         else
             bINVBAR = false;
