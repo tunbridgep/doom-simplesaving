@@ -10,6 +10,6 @@
 		{"type":"zscript", "settings":{ "dir":"zsc", "output":"zscript.txt"} }
 	],
 	"outputs": [
-		{"type":"zip", "settings":{ "cmd":"7z -tzip -mx1 a","path":"./rel","name":"NoSaving 1.32 - Selaco.pk3", "split":"false"} }
+		{"type":"zip", "settings":{ "cmd":"7z -tzip -mx1 a","path":"./rel","name":"NoSaving 1.4 - Selaco.pk3", "split":"false"} }
 	]
 }
