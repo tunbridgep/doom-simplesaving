@@ -11,3 +11,6 @@ nosave server cheat int nosave_map_first = 1;
 nosave server cheat bool nosave_auto_collect = false;
 nosave server cheat bool nosave_consistent_drops = false;
 nosave bool nosave_double_tap = true;
+noarchive server int nosave_index = 0;
+//nosave server int nosave_index = 0;
+//nosave int nosave_max_save_slots = 5; //How many saves we should create for this particular save file before looping around

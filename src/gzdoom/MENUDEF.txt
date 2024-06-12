@@ -184,4 +184,7 @@ OptionMenu "NoSaveAdvancedOptions"
     StaticText ""
     Option "$NOSAVE_DOUBLE_TAP", "nosave_double_tap", YesNo
     StaticText "$NOSAVE_DOUBLE_TAP_DESC"
+    StaticText ""
+	//Slider "$NOSAVE_MAX_SLOTS", "nosave_max_slots", 1,10,1,0
+    //StaticText "$NOSAVE_MAX_SLOTS_DESC"
 }

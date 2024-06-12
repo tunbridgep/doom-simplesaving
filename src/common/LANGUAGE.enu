@@ -86,6 +86,8 @@ NOSAVE_STYLE_STRIFE = "Disciple (Strife)";
 NOSAVE_STYLE_FLOPPY = "Floppy Disk";
 NOSAVE_STYLE_MISATO = "Misato's Cross (Evangellion)";
 NOSAVE_STYLE_SUBWAY = "Metro Ticket (Ashes)";
+NOSAVE_MAX_SLOTS = "Maximum Save Slots";
+NOSAVE_MAX_SLOTS_DESC = "The number of save slots that will be used before repeating";
 
 //Item text
 NOSAVE_ITEM_PICKUP_RAVEN = "You got the Ankh of Time Manipulation!";
