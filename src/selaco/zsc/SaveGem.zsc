@@ -7,12 +7,9 @@ class SaveGem : Inventory
         +INVENTORY.HUBPOWER;
         +INVENTORY.PERSISTENTPOWER;
         +INVENTORY.IGNORESKILL;
-        //+INVENTORY.KEEPDEPLETED;
-        //+INVENTORY.INVBAR;
         +INVENTORY.FANCYPICKUPSOUND;
         Inventory.InterHubAmount 9999;
         Inventory.MaxAmount 9999;
-        Inventory.Icon "ARTIALI1";
         Tag "";
     }
 }

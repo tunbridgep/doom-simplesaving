@@ -1,0 +1,28 @@
+//This has to be done here because we can't do it in any of the common handlers
+//Because Selaco doesn't support the 
+class SaveingModSaveCreationHandler : StaticEventHandler
+{
+    override void InterfaceProcess(ConsoleEvent e)
+    {
+        if (e.Name == "NoSavePerformSave")
+        {
+            //console.printf("Received Interface Event");
+            //Thank god SELACO is open source!
+            let manager = SavegameManager.GetManager();
+            manager.ReadSaveStrings();
+            int saveIndex = 0;
+            let cv = CVar.FindCVar("nosave_index");
+            int num = cv.GetInt() + 1;
+
+            //if (num > nosave_max_save_slots)
+            //    num = 1;
+
+            cv.SetInt(num);
+            manager.InsertNewSaveNode();
+            manager.DoSave(saveIndex, String.Format("Save #%d (Simple Saving)", num));
+            manager.RemoveNewSaveNode();
+        }
+    }
+
+}
+

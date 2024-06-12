@@ -1,8 +1,11 @@
 class SSMiscUtils play
 {
-    static bool IsSelaco()
+    //Selaco doesn't support the SendInterfaceEvent function
+    static void PerformSave(Actor owner)
     {
-        return false;
+        SaveGem savegem = SaveGem(owner.FindInventory("SaveGem",true));
+        owner.UseInventory(savegem);
+        EventHandler.SendInterfaceEvent(consoleplayer,"NoSavePerformSave");
     }
 
     //For GZDoom this is set by convar

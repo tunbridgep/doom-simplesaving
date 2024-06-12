@@ -60,8 +60,8 @@ mixin class SaveGemInc
             owner.A_StartSound(UseSound,CHAN_ITEM,CHANF_UI|CHANF_LISTENERZ|CHANF_LOCAL|CHANF_OVERLAP|CHANF_NOPAUSE,1.0,ATTN_NONE);
         }
         UseSound = ""; //Horrible dirty hack to prevent the "Use" sound playing when loading the created autosave.
-        //LevelLocals.MakeAutoSave();
-        EventHandler.SendInterfaceEvent(consoleplayer,"NoSavePerformSave");
+        //Save is actually being done by the save handler
+        //SSMiscUtils.SendSaveEvent();
     }
     
     void DisplayCornerMessage(bool pressAgain = false)

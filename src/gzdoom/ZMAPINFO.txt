@@ -3,4 +3,5 @@ GameInfo
 {
     AddEventHandlers = "SaveingModItemHandler"
     AddEventHandlers = "SaveingProfileHandler"
+    AddEventHandlers = "SaveingModSaveCreationHandler"
 }
