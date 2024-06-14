@@ -1,2 +1,2 @@
 //Save profiles
-alias "nosave_profile_apply" "netevent SaveSelectProfile"
+alias "nosave_profile_apply" "event SaveSelectProfile"

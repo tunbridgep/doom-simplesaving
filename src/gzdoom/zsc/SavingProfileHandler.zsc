@@ -1,7 +1,7 @@
 //Handler for setting up profiles for the save mod
 class SaveingProfileHandler : SavingModEventHandler
 {
-    void CInt(string name, int value)
+    ui void CInt(string name, int value)
     {
         let cv = CVar.FindCVar(name);
         if (cv)
@@ -10,7 +10,7 @@ class SaveingProfileHandler : SavingModEventHandler
             Console.Printf("Couldn't modify console variable: %s", name);
     }
 
-    void CBool(string name, bool value)
+    ui void CBool(string name, bool value)
     {
         let cv = CVar.FindCVar(name);
         if (cv)
@@ -19,7 +19,7 @@ class SaveingProfileHandler : SavingModEventHandler
             Console.Printf("Couldn't modify console variable: %s", name);
     }
 
-    override void NetworkProcess (ConsoleEvent e) 
+    override void ConsoleProcess (ConsoleEvent e) 
     {
         if (e.Name == "SaveSelectProfile")
         {
