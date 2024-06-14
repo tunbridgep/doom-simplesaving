@@ -28,8 +28,20 @@ struct StyleStruct
     }
 }
 
-mixin class SaveGemInc
+class SaveGem : Inventory
 {
+    Default
+    {
+        +INVENTORY.UNCLEARABLE;
+        +INVENTORY.HUBPOWER;
+        +INVENTORY.PERSISTENTPOWER;
+        +INVENTORY.IGNORESKILL;
+        +INVENTORY.FANCYPICKUPSOUND;
+        Inventory.InterHubAmount 9999;
+        Inventory.MaxAmount 9999;
+        Tag "SaveGem";
+    }
+
     //This has to be done here, rather than being dynamic
     //because otherwise the inventory UI completely breaks.
     //But there's nothing stopping the player dropping the item and picking it up again

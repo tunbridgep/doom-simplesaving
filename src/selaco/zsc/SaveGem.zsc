@@ -1,15 +1,23 @@
-class SaveGem : Inventory
+//Fancy pickup for the Save Gem
+class SaveGemPickup : FlaredPickup
 {
-    mixin SaveGemInc;
     Default
     {
-        +INVENTORY.UNCLEARABLE;
-        +INVENTORY.HUBPOWER;
-        +INVENTORY.PERSISTENTPOWER;
-        +INVENTORY.IGNORESKILL;
-        +INVENTORY.FANCYPICKUPSOUND;
-        Inventory.InterHubAmount 9999;
-        Inventory.MaxAmount 9999;
-        Tag "";
+        SelacoItem.pickupIcon "P_CABIA0";
+		SelacoItem.pickupTag "$NOSAVE_PICKUP_LINE";
+		SelacoItem.pickupType "SaveGem";
+		Inventory.PickupSound "misc/i_pkup";
+		Tag "$NOSAVE_PICKUP_NAME";
+		FlaredPickup.FlareClass "throwable_flare";
+		FlaredPickup.IconClass "CABINET_ICON";
+		FlaredPickup.IconOffset 15;
+        SelacoItem.pickupCount 1;
+    }
+
+    States
+    {
+        Spawn:
+            VOXE A 1;
+            Loop;
     }
 }

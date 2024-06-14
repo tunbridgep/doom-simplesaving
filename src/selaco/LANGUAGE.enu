@@ -7,6 +7,10 @@ NOSAVE_ADD_TO_CHESTS_DESC = "Locked Chests (which require credits to open) will 
 DENIEDSAVE_LIMITED = "You need a Combat Simulation Chip to Quicksave";
 
 //Save Pickup Strings
+NOSAVE_PICKUP_NAME = "Combat Simulation Chip";
+NOSAVE_PICKUP_LINE = "\c[omniblue] Quicksave Added";
+
+//Unused
 NOSAVE_PICKUP_LINE1 = "\c[white]Combat Simulation Chip Found\n\t\c[omniblue]+1 Quicksave Added";
 NOSAVE_PICKUP_LINE2_SINGULAR = "\c[white]One Quicksave Available!";
 NOSAVE_PICKUP_LINE2_PLURAL = "\c[white]%d Quicksaves Available!";

@@ -1,4 +1,4 @@
-Model SaveGem
+Model SaveGemPickup
 {
    noperpixellighting  
    Path "MD/keycards"
