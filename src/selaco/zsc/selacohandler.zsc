@@ -1,5 +1,26 @@
 class SaveingModSelacoHandler : StaticEventHandler
 {
+    //Add a savegem to each locked chest
+    override void WorldLoaded (WorldEvent e)
+    {
+        //Only run the first time we enter the map
+        if (e.IsReopen || e.IsSaveGame)
+            return;
+
+        //Abort if we're told not to populate chests
+        if (!nosave_add_to_chests)
+            return;
+
+        //Find all the ItemChest's in the game, add a SaveGem to their contents
+        let ChestFinder = ThinkerIterator.Create("ItemChest");
+        ItemChest chest;
+        while (chest = ItemChest(ChestFinder.Next()))
+        {
+            SSDebug.Log("Adding savegem to chest");
+            chest.chestContents.Push("SaveGem");
+        }
+    }
+
     override void NetworkProcess(ConsoleEvent e)
     {
         if(e.name == "SimpleSavesSelacoHack")

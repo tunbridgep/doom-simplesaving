@@ -39,11 +39,11 @@ NOSAVE_PROFILE_C_DESC_1 = "NOTE: Custom Settings will be overridden when applyin
 NOSAVE_PROFILE_CURRENT = "Current Profile";
 NOSAVE_PROFILE_SELECTED = "Selected Profile";
 NOSAVE_PROFILE_APPLY = "Apply New Profile";
-NOSAVE_SAVES_STARTING = "Starting number of save items";
-NOSAVE_SAVES_STARTING_DESC = "How many save items players will start with";
-NOSAVE_SAVES_PER_LEVEL = "Saves per level (Base)";
-NOSAVE_SAVES_PER_LEVEL_DESC = "How many save items will drop per level";
-NOSAVE_SAVES_PER_LEVEL_BONUS = "Saves per Level (Bonus)";
+NOSAVE_SAVES_STARTING = "Starting Number of Save Items";
+NOSAVE_SAVES_STARTING_DESC = "How many save items players will start with.";
+NOSAVE_SAVES_PER_LEVEL = "Saves Per Level";
+NOSAVE_SAVES_PER_LEVEL_DESC = "How many save items will drop per level.";
+NOSAVE_SAVES_PER_LEVEL_BONUS = "Bonus Save Item Threshold";
 NOSAVE_SAVES_PER_LEVEL_BONUS_DESC = "Drop additional save items based on the number of enemies";
 NOSAVE_SAVES_PER_LEVEL_BONUS_DESC2 = "in the map, determined by multiples of this number.";
 NOSAVE_ENEMY_THRESHOLD = "Minimum Enemy Threshold";
@@ -71,11 +71,11 @@ NOSAVE_SHOW_INVENTORY = "Show item in Inventory";
 NOSAVE_SHOW_INVENTORY_DESC = "Will show save items in the inventory panel";
 NOSAVE_SHOW_INVENTORY_DESC2 = "Due to GZDoom bugs, save items may not appear until after a level transition";
 NOSAVE_DOUBLE_TAP = "Double Tap Saving";
-NOSAVE_DOUBLE_TAP_DESC = "Pressing the save button once will tell you how many save items you have. Press again to save";
+NOSAVE_DOUBLE_TAP_DESC = "Pressing the save button once will tell you how many save items you have. Press again to save.";
 NOSAVE_MAP_START = "First Map Offset";
 NOSAVE_MAP_START_DESC = "The earliest map where save items will start to appear.";
 NOSAVE_MAX_ITEMS = "Max Items";
-NOSAVE_MAX_ITEMS_DESC = "The maximum number of save items players can hold";
+NOSAVE_MAX_ITEMS_DESC = "The maximum number of save items players can hold.";
 NOSAVE_STYLE = "Save Item Style";
 NOSAVE_STYLE_DESC = "Save Items will look a certain way depending on the style set.";
 NOSAVE_STYLE_AUTO = "Auto Detect (Recommended)";
@@ -104,6 +104,3 @@ NOSAVE_ITEM_TAG_SUBWAY = "Subway Ticket";
 //Misc
 NOSAVE_WARNING = "Warning: Autosaving is disabled! Simple Saving will not work correctly! Please change this in the options menu!";
 NOSAVE_NOKEY = "Warning: Simple Saving Quicksave button is not bound! The mod will not work correctly! Please change this in the options menu!";
-
-//Selaco Stuff
-DENIEDSAVE_LIMITED = "You need a Combat Simulation Chip to Quicksave";

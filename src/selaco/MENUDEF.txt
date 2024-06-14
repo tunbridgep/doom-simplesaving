@@ -1,0 +1,11 @@
+AddOptionMenu "ModOptionsMenu"
+{
+    ModHeader "$NOSAVE_OPTIONS_MENU_NAME", "Sarge945", "$NOSAVE_MOD_DESC", "NSBANNER" 
+    //StaticText "$NOSAVE_GAMEPLAY_MENU_NAME", "OMNIBLUE"
+    TooltipSlider "$NOSAVE_SAVES_STARTING", "$NOSAVE_SAVES_STARTING_DESC", "", "nosave_items_starting", 0,100,1,0
+	TooltipSlider "$NOSAVE_MAX_ITEMS", "$NOSAVE_MAX_ITEMS_DESC", "", "nosave_items_max", 1,100,1,0
+    TooltipSlider "$NOSAVE_SAVES_PER_LEVEL", "$NOSAVE_SAVES_PER_LEVEL_DESC", "", "nosave_items_per_level", 0,100,1,0
+    TooltipSlider "$NOSAVE_SAVES_PER_LEVEL_BONUS", "$NOSAVE_SAVES_PER_LEVEL_BONUS_DESC", "", "nosave_items_per_level_bonus", 0,200,1,0
+    TooltipOption "$NOSAVE_DOUBLE_TAP", "$NOSAVE_DOUBLE_TAP_DESC", "", "nosave_double_tap", YesNo
+    TooltipOption "$NOSAVE_ADD_TO_CHESTS", "$NOSAVE_ADD_TO_CHESTS_DESC", "", "nosave_add_to_chests", YesNo
+}

@@ -1,3 +1,14 @@
+//save settings
+//Different between gzdoom and selaco
+nosave server cheat int nosave_items_starting = 1;
+nosave server cheat int nosave_items_max = 5;
+nosave server cheat int nosave_items_per_level = 3;
+nosave server cheat int nosave_items_per_level_bonus = 0;
+nosave server cheat int nosave_enemy_threshold = 20;
+nosave server cheat int nosave_map_skip = 2;
+nosave server cheat int nosave_map_first = 2;
+nosave server cheat bool nosave_consistent_drops = false;
+
 //gzdoom specific settings
 nosave server int nosave_style = -1;
 nosave server int nosave_profile = 0; //our actually selected profile

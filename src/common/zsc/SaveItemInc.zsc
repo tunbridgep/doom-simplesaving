@@ -49,7 +49,12 @@ mixin class SaveGemInc
 		if (nosave_items_starting > max)
 			max = nosave_items_starting;
         bool allow = toucher.CountInv("SaveGem") < max;
-        return allow && super.CanPickup(toucher);
+        allow = allow && super.CanPickup(toucher);
+
+        if (allow)
+            SSMiscUtils.DisplayPickupMessage(toucher);
+
+        return allow;
     }
 	
     void MakeAutosave(bool showmsg = true)

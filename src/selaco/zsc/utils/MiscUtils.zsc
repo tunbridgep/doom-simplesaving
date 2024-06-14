@@ -8,6 +8,15 @@ class SSMiscUtils play
         EventHandler.SendNetworkEvent("SimpleSavesSelacoHack");
     }
 
+    //For Gzdoom, we can just use the standard corner message
+    static void DisplayPickupMessage(Actor owner)
+    {
+        let savegems = owner.CountInv("SaveGem") + 1; //We need to count the new one that was added
+        let line1 = StringTable.Localize("$NOSAVE_PICKUP_LINE1");
+        let line2 = savegems > 1 ? String.Format(StringTable.Localize("$NOSAVE_PICKUP_LINE2_PLURAL"),savegems) : StringTable.Localize("$NOSAVE_PICKUP_LINE2_SINGULAR");
+        Console.MidPrint("SMALLFONT",line1.."\n"..line2,true);
+    }
+
     //For GZDoom this is set by convar
     //For Selaco this is always false because Selaco doesn't have a working inventory bar
     static bool ShowInInventory()

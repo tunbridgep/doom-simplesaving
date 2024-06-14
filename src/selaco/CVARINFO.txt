@@ -1,0 +1,12 @@
+nosave server cheat int nosave_items_starting = 0;
+nosave server cheat int nosave_items_max = 10;
+nosave server cheat int nosave_items_per_level = 0;
+nosave server cheat int nosave_items_per_level_bonus = 40;
+nosave server cheat int nosave_enemy_threshold = 0;
+nosave server cheat int nosave_map_skip = 1;
+nosave server cheat int nosave_map_first = 1;
+nosave server cheat bool nosave_consistent_drops = true;
+
+//Selaco Settings
+nosave server bool nosave_add_to_chests = true;
+

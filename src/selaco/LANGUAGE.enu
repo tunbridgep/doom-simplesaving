@@ -1,0 +1,19 @@
+//Selaco Text
+NOSAVE_OPTIONS_MENU_NAME = "Simple Save Restrictions";
+NOSAVE_MOD_DESC = "Mod Description";
+NOSAVE_ADD_TO_CHESTS = "Add Items to Chests";
+NOSAVE_ADD_TO_CHESTS_DESC = "Locked Chests (which require credits to open) will always contain a save item.\n\n\c[omniblue](Default: Yes)";
+
+DENIEDSAVE_LIMITED = "You need a Combat Simulation Chip to Quicksave";
+
+//Save Pickup Strings
+NOSAVE_PICKUP_LINE1 = "\c[white]Combat Simulation Chip Found\n\t\c[omniblue]+1 Quicksave Added";
+NOSAVE_PICKUP_LINE2_SINGULAR = "\c[white]One Quicksave Available!";
+NOSAVE_PICKUP_LINE2_PLURAL = "\c[white]%d Quicksaves Available!";
+
+//combined versions of original strings
+NOSAVE_SAVES_STARTING_DESC = "How many save items players will start with.\n\n\c[omniblue](Default: 0)";
+NOSAVE_MAX_ITEMS_DESC = "The maximum number of save items players can hold.\n\n\c[omniblue](Default: 10)";
+NOSAVE_SAVES_PER_LEVEL_DESC = "How many save items will drop per level.\n\n\c[omniblue](Default: 0)";
+NOSAVE_SAVES_PER_LEVEL_BONUS_DESC = "Drop additional save items based on the number of enemies in the map, determined by multiples of this number.\n\n\c[omniblue](Default: 40)";
+NOSAVE_DOUBLE_TAP_DESC = "Pressing the save button once will tell you how many save items you have. Press again to save.\n\n\c[omniblue](Default: Yes)";
