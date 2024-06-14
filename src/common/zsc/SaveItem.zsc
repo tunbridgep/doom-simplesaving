@@ -1,35 +1,7 @@
-class SavingModPermanentItem : Inventory
-{
-    Default
-    {
-        +INVENTORY.UNCLEARABLE;
-        +INVENTORY.HUBPOWER;
-        +INVENTORY.PERSISTENTPOWER;
-        +INVENTORY.IGNORESKILL;
-        //+INVENTORY.KEEPDEPLETED;
-        //+INVENTORY.INVBAR;
-        Inventory.InterHubAmount 1;
-        Inventory.MaxAmount 1;
-    }
-}
-
-struct StyleStruct
-{
-    enum Name
-    {
-        Doom,
-        DoomAlt,
-        Raven,
-        Strife,
-        Chex,
-        Floppy,
-        Misato,
-        Ashes,
-    }
-}
-
 class SaveGem : Inventory
 {
+    bool startingSavesGiven; //Have we given out our starting saves yet?
+
     Default
     {
         +INVENTORY.UNCLEARABLE;
@@ -37,6 +9,7 @@ class SaveGem : Inventory
         +INVENTORY.PERSISTENTPOWER;
         +INVENTORY.IGNORESKILL;
         +INVENTORY.FANCYPICKUPSOUND;
+        +INVENTORY.KEEPDEPLETED;
         Inventory.InterHubAmount 9999;
         Inventory.MaxAmount 9999;
         Tag "SaveGem";
@@ -53,6 +26,25 @@ class SaveGem : Inventory
         else
             bINVBAR = false;
         super.AttachToOwner(other);
+    }
+
+    //What happens when we press the quicksave button
+    void ButtonPress(bool doublePress)
+    {
+        if (amount == 0)
+            SSPrintUtils.Print(Stringtable.Localize("$NOSAVE_REMAIN_NONE"));
+        else if (doublePress)
+            SSMiscUtils.PerformSave(owner);
+        else
+            DisplayCornerMessage(true);
+    }
+
+    
+    //Strip if we have stripping enabled
+    override void Travelled()
+    {
+        if (nosave_strip_between_levels)
+            owner.TakeInventory("SaveGem",999);
     }
     
 	override bool CanPickup(Actor toucher)

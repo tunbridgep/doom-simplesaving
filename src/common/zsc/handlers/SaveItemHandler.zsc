@@ -1,27 +1,10 @@
+/*
 //This item signifies that we have a start token, so we can verify that a player has been setup correctly etc
 //This also gives us the advantage of "restarting" when on a pistol-start enforced mission, like in scythe2
 class NoSaveStartup : SavingModPermanentItem
 {
     bool startup;
     
-    override void Travelled()
-    {
-        if (nosave_strip_between_levels)
-            owner.TakeInventory("SaveGem",999);
-    }
-    
-    void ButtonPress(bool doublePress)
-    {
-        SaveGem savegem = SaveGem(owner.FindInventory("SaveGem",true));
-        if (savegem && doublePress)
-            //owner.UseInventory(savegem);
-            SSMiscUtils.PerformSave(owner);
-        else if (savegem)
-            savegem.DisplayCornerMessage(true);
-        else
-            SSPrintUtils.Print(Stringtable.Localize("$NOSAVE_REMAIN_NONE"));
-    }
-
     override void DoEffect()
     {
         //This needs to be delayed by a bit or it doesn't make a save
@@ -52,16 +35,17 @@ class NoSaveStartup : SavingModPermanentItem
         super.DoEffect();
     }
 }
+*/
 
-//Handler for keypresses and player joining/leaving etc.
+//Handler for giving out savegems and spawning them on enemies when they die.
+//Also does a few other checks, like checking for autosaving being enabled
 class SaveingModItemHandler : SavingModEventHandler
 {
     int has_spawned;
     int total_enemies;
     int remaining_enemies;
-    
-    const SAVE_BUTTON_TICS = 35;
-    int lastpress[32];
+
+    bool should_autosave;
 
     override void UniqueWorldLoaded(WorldEvent e)
     {
@@ -93,27 +77,28 @@ class SaveingModItemHandler : SavingModEventHandler
         }
         */
 
-        if (!Player.CheckInventory("NoSaveStartup",1))
+        let gem = Player.FindInventory("SaveGem");
+        if (!gem)
         {
-            Player.GiveInventory("NoSaveStartup",1);
+            //Because of the stupid way "keep depleted" works, we need to make sure we always add one and then remove it if we start with 0
+            Player.GiveInventory("SaveGem",1);
+            Player.SetInventory("SaveGem",nosave_items_starting);
+            
+            //Autosave at the start of the game, so we don't have pistol starts
+            //We need to set this to work after a few tics, otherwise it won't save
+            if (disableautosave > 0)
+                should_autosave = true;
         }
     }
- 
-	//Check for save button press
-	//This is necessary as we can't restrict saving
-	//because Graf is a self-entitled cunt
-    override bool InputProcess (InputEvent e)
+
+    override void WorldTick()
     {
-        if (Bindings.GetBinding(e.KeyScan) == "quicksave")
+        if (should_autosave && gametic > 5)
         {
-            EventHandler.SendNetworkEvent("SaveCheater");
-
-            //Swallow the event
-            //e = null;
-            //return true;
+            SSDebug.LogVerbose("Performing start of game autosave");
+            LevelLocals.MakeAutoSave();
+            should_autosave = false;
         }
-
-        return false;
     }
  
     bool HasMetThreshold()
@@ -124,37 +109,6 @@ class SaveingModItemHandler : SavingModEventHandler
     bool IsValidActor(Actor a)
     {
         return a && a.bISMONSTER && a.bCOUNTKILL;
-    }
-    
-    override void NetworkProcess (ConsoleEvent e) 
-    {
-		let player = players[e.Player].mo;
-		if (e.Name == "SaveCheater")
-		{
-			//player.DamageMobj(player,player,10000,'Normal',DMG_FORCED,0);
-            //Console.MidPrint("BIGFONT","Tell Graf his port sucks",true);
-            Console.MidPrint("BIGFONT","BIND QUICKSAVE BUTTON IN OPTIONS",true);
-		}
-        if (e.Name == "SaveButton")
-        {
-            NoSaveStartup token = NoSaveStartup(player.FindInventory("NoSaveStartup",true));
-
-            if (!token)
-                return;
-
-            //we have double tapped (or single tapped, if not enabled)
-            if (!nosave_double_tap || (lastpress[e.Player] <= gametic && gametic - lastpress[e.Player] <= SAVE_BUTTON_TICS && lastpress[e.Player] > SAVE_BUTTON_TICS))
-            {
-                token.ButtonPress(true);
-            }
-            else
-            {
-                token.ButtonPress(false);
-            }
-            
-            SSDebug.LogVerbose("lastpress is "..lastpress[e.Player]..", gametic is "..gametic.."");
-            lastpress[e.Player] = gametic;
-        }
     }
     
     override void WorldThingSpawned(WorldEvent e)

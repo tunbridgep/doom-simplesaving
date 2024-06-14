@@ -1,5 +1,5 @@
 //This has to be done here because we can't do it in any of the common handlers
-//Because Selaco doesn't support the 
+//Because Selaco doesn't support the InterfaceProcess feature
 class SaveingModSaveCreationHandler : StaticEventHandler
 {
     override void InterfaceProcess(ConsoleEvent e)

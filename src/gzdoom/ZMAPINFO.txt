@@ -2,6 +2,7 @@
 GameInfo
 {
     AddEventHandlers = "SaveingModItemHandler"
+    AddEventHandlers = "SaveingModInputHandler"
     AddEventHandlers = "SaveingProfileHandler"
     AddEventHandlers = "SaveingModSaveCreationHandler"
 }

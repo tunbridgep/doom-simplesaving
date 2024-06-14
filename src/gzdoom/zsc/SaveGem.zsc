@@ -1,0 +1,22 @@
+struct StyleStruct
+{
+    enum Name
+    {
+        Doom,
+        DoomAlt,
+        Raven,
+        Strife,
+        Chex,
+        Floppy,
+        Misato,
+        Ashes,
+    }
+}
+
+//Pickup able to set a style
+class SaveGemPickup : Inventory
+{
+    Default
+    {
+    }
+}

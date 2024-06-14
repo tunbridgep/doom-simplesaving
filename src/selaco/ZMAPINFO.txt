@@ -2,5 +2,6 @@
 GameInfo
 {
     AddEventHandlers = "SaveingModItemHandler"
+    AddEventHandlers = "SaveingModInputHandler"
     AddEventHandlers = "SaveingModSelacoHandler"
 }

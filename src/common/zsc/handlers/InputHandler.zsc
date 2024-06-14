@@ -1,0 +1,46 @@
+//Handles all the input for the save mod.
+class SaveingModInputHandler : SavingModEventHandler
+{
+    const SAVE_BUTTON_TICS = 35;
+    int lastpress[32];
+
+	//Check for save button press
+	//This is necessary as we can't restrict saving
+	//because Graf is a self-entitled cunt
+    override bool InputProcess (InputEvent e)
+    {
+        if (Bindings.GetBinding(e.KeyScan) == "quicksave")
+            EventHandler.SendNetworkEvent("SaveCheater");
+
+        return false;
+    }
+    
+    override void NetworkProcess (ConsoleEvent e) 
+    {
+		let player = players[e.Player].mo;
+		if (e.Name == "SaveCheater")
+		{
+			//player.DamageMobj(player,player,10000,'Normal',DMG_FORCED,0);
+            //Console.MidPrint("BIGFONT","Tell Graf his port sucks",true);
+            Console.MidPrint("BIGFONT","BIND QUICKSAVE BUTTON IN OPTIONS",true);
+		}
+        if (e.Name == "SaveButton")
+        {
+            let gem = SaveGem(player.FindInventory("SaveGem",true));
+
+            if (!gem)
+                return;
+
+            //we have double tapped (or single tapped, if not enabled)
+            if (!nosave_double_tap || (lastpress[e.Player] <= gametic && gametic - lastpress[e.Player] <= SAVE_BUTTON_TICS && lastpress[e.Player] > SAVE_BUTTON_TICS))
+                gem.ButtonPress(true);
+            else
+                gem.ButtonPress(false);
+            
+            SSDebug.LogVerbose("lastpress is "..lastpress[e.Player]..", gametic is "..gametic.."");
+            lastpress[e.Player] = gametic;
+        }
+    }
+    
+ 
+}
