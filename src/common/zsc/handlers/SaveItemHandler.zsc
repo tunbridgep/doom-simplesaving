@@ -153,16 +153,38 @@ class SaveingModItemHandler : SavingModEventHandler
     
     int GetTotalSaveItems()
     {
-        if (nosave_items_per_level_bonus > 0)
-            return nosave_items_per_level + (total_enemies / nosave_items_per_level_bonus);
         return nosave_items_per_level;
+    }
+
+    //Have we killed enough enemies to get the (continuous) save bonus?
+    //This is determined by either going 5 over the quota, or
+    //by a 10% roll for each kill from 5 under the quota.
+    //So at a quota of 40, it will drop with 10% chance from 35 onwards, and is guaranteed to drop at 45.
+    //Each kill offsets the next one, so it will be a little harder or easier to get based on our roll.
+    void GiveSaveBonusForKills(SaveGem s, Actor d)
+    {
+        //don't do anything if the feature is disabled
+        if (nosave_items_per_level_bonus <= 0)
+            return;
+        
+        SSDebug.LogVerbose("Killed enemy #"..s.totalEnemyKills.." of " .. nosave_items_per_level_bonus);
+
+        int howMuchOver = s.totalEnemyKills - nosave_items_per_level_bonus;
+        int rand = random(-5,5);
+        if (howMuchOver + rand >= 0)
+        {
+            s.totalEnemyKills = s.totalEnemyKills - nosave_items_per_level_bonus;
+            d.A_DropItem("SaveGem");
+        }
     }
 
     override void WorldThingDied(WorldEvent e)
     {
         Actor a = e.Thing;
+        Actor p = players[0].mo;
+        SaveGem savegem = SaveGem(p.FindInventory("SaveGem"));
         
-        if (IsValidActor(a))
+        if (IsValidActor(a) && savegem)
         {
             remaining_enemies--;
             if (HasMetThreshold() && IsValidMap() && GetSpawnsRemaining() > 0 && total_enemies > 0 && GetTotalSaveItems() > 0)
@@ -192,9 +214,13 @@ class SaveingModItemHandler : SavingModEventHandler
                     a.A_DropItem("SaveGem");
                     has_spawned++;
                 }
+
             }
             else
                 SSDebug.LogVerbose("Not rolling for enemy "..(total_enemies - remaining_enemies).."/"..total_enemies.." - not valid map or threshold, or exceeded spawn number");
+
+            savegem.totalEnemyKills++;
+            GiveSaveBonusForKills(savegem,a); //Yes, this means we can drop two sometimes
         }
     }
 }

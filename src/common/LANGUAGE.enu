@@ -8,6 +8,8 @@ NOSAVE_REMAIN_POSTFIX = "(Press again to save.)";
 NOSAVE_REMAIN_NONE = "No saves remaining!";
 NOSAVE_CAN_NOW_SAVE = "You can now save the game!";
 
+NOSAVE_SAVE_NAME = "Save #%02d (Simple Saving)";
+
 //Menu Options
 NOSAVE_MAIN_TITLE = "Simple Saving Options";
 NOSAVE_OPTIONS_MENU_NAME = "Simple Saving";

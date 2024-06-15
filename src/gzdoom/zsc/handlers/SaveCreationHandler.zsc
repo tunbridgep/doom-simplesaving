@@ -2,6 +2,12 @@
 //Because Selaco doesn't support the InterfaceProcess feature
 class SaveingModSaveCreationHandler : StaticEventHandler
 {
+    ui String GetSaveName(int saveNum)
+    {
+        let n = StringTable.Localize("$NOSAVE_SAVE_NAME");
+        return String.Format(n, saveNum);
+    }
+
     override void InterfaceProcess(ConsoleEvent e)
     {
         if (e.Name == "NoSavePerformSave")
@@ -19,7 +25,7 @@ class SaveingModSaveCreationHandler : StaticEventHandler
 
             cv.SetInt(num);
             manager.InsertNewSaveNode();
-            manager.DoSave(saveIndex, String.Format("Save #%d (Simple Saving)", num));
+            manager.DoSave(saveIndex, GetSaveName(num));
             manager.RemoveNewSaveNode();
         }
     }
