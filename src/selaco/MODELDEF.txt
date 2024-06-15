@@ -2,9 +2,9 @@ Model SaveGemPickup
 {
    noperpixellighting  
    Path "MD/keycards"
-   SKIN 0 "STARLIGHT_EMPLOYEE_PASS.png" 
+   SKIN 0 "COMBAT_SIM_CHIP.png" 
    MODEL 0 "STARLIGHT_EMPLOYEE_PASS.obj" 
    Scale 0.1 0.1 0.1
    PITCHFROMMOMENTUM 
-   FrameIndex VOXE A 0 0 
+   FrameIndex VOXE L 0 0 
 }

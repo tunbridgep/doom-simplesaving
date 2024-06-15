@@ -1,5 +1,5 @@
 //Fancy pickup for the Save Gem
-class SaveGemPickup : FlaredPickup
+class SaveGemPickup : FlaredPickup replaces SaveGem
 {
     Default
     {
@@ -17,7 +17,7 @@ class SaveGemPickup : FlaredPickup
     States
     {
         Spawn:
-            VOXE A 1;
+            VOXE L 1;
             Loop;
     }
 }

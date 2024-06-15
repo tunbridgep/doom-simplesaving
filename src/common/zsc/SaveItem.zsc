@@ -1,6 +1,7 @@
 class SaveGem : Inventory
 {
     bool startingSavesGiven; //Have we given out our starting saves yet?
+    int totalEnemyKills;     //How many total enemies we have killed
 
     Default
     {
@@ -53,12 +54,7 @@ class SaveGem : Inventory
 		if (nosave_items_starting > max)
 			max = nosave_items_starting;
         bool allow = toucher.CountInv("SaveGem") < max;
-        allow = allow && super.CanPickup(toucher);
-
-        if (allow)
-            SSMiscUtils.DisplayPickupMessage(toucher);
-
-        return allow;
+        return allow && super.CanPickup(toucher);
     }
 	
     void MakeAutosave(bool showmsg = true)
@@ -126,6 +122,18 @@ class SaveGem : Inventory
         SSStyleUtils.SetObjectFrameInformation(self,_frame);
     }
 
+    action void DoAutoCollect()
+    {
+        if (nosave_auto_collect)
+        {
+            let player = players[consoleplayer].mo;
+            player.GiveInventory("SaveGem",1);
+            player.A_StartSound(invoker.PickupSound,CHAN_ITEM,CHANF_UI|CHANF_LISTENERZ|CHANF_LOCAL|CHANF_OVERLAP|CHANF_NOPAUSE,1.0,ATTN_NONE);
+            SSPrintUtils.Print(invoker.PickupMessage());
+            self.Destroy();
+        }
+    }
+
     States
     {
 		Precache:
@@ -140,17 +148,7 @@ class SaveGem : Inventory
 			Stop;
         Spawn:
             //If we are set to auto collect, simply save
-            TNT1 A 0
-            {
-                if (nosave_auto_collect)
-                {
-                    let player = players[consoleplayer].mo;
-                    player.GiveInventory("SaveGem",1);
-                    player.A_StartSound(PickupSound,CHAN_ITEM,CHANF_UI|CHANF_LISTENERZ|CHANF_LOCAL|CHANF_OVERLAP|CHANF_NOPAUSE,1.0,ATTN_NONE);
-                    SSPrintUtils.Print(PickupMessage());
-                    self.Destroy();
-                }
-            }
+            TNT1 A 0 DoAutoCollect;
             TNT1 A 1 SetFrameInformation(0);
             TNT1 A 1 SetFrameInformation(1);
             TNT1 A 1 SetFrameInformation(2);

@@ -37,6 +37,12 @@ class NoSaveStartup : SavingModPermanentItem
 }
 */
 
+//This only exists to not blow up savegames
+//TODO: Remove in a future version
+class NoSaveStartup : Inventory
+{
+}
+
 //Handler for giving out savegems and spawning them on enemies when they die.
 //Also does a few other checks, like checking for autosaving being enabled
 class SaveingModItemHandler : SavingModEventHandler
@@ -99,6 +105,20 @@ class SaveingModItemHandler : SavingModEventHandler
             LevelLocals.MakeAutoSave();
             should_autosave = false;
         }
+
+        //Set INVBAR on existing savegems
+        let player = players[consoleplayer].mo;
+        let savegem = player.FindInventory("SaveGem");
+        bool inv = SSMiscUtils.ShowInInventory();
+        if (savegem && ((savegem.bINVBAR && !inv) || (!savegem.bINVBAR && inv)))
+        {
+            let amount = savegem.amount;
+            //owner.TakeInventory("SaveGem",9999);
+            savegem.Destroy();
+            player.GiveInventory("SaveGem",amount);
+            SSDebug.LogVerbose("Refreshed Save Gems");
+        }
+
     }
  
     bool HasMetThreshold()
@@ -174,7 +194,7 @@ class SaveingModItemHandler : SavingModEventHandler
                 }
             }
             else
-                SSDebug.LogVerbose("Not rolling for enemy #"..remaining_enemies.." - not valid map or threshold, or exceeded spawn number");
+                SSDebug.LogVerbose("Not rolling for enemy "..(total_enemies - remaining_enemies).."/"..total_enemies.." - not valid map or threshold, or exceeded spawn number");
         }
     }
 }

@@ -8,26 +8,10 @@ class SSStyleUtils play
 
     static void SetObjectProperties(SaveGem item)
     {
-        string _pickupSound = "misc/i_pkup";
-        string _useSound = "misc/p_pkup";
-        
-        item.PickupSound = _pickupSound;
-        item.UseSound = _useSound;
-        item.SetTag(StringTable.Localize("$NOSAVE_ITEM_TAG_SELACO"));
     }
     
     static void SetObjectFrameInformation(SaveGem item, int _frame)
     {
-        StyleStruct Style;
-        String _sprite;
-        int _speed = 1;
-        
-        _frame = 0; //Always force to frame zero
-        _sprite = "VOXE";
-
-        item.frame = _frame;
-        item.sprite = item.GetSpriteIndex(_sprite);
-        item.A_SetTics(_speed);
     }
 
 }
