@@ -18,6 +18,6 @@ NOSAVE_PICKUP_LINE2_PLURAL = "\c[white]%d Quicksaves Available!";
 //combined versions of original strings
 NOSAVE_SAVES_STARTING_DESC = "How many save items players will start with.\n\n\c[omniblue](Default: 0)";
 NOSAVE_MAX_ITEMS_DESC = "The maximum number of save items players can hold.\n\n\c[omniblue](Default: 10)";
-NOSAVE_SAVES_PER_LEVEL_DESC = "How many save items will drop per level.\n\n\c[omniblue](Default: 0)";
-NOSAVE_SAVES_PER_LEVEL_BONUS_DESC = "Drop additional save items based on the number of enemies in the map, determined by multiples of this number.\n\n\c[omniblue](Default: 40)";
+NOSAVE_SAVES_PER_LEVEL_DESC = "How many save items will drop per level.\n\nSave items will be divided between the enemies in the level.\n\n\c[omniblue](Default: 0)";
+NOSAVE_SAVES_PER_LEVEL_BONUS_DESC = "Drop additional save items as you kill enemies, determined by multiples of this number.\n\nMaintained between maps.\n\n\c[omniblue](Default: 40)";
 NOSAVE_DOUBLE_TAP_DESC = "Pressing the save button once will tell you how many save items you have. Press again to save.\n\n\c[omniblue](Default: Yes)";
