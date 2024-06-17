@@ -1,7 +1,22 @@
+mixin class SaveGemPickupLogic
+{
+	override bool CanPickup(Actor toucher)
+    {
+		let max = nosave_items_max;
+		if (nosave_items_starting > max)
+			max = nosave_items_starting;
+        bool allow = toucher.CountInv("SaveGem") < max;
+        return allow && super.CanPickup(toucher);
+    }
+
+}
+
 class SaveGem : Inventory
 {
     bool startingSavesGiven; //Have we given out our starting saves yet?
     int totalEnemyKills;     //How many total enemies we have killed
+
+    mixin SaveGemPickupLogic;
 
     Default
     {
@@ -46,15 +61,6 @@ class SaveGem : Inventory
     {
         if (nosave_strip_between_levels)
             owner.TakeInventory("SaveGem",999);
-    }
-    
-	override bool CanPickup(Actor toucher)
-    {
-		let max = nosave_items_max;
-		if (nosave_items_starting > max)
-			max = nosave_items_starting;
-        bool allow = toucher.CountInv("SaveGem") < max;
-        return allow && super.CanPickup(toucher);
     }
 	
     void MakeAutosave(bool showmsg = true)

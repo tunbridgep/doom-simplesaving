@@ -1,6 +1,7 @@
 //Fancy pickup for the Save Gem
 class SaveGemPickup : FlaredPickup replaces SaveGem
 {
+    mixin SaveGemPickupLogic;
     Default
     {
         SelacoItem.pickupIcon "P_CABIA0";
