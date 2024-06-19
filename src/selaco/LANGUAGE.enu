@@ -1,6 +1,6 @@
 //Selaco Text
 NOSAVE_OPTIONS_MENU_NAME = "Simple Save Restrictions";
-NOSAVE_MOD_DESC = "Mod Description";
+NOSAVE_MOD_DESC = "Replaces the free-saving system with limited saves.\n\nEnemies will drop Combat Simulation Chips, which each provide a single quicksave.\n\nCompatible with Hardcore mode. When playing in Hardcore, both the Combat Simulation Chips and Gwyn Machines can be used to save.";
 NOSAVE_ADD_TO_CHESTS = "Add Items to Chests";
 NOSAVE_ADD_TO_CHESTS_DESC = "Locked Chests (which require credits to open) will always contain a save item.\n\n\c[omniblue](Default: Yes)";
 

@@ -9,12 +9,16 @@ ListMenu "MainMenu"
     
     Font "SEL27OFONT", WHITE, MENUHIGHLIGHT
     OnlyTitleMap
+    OnlySaveGame
+    TitleButton "$MENU_RESUMECAMPAIGN",    "n", "ResumeGame",   66, 5, 5
+
+    OnlyTitleMap
     TitleButton "$MENU_NEWCAMPAIGN",    "n", "SkillMenu2",      66, 5, 5
     
-    Font "SEL27OFONT", DARKGRAY, DARKBROWN
-    OnlyTitleMap
-    Disabled
-    TitleButton "$MENU_NEWINCURSION", "S", "",                   66, 5, 5
+    //Font "SEL27OFONT", DARKGRAY, DARKBROWN
+    //OnlyTitleMap
+    //Disabled
+    //TitleButton "$MENU_NEWINCURSION", "S", "",                   66, 5, 5
     
     Font "SEL27OFONT", WHITE, MENUHIGHLIGHT
     TitleButton "$MENU_LOADGAME", "l", "LoadSelacoMenu",         66, 5, 5
@@ -22,7 +26,11 @@ ListMenu "MainMenu"
     Font "SEL27OFONT", WHITE, MENUHIGHLIGHT
     OnlyTitleMap
     OnlyUserMaps
-    TitleButton "User Maps",   "p", "UsermapMenu",            66, 5, 5
+    TitleButton "User Maps",   "p", "UsermapMenu",               66, 5, 5
+    
+    //OnlyIsPlaying
+    //OnlyInNormal
+    //TitleButton "$MENU_SAVEGAME", "s", "SaveSelacoMenu",           66, 5, 5
 
     Spacer 15
 
@@ -43,6 +51,19 @@ ListMenu "MainMenu"
     TitleButton "$MENU_QUITTOTITLE", "q", "QuitToTitleMenu",     66, 5, 7
     
     TitleButton "$MENU_QUITGAME",    "q", "BetterQuitMenu",      66, 5, 7, 0.8, 0.8
+    
+
+
+    // Gamepad quicksave/quickload buttons
+    Reset
+    OnlyIsPlaying
+    OnlyGamepad
+    OnlyInNormal
+    PinWidth 800
+    Pin "hcenter", "hcenter", 0, 1.0, 1
+    Pin "bottom", "bottom", -30
+    Font "SEL21OFONT", UNTRANSLATED, MENUHIGHLIGHT
+    Label "$MENU_GAMEPAD_QUICKSHORTCUTS", 96
 
     // Hardcore Quickload button
     Reset
