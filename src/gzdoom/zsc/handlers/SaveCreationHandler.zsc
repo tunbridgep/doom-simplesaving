@@ -8,6 +8,7 @@ class SaveingModSaveCreationHandler : StaticEventHandler
         return String.Format(n, saveNum);
     }
 
+    //This is done in the uiTick of the selacohandler for selaco
     override void InterfaceProcess(ConsoleEvent e)
     {
         if (e.Name == "NoSavePerformSave")
@@ -25,7 +26,7 @@ class SaveingModSaveCreationHandler : StaticEventHandler
 
             cv.SetInt(num);
             manager.InsertNewSaveNode();
-            manager.DoSave(saveIndex, GetSaveName(num));
+            manager.DoSave(0, GetSaveName(num));
             manager.RemoveNewSaveNode();
         }
     }

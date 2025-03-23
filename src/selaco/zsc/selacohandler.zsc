@@ -1,5 +1,9 @@
 class SaveingModSelacoHandler : StaticEventHandler
 {
+    int doSave;
+    bool isHardcore;
+    int hackyHardcoreTicker;
+
     //Add a savegem to each locked chest
     override void WorldLoaded (WorldEvent e)
     {
@@ -23,22 +27,50 @@ class SaveingModSelacoHandler : StaticEventHandler
 
     override void NetworkProcess(ConsoleEvent e)
     {
-        if(e.name == "SimpleSavesSelacoHack")
+        let d = Dawn(players[0].mo);
+        if(e.name == "SimpleSaveSelacoResetQuicksave")
         {
-            let d = Dawn(players[0].mo);
+            if (isHardcore)
+                d.GiveInventory("HardcoreMode",1);
+            doSave = 0;
+        }
+
+        else if(e.name == "SimpleSavesSelacoHack")
+        {
+            isHardcore = d.CountInv("HardcoreMode") > 0;
             if(d && d.quicksaveTimerCurrent == 0 && d.countinv("isPlaying") == 1)
             {
-                d.quicksaveTimerCurrent = d.QUICKSAVE_DELAY_TIMER;
-                checkSaveValidation(isQuicksave: true);
+                if (checkSaveValidation())
+                {
+                    d.quicksaveTimerCurrent = d.QUICKSAVE_DELAY_TIMER;
+                    hackyhardcoreticker = d.QUICKSAVE_DELAY_TIMER / 2;
+                    doSave = d.QUICKSAVE_DELAY_TIMER;
+                }
             }
             return;
+        }
+    }
+
+    //dirty hack. Disables hardcore mode for 1 frame while we save.
+    override void WorldTick()
+    {
+        if (hackyHardcoreTicker >= 0)
+        {
+            let d = Dawn(players[0].mo);
+            if (hackyHardcoreTicker == 3 && isHardcore)
+                d.TakeInventory("HardcoreMode",999);
+
+            else if (hackyHardcoreTicker == 0 && isHardcore)
+                d.GiveInventory("HardcoreMode",1);
+
+            hackyHardcoreTicker--;
         }
     }
 
     // Validation system for Quick Saves
 	// Defaults to autosave type, otherwise is quicksave
     // REWRITTEN by Sarge to account for the new hardcore variable
-	void checkSaveValidation(bool isQuicksave = false, int enemyRange = 2000) {
+	bool checkSaveValidation(int enemyRange = 2000) {
 		PlayerPawn pawn=players[consolePlayer].mo;
 		let d = Dawn(pawn);
 		d.beginSaveValidation = false;
@@ -46,56 +78,96 @@ class SaveingModSelacoHandler : StaticEventHandler
         
         SaveGem savegem = SaveGem(d.FindInventory("SaveGem",true));
 
-		if(isQuicksave)
-		{
-			if(d.quicksaveTimerCurrent >= d.QUICKSAVE_DELAY_TIMER) {
-                /*
-                //SARGE: Disabled so that Hardcore can benefit from savegems
-				// Check 1 - Check if the player is playing Hardcore Mode
-				if(d.countinv("HardcoreMode")) {
-					d.denySave("$DENIEDSAVE_LIMITED", isQuicksave);
-					return;
-				}
-                */
+        if(d.quicksaveTimerCurrent >= d.QUICKSAVE_DELAY_TIMER) {
+            /*
+            //SARGE: Disabled so that Hardcore can benefit from savegems
+            // Check 1 - Check if the player is playing Hardcore Mode
+            if(d.countinv("HardcoreMode")) {
+                d.denySave("$DENIEDSAVE_LIMITED", true);
+                return false;
+            }
+            */
 
-				// Check 2 - Player is not in a critical state
-				if(d.countinv("DangerStateActive")) {
-					d.denySave("$DENIEDSAVE_DANGERSTATE", isQuicksave);
-					return;
-				}
+            // Check 2 - Player is not in a critical state
+            if(d.countinv("DangerStateActive")) {
+                d.denySave("$DENIEDSAVE_DANGERSTATE", true);
+                return false;
+            }
 
-				// Check 3 - Check if enemies have seen Dawn recently and if any of they are close.
-				if(d.seenByEnemySaveValidation)
-				{
-					ThinkerIterator it = ThinkerIterator.Create("SelacoEnemy");
-					SelacoEnemy enemyActor = SelacoEnemy(it.Next());
+            // Check 3 - Check if enemies have seen Dawn recently and if any of they are close.
+            if(d.seenByEnemySaveValidation)
+            {
+                ThinkerIterator it = ThinkerIterator.Create("SelacoEnemy");
+                SelacoEnemy enemyActor = SelacoEnemy(it.Next());
 
-					for (; enemyActor; enemyActor = SelacoEnemy(it.Next())) 
-					{
-						if(!(enemyActor.target is "Dawn") || enemyActor.dawnNearbyCooldown > 0 || enemyActor.distance3DSquared(d) > 2000*2000)
-						{
-							continue;
-						}
-						d.denySave("$DENIEDSAVE_ALERTEDENEMY", isQuicksave);
-						return;
-					}
-				}
+                for (; enemyActor; enemyActor = SelacoEnemy(it.Next())) 
+                {
+                    if(!(enemyActor.target is "Dawn") || enemyActor.dawnNearbyCooldown > 0 || enemyActor.distance3DSquared(d) > 2000*2000)
+                    {
+                        continue;
+                    }
+                    d.denySave("$DENIEDSAVE_ALERTEDENEMY", true);
+                    return false;
+                }
+            }
 
-				// Check 4 - No nearby hazard -- This must be improved.
-				BlockThingsIterator it2 = BlockThingsIterator.Create(d, 600);
-				Actor hazardousActor; 
-				while (it2.Next()) {
-					hazardousActor = it2.thing;
-					let hazardousActorProps = SelacoActor(hazardousActor);
-					if((hazardousActorProps) && hazardousActorProps.bDangerousActor && d.Distance2DSquared(hazardousActor) < 400*400) {
-						d.denySave("$DENIEDSAVE_DANGEROUOBJECT", isQuicksave);
-						return;
-					}
-				}
-			}
-            d.UseInventory(savegem);
-			d.A_playsound("UI/QUICKSAVE", CHAN_AUTO, 0.7);
-		}
-		d.saveAccepted(isQuicksave);
+            // Check 4 - No nearby hazard -- This must be improved.
+            BlockThingsIterator it2 = BlockThingsIterator.Create(d, 600);
+            Actor hazardousActor; 
+            while (it2.Next()) {
+                hazardousActor = it2.thing;
+                let hazardousActorProps = SelacoActor(hazardousActor);
+                if((hazardousActorProps) && hazardousActorProps.bDangerousActor && d.Distance2DSquared(hazardousActor) < 400*400) {
+                    d.denySave("$DENIEDSAVE_DANGEROUOBJECT", true);
+                    return false;
+                }
+            }
+        }
+        d.UseInventory(savegem);
+        //d.A_playsound("UI/QUICKSAVE", CHAN_AUTO, 0.7);
+        d.S_StartSound("ui/savegame", CHAN_VOICE, CHANF_UI, snd_menuvolume);
+        d.A_PRINTBOLD("");
+        return true;
 	}
+
+    ui int wait;
+    override void uiTick()
+    {
+        if (doSave > 0)
+        {
+            if (wait == 0)
+            {
+                HUD.SaveStarted();
+            }
+            wait++;
+
+            if (wait == doSave / 2)
+                MakeSave();
+
+            if (wait >= doSave)
+            {
+                EventHandler.SendNetworkEvent("SimpleSaveSelacoResetQuicksave");
+                wait = 0;
+                HUD.SaveCompleted();
+            }
+        }
+    }
+
+    ui void MakeSave()
+    {
+        //console.printf("Received Interface Event");
+        let manager = SavegameManager.GetManager();
+        manager.ReadSaveStrings();
+        let cv = CVar.FindCVar("g_saveindex");
+        int num = cv.GetInt() + 1;
+        manager.InsertNewSaveNode();
+        manager.DoSave(0, GetSaveName(num));
+        manager.RemoveNewSaveNode();
+    }
+    
+    ui String GetSaveName(int saveNum)
+    {
+        let n = StringTable.Localize("$NOSAVE_SAVE_NAME");
+        return String.Format(n, saveNum);
+    }
 }
